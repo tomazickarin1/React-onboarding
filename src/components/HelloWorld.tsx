@@ -1,7 +1,11 @@
 // functional component
 
-export default function HelloWorld() {
+export interface HelloWorldProps {
+  text: string;
+}
+
+export default function HelloWorld({text}:HelloWorldProps) {
   return(
-    <h1>Hello World</h1>
+    <h1>{text}</h1>
   );
 }
