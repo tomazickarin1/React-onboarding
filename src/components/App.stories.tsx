@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import HelloWorld from "./HelloWorld";
+import App from "./App";
 
 const meta = {
-  title: "Component/HelloWord",
-  component: HelloWorld,
-} satisfies Meta<typeof HelloWorld>;
+  title: "Component/App",
+  component: App,
+} satisfies Meta<typeof App>;
 
 export default meta;
 
@@ -13,6 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: "Hello Word",
+    text: "App text",
   },
 };
