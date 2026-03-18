@@ -23,5 +23,5 @@ export default defineConfig(
     },
   },
   prettierConfig,
-  globalIgnores(['!.storybook'], 'Include Storybook Directory'),
+  globalIgnores(['.storybook']),
 );
