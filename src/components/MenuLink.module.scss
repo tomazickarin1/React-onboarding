@@ -1,9 +1,12 @@
 .link {
-  background-color: white;
   text-decoration: none;
-  color: #212529;
-  padding: .25rem 1rem;
-  font-size: .9rem;
+  color: white;
+  font-size: 0.9rem;
+
+  @media only screen and (min-width: 768px) {
+    color: #212529;
+    padding: 0.25rem 1rem;
+  }
 
   &:hover {
     background-color: #dee2e6;
