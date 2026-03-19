@@ -2,26 +2,24 @@
   background-color: #032541;
   position: relative;
 
-  &:hover {
-    .mainMenuList {
-      display: block;
+  .mainMenuList {
+    display: none;
+    background-color: #032541;
 
-      @media (max-width: 767px) {
+    &.open {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      &.open {
         display: none;
       }
     }
   }
 
-  .mainMenuList {
-    display: none;
-
-    @media (max-width: 767px) {
-      display: none;
-      background-color: #032541;
-
-      &.open {
-        display: block;
-      }
+  @media (min-width: 768px) {
+    &:hover .mainMenuList {
+      display: block;
     }
   }
 }
