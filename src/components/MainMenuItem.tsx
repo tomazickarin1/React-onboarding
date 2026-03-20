@@ -13,8 +13,6 @@ export default function MainMenuItem({ label, links }: MainMenuItemProps) {
   const [open, setOpen] = useState(false);
   const toggleMenuOpen = () => { setOpen(!open); }
 
-  console.log(open)
-
   return (
     <div className={styles.mainMenu}>
       <MainMenuLink label={label} handleMenuToggle={toggleMenuOpen} />

@@ -1,6 +1,5 @@
 import MainMenuItem from "./MainMenuItem";
 import {menuItems} from "../data/menuItems";
-console.log(menuItems);
 
 export default function MainMenu() {
   return (
