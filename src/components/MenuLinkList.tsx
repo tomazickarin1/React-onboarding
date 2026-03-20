@@ -10,7 +10,7 @@ export default function MenuLinkList({ links }: MenuLinkListProps) {
     <div className={styles.menuWrapper}>
       <ul className={styles.menu}>
         {links.map((link) => (
-          <li key={link.url}>
+          <li key={link.label}>
             <MenuLink label={link.label} url={link.url}></MenuLink>
           </li>
         ))}

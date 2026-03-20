@@ -1,17 +1,13 @@
 import MainMenuItem from "./MainMenuItem";
+import {menuItems} from "../data/menuItems";
+console.log(menuItems);
 
 export default function MainMenu() {
   return (
     <div>
-      <MainMenuItem label={"label1"} links={[{ label: "llll", url: "#" }]} />
-
-      <MainMenuItem
-        label="TV Shows"
-        links={[
-          { label: "Popular", url: "/tv/popular" },
-          { label: "Top Rated", url: "/tv/top-rated" },
-        ]}
-      />
+      {menuItems.map((item) => (
+        <MainMenuItem key={item.id} label={item.label} links={item.links} />
+      ))}
     </div>
   );
 }
