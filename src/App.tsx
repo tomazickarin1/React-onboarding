@@ -1,5 +1,5 @@
 // functional component
-import MainMenu from "./MainMenu";
+import MainMenu from "./components/mainmenu/MainMenu";
 import styles from './App.module.scss'
 
 export default function App() {
