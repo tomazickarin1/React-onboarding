@@ -1,22 +1,19 @@
 // functional component
-import MainMenuItem from "./MainMenuItem";
+import MainMenu from "./MainMenu";
 import styles from './App.module.scss'
 
-const links = [
-  { label: "Home", url: "/home" },
-  { label: "About", url: "/about" },
-  { label: "Contact", url: "/contact" }
-]
+// const links = [
+//   { label: "Home", url: "/home" },
+//   { label: "About", url: "/about" },
+//   { label: "Contact", url: "/contact" }
+// ]
 
-export interface AppProps {
-  text: string;
-}
-
-export default function App({text}:AppProps) {
+export default function App() {
   return (
     <div className={styles.movieapp}>
-      {text}
-      <MainMenuItem label='main menu link 1' links={links} />
+      {/* <MainMenu label="Main menu 1" links={links} /> */}
+      <MainMenu />
+
     </div>
   );
 }

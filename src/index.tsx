@@ -5,4 +5,4 @@ import './styles/global.scss'
 const appElement = document.getElementById('app');
 if (!appElement) throw new Error('Could not find #app element');
 const root = createRoot(appElement);
-root.render(<App text='Testing app' />);
+root.render(<App />);
