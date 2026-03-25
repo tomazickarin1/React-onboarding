@@ -6,7 +6,6 @@ export interface MenuLinkListProps {
 }
 
 export default function MenuLinkList({ links }: MenuLinkListProps) {
-
   return (
     <ul className={styles.menu}>
       {links.map((link) => (

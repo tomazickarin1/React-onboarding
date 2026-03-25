@@ -1,5 +1,10 @@
 .mainMenu {
   position: relative;
+  margin-bottom: 10px;
+
+   @media (min-width: 768px)  {
+    margin-bottom: 0;
+   }
 
   &.open .mainMenuList {
     display: block;
