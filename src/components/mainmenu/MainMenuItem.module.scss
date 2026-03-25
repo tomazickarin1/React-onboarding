@@ -1,19 +1,19 @@
 .mainMenu {
-  background-color: #032541;
   position: relative;
+
+  &.open .mainMenuList {
+    display: block;
+  }
 
   .mainMenuList {
     display: none;
-    background-color: #032541;
-
-    &.open {
-      display: block;
-    }
+    position: relative;
+    overflow: hidden;
 
     @media (min-width: 768px) {
-      &.open {
-        display: none;
-      }
+      top: 40px;
+      left: 0px;
+      position: absolute;
     }
   }
 
@@ -23,3 +23,4 @@
     }
   }
 }
+

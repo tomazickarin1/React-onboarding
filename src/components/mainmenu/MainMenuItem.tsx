@@ -13,11 +13,11 @@ export default function MainMenuItem({ label, links }: MainMenuItemProps) {
   const toggleMenuOpen = () => { setOpen(!open); }
 
   return (
-    <div className={styles.mainMenu}>
+    <li className={` ${styles.mainMenu ?? ''} ${open ? styles.open ?? '' : ''}`}>
       <MainMenuLink label={label} handleMenuToggle={toggleMenuOpen} />
-      <div className={`${styles.mainMenuList ?? ''} ${open ? styles.open ?? '' : ''}`}>
+      <div className={styles.mainMenuList ?? ''}>
         <MenuLinkList links={links}></MenuLinkList>
       </div>
-    </div>
+    </li>
   );
 }

@@ -1,0 +1,14 @@
+.mainMenuItem {
+  display: flex;
+  flex-direction: column;
+  background-color: #032541;
+  text-decoration: none;
+  font: inherit;
+  list-style: none;
+  padding: 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}

@@ -6,18 +6,22 @@ export interface MainMenuLinkProps {
   handleMenuToggle: () => void;
 }
 
-export default function MainMenuLink({ label, url = "#", handleMenuToggle }: MainMenuLinkProps) {
+export default function MainMenuLink({
+  label,
+  url = "#",
+  handleMenuToggle,
+}: MainMenuLinkProps) {
   return (
-    <a
-      className={styles.link}
-      aria-label={label}
-      href={url}
+    <li
+      className={styles.listItem}
       onClick={(e) => {
         e.preventDefault();
-        handleMenuToggle()
+        handleMenuToggle();
       }}
     >
-      {label}
-    </a>
+      <a className={styles.link} aria-label={label} href={url}>
+        {label}
+      </a>
+    </li>
   );
 }
