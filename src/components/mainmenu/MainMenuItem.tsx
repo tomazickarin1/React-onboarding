@@ -10,12 +10,18 @@ export interface MainMenuItemProps {
 
 export default function MainMenuItem({ label, links }: MainMenuItemProps) {
   const [open, setOpen] = useState(false);
-  const toggleMenuOpen = () => { setOpen(!open); }
+  const toggleMenuOpen = () => {
+    if (window.innerWidth < 768) {
+      setOpen(!open);
+    }
+  };
 
   return (
-    <li className={` ${styles.mainMenu ?? ''} ${open ? styles.open ?? '' : ''}`}>
+    <li
+      className={` ${styles.mainMenu ?? ""} ${open ? (styles.open ?? "") : ""}`}
+    >
       <MainMenuLink label={label} handleMenuToggle={toggleMenuOpen} />
-      <div className={styles.mainMenuList ?? ''}>
+      <div className={styles.mainMenuList ?? ""}>
         <MenuLinkList links={links}></MenuLinkList>
       </div>
     </li>

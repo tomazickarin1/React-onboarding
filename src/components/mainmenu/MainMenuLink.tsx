@@ -12,7 +12,7 @@ export default function MainMenuLink({
   handleMenuToggle,
 }: MainMenuLinkProps) {
   return (
-    <li
+    <div
       className={styles.listItem}
       onClick={(e) => {
         e.preventDefault();
@@ -22,6 +22,6 @@ export default function MainMenuLink({
       <a className={styles.link} aria-label={label} href={url}>
         {label}
       </a>
-    </li>
+    </div>
   );
 }

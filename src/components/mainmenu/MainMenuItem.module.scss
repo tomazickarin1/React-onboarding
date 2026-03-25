@@ -1,6 +1,7 @@
 .mainMenu {
   position: relative;
 
+
   &.open .mainMenuList {
     display: block;
   }
@@ -9,6 +10,7 @@
     display: none;
     position: relative;
     overflow: hidden;
+        margin-bottom: 1.5rem;
 
     @media (min-width: 768px) {
       top: 40px;
