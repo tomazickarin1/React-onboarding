@@ -6,15 +6,14 @@ export interface MenuLinkListProps {
 }
 
 export default function MenuLinkList({ links }: MenuLinkListProps) {
+
   return (
-    <div className={styles.menuWrapper}>
-      <ul className={styles.menu}>
-        {links.map((link) => (
-          <li key={link.label}>
-            <MenuLink label={link.label} url={link.url}></MenuLink>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={styles.menu}>
+      {links.map((link) => (
+        <li key={link.label}>
+          <MenuLink label={link.label} url={link.url}></MenuLink>
+        </li>
+      ))}
+    </ul>
   );
 }

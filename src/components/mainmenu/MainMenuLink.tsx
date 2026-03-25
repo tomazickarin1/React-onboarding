@@ -12,16 +12,16 @@ export default function MainMenuLink({
   handleMenuToggle,
 }: MainMenuLinkProps) {
   return (
-    <div
-      className={styles.listItem}
+    <a
       onClick={(e) => {
         e.preventDefault();
         handleMenuToggle();
       }}
+      className={styles.link}
+      aria-label={label}
+      href={url}
     >
-      <a className={styles.link} aria-label={label} href={url}>
-        {label}
-      </a>
-    </div>
+      {label}
+    </a>
   );
 }
