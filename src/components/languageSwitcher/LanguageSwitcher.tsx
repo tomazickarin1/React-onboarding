@@ -22,7 +22,9 @@ export default function LanguageSwitcher({
   selectedMain,
   selectedFallback,
 }: LanguageSwitcherProps) {
-  const [main, setMain] = useState(selectedMain);
+
+  const firstCode = languageList[0] ? languageList[0].code : '';
+  const [main, setMain] = useState(localStorage.getItem('selectedMain') || selectedMain || firstCode);
 
   const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -31,13 +33,14 @@ export default function LanguageSwitcher({
 
   const onSelect = (code: string, type: "primary" | "fallback") => {
     console.log(code, type);
-    if (type === 'primary')  setMain(code);
+    if (type === 'primary') {
+      setMain(code);
+      localStorage.setItem('selectedMain', code);
+    }
   };
 
   const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(e.target.value, "primary");
-
-    console.log(e.target)
   };
   const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(e.target.value, "fallback");
