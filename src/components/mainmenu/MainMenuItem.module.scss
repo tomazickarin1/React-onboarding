@@ -2,9 +2,9 @@
   position: relative;
   margin-bottom: 10px;
 
-   @media (min-width: 768px)  {
+  @media (min-width: 768px) {
     margin-bottom: 0;
-   }
+  }
 
   &.open .mainMenuList {
     display: block;
@@ -14,12 +14,18 @@
     display: none;
     position: relative;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    z-index: 2;
 
     @media (min-width: 768px) {
-      top: 40px;
+      top: 35px;
       left: 0px;
       position: absolute;
+      z-index: 2;
+      border-radius: 8px;
+      border: 1px solid rgba(33, 37, 41, 0.2);
+      background: white;
+      min-width: 130px;
+      padding: 6px 0;
     }
   }
 
