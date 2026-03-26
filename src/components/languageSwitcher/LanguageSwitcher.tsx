@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
   selectedMain: string;
@@ -15,33 +17,39 @@ export interface LanguageSwitcherProps {
 // selectedMain: string,
 // selectedFallback: string
 
-const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault();
-  console.log("click on reset");
-};
-
-const onSelect = (code: string, type: "primary" | "fallback") => {
-  console.log(code, type);
-};
-
-const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  onSelect(e.target.value, "primary");
-};
-const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  onSelect(e.target.value, "fallback");
-};
-
 export default function LanguageSwitcher({
   languageList,
   selectedMain,
   selectedFallback,
 }: LanguageSwitcherProps) {
+  const [main, setMain] = useState(selectedMain);
+
+  const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("click on reset");
+  };
+
+  const onSelect = (code: string, type: "primary" | "fallback") => {
+    console.log(code, type);
+    if (type === 'primary')  setMain(code);
+  };
+
+  const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onSelect(e.target.value, "primary");
+
+    console.log(e.target)
+  };
+  const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onSelect(e.target.value, "fallback");
+  };
+
   return (
     <>
       <div>{selectedMain}</div>
       <div>{selectedFallback}</div>
 
       <div>
+        <div>selected: {main}</div>
         <form action="">
           <fieldset>
             <legend>Language Preferences</legend>
@@ -57,7 +65,7 @@ export default function LanguageSwitcher({
                 onChange={handleSelectPrimary}
               >
                 {languageList.map((list) => (
-                  <option key={list.code} value={list.label}>
+                  <option key={list.code} value={list.code}>
                     {list.label}
                   </option>
                 ))}
