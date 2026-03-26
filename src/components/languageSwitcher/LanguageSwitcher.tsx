@@ -1,3 +1,5 @@
+import styles from "./LanguageSwitcher.module.scss";
+
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
   selectedMain: string;
@@ -22,49 +24,54 @@ export default function LanguageSwitcher({
   };
 
   return (
-    <section>
-      <button>{selectedMain}</button>
-      <form>
-        <fieldset>
-          <legend>Language Preferences</legend>
+    <section className={styles.languageSwitcher}>
+      <button className={styles.languageButton}>
+        {selectedMain.split("-").pop()}
+      </button>
+      <div className={styles.languageDropdown}>
+        <form>
+          <fieldset>
+            <legend>Language Preferences</legend>
+            <div className={styles.defaultLanguage}>
+              <div className={styles.defaultLanguageHeader}>
+                <label htmlFor="defaultLanguage">Default Language</label>
+                <button onClick={onReset} className={styles.restButton}>
+                  Reset
+                </button>
+              </div>
 
-          <div>
-            <label htmlFor="defaultLanguage">Default Language</label>
-            <button onClick={onReset} className="restButton">
-              Reset
-            </button>
+              <select
+                name="Default Language"
+                id="defaultLanguage"
+                value={selectedMain}
+                onChange={handleSelectPrimary}
+              >
+                {languageList.map((list) => (
+                  <option key={list.code} value={list.code}>
+                    {list.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <select
-              name="Default Language"
-              id="defaultLanguage"
-              value={selectedMain}
-              onChange={handleSelectPrimary}
-            >
-              {languageList.map((list) => (
-                <option key={list.code} value={list.code}>
-                  {list.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="fallbackLanguage">Fallback Language</label>
-            <select
-              name=""
-              id="fallbackLanguage"
-              value={selectedFallback}
-              onChange={handleSelectFallback}
-            >
-              {languageList.map((list) => (
-                <option key={list.code} value={list.code}>
-                  {list.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </fieldset>
-      </form>
+            <div>
+              <label htmlFor="fallbackLanguage">Fallback Language</label>
+              <select
+                name=""
+                id="fallbackLanguage"
+                value={selectedFallback}
+                onChange={handleSelectFallback}
+              >
+                {languageList.map((list) => (
+                  <option key={list.code} value={list.code}>
+                    {list.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </section>
   );
 }
