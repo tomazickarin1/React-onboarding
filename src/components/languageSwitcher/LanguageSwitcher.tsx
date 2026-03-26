@@ -1,7 +1,7 @@
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
   selectedMain: string;
-  // selectedFallback: string;
+  selectedFallback: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;
   onReset: () => void;
 }
@@ -9,16 +9,17 @@ export interface LanguageSwitcherProps {
 export default function LanguageSwitcher({
   languageList,
   selectedMain,
-  // selectedFallback,
+  selectedFallback,
   onSelect,
-  onReset
+  onReset,
 }: LanguageSwitcherProps) {
-
-
   const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(e.target.value, "primary");
   };
 
+  const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onSelect(e.target.value, "fallback");
+  };
 
   return (
     <>
@@ -48,11 +49,12 @@ export default function LanguageSwitcher({
               </select>
             </div>
 
-            {/* <div>
+            <div>
               <label htmlFor="fallbackLanguage">Fallback Language</label>
               <select
                 name=""
                 id="fallbackLanguage"
+                value={selectedFallback}
                 onChange={handleSelectFallback}
               >
                 {languageList.map((list) => (
@@ -61,7 +63,7 @@ export default function LanguageSwitcher({
                   </option>
                 ))}
               </select>
-            </div> */}
+            </div>
           </fieldset>
         </form>
       </div>
