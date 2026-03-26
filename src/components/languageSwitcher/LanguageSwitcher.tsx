@@ -15,8 +15,21 @@ export interface LanguageSwitcherProps {
 // selectedMain: string,
 // selectedFallback: string
 
+const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  console.log("click on reset");
+};
 
+const onSelect = (code: string, type: "primary" | "fallback") => {
+  console.log(code, type);
+};
 
+const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  onSelect(e.target.value, "primary");
+};
+const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  onSelect(e.target.value, "fallback");
+};
 
 export default function LanguageSwitcher({
   languageList,
@@ -26,16 +39,48 @@ export default function LanguageSwitcher({
   return (
     <>
       <div>{selectedMain}</div>
-      <input type="text" />
-      
-      {languageList.map((list) => (
-        <li key={list.code}>
-          {list.code}
-          {list.label}
-        </li>
-      ))}
-
       <div>{selectedFallback}</div>
+
+      <div>
+        <form action="">
+          <fieldset>
+            <legend>Language Preferences</legend>
+
+            <div>
+              <label htmlFor="defaultLanguage">Default Language</label>
+              <button onClick={onReset} className="restButton">
+                Reset
+              </button>
+              <select
+                name=""
+                id="defaultLanguage"
+                onChange={handleSelectPrimary}
+              >
+                {languageList.map((list) => (
+                  <option key={list.code} value={list.label}>
+                    {list.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="fallbackLanguage">Fallback Language</label>
+              <select
+                name=""
+                id="fallbackLanguage"
+                onChange={handleSelectFallback}
+              >
+                {languageList.map((list) => (
+                  <option key={list.code} value={list.label}>
+                    {list.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </>
   );
 }
