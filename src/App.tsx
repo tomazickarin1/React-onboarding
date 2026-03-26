@@ -19,7 +19,7 @@ export default function App() {
     localStorage.getItem("selectedMain") || firstCode,
   );
   const [fallback, setFallback] = useState(
-    localStorage.getItem("selectedMain") || firstCode,
+    localStorage.getItem("selectedFallback") || firstCode,
   );
 
   const handleSelect = (code: string, type: "primary" | "fallback") => {
@@ -35,7 +35,9 @@ export default function App() {
   const handleReset = () => {
     console.log("click on reset");
     setMain("");
+    setFallback("");
     localStorage.setItem("selectedMain", "");
+    localStorage.setItem("selectedFallback", "");
   };
 
   return (
