@@ -1,5 +1,5 @@
 import styles from "./LanguageSwitcher.module.scss";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
@@ -17,6 +17,22 @@ export default function LanguageSwitcher({
   onReset,
 }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if(ref.current && !ref.current.contains(e.target as Node) ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+
+  },[]);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -31,7 +47,7 @@ export default function LanguageSwitcher({
   };
 
   return (
-    <section className={styles.languageSwitcher}>
+    <section className={styles.languageSwitcher} ref={ref}>
       <button className={styles.languageButton} onClick={handleOpen}>
         {selectedMain.split("-").pop()}
       </button>
