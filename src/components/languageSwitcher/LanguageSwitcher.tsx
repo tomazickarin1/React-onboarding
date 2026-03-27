@@ -38,7 +38,7 @@ export default function LanguageSwitcher({
 
   return (
     <section className={styles.languageSwitcher} ref={ref}>
-      <button className={styles.languageButton} onClick={handleOpen}>
+      <button className={styles.languageButton} onClick={handleOpen} aria-label="Language settings" aria-expanded={isOpen}>
         {selectedMain.split("-").pop()}
       </button>
       {isOpen && (
@@ -48,16 +48,15 @@ export default function LanguageSwitcher({
               <legend>Language Preferences</legend>
               <div className={styles.defaultLanguage}>
                 <div className={styles.defaultLanguageHeader}>
-                  <label htmlFor="defaultLanguage">Default Language</label>
-                  <button onClick={onReset} className={styles.restButton}>
+                  <p>Default Language</p>
+                  <button type="button" onClick={onReset} className={styles.restButton}>
                     Reset
                   </button>
                 </div>
                 <LanguageSelect languageList={languageList} selected={selectedMain} type="primary" onSelect={onSelect} />
               </div>
-
               <div>
-                <label htmlFor="fallbackLanguage">Fallback Language</label>
+                <p>Fallback Language</p>
                 <LanguageSelect languageList={languageList} selected={selectedFallback} type="fallback" onSelect={onSelect} />
               </div>
             </fieldset>

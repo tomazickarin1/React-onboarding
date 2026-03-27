@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./LanguageSelect.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
@@ -40,10 +43,14 @@ export default function LanguageSelect({
     setFilter(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsOpen(false);
+    }
+  };
+
   const foundLanguage = languageList.find((label) => label.code === selected);
   let selectedLabel;
-
-  console.log(foundLanguage);
 
   if (foundLanguage) {
     selectedLabel = foundLanguage.label;
@@ -63,7 +70,17 @@ export default function LanguageSelect({
               onSelect(list.code, type);
               setIsOpen(false);
             }}
-            className={list.code === selected ? styles.active : ''}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.stopPropagation();
+                onSelect(list.code, type);
+                setIsOpen(false);
+              }
+            }}
+            className={list.code === selected ? styles.active : ""}
+            role="option"
+            tabIndex={0}
+            aria-selected={list.code === selected}
           >
             {list.label} ({list.code})
           </li>
@@ -72,27 +89,34 @@ export default function LanguageSelect({
   };
 
   return (
-    <div className={styles.selectWrapper} ref={ref}>
-      <button type="button" onClick={handleOpen} className={styles.languageBtn}>
+    <div className={styles.selectWrapper} ref={ref} onKeyDown={handleKeyDown}>
+      <button
+        type="button"
+        onClick={handleOpen}
+        className={styles.languageBtn}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+      >
         {selectedLabel} ({selected})
-        <FontAwesomeIcon icon={faCaretDown} />
+        <FontAwesomeIcon icon={faCaretDown} aria-hidden="true" />
       </button>
 
       {isOpen && (
         <div className={styles.selectBox}>
           <div className={styles.searchBar}>
             <div className={styles.searchBarInner}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
               <input
                 type="text"
                 value={filter}
                 onChange={handleFilter}
                 placeholder="Filter"
+                aria-label="Filter languages"
               />
             </div>
           </div>
 
-          <ul>{renderedList()}</ul>
+          <ul role="listbox">{renderedList()}</ul>
         </div>
       )}
     </div>
