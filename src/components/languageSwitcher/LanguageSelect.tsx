@@ -58,9 +58,12 @@ export default function LanguageSelect({
         return (
           <li
             key={list.code}
-            onMouseDown={() => {
+            onMouseDown={(e) => {
+              e.stopPropagation();
               onSelect(list.code, type);
+              setIsOpen(false);
             }}
+            className={list.code === selected ? styles.active : ''}
           >
             {list.label} ({list.code})
           </li>

@@ -17,12 +17,23 @@
     padding: 0;
     list-style: none;
     margin: 0;
-    max-height: 300px;
+    max-height: 230px;
     overflow: auto;
 
     li {
       padding: 4px 16px;
+      font-size: 1rem;
+      line-height: 24px;
       cursor: pointer;
+
+      &.active {
+        background-color: #01b3e4;
+        color: white;
+
+        &:hover {
+          background-color: #052c65;
+        }
+      }
 
       &:hover {
         background-color: #dee2e6;
@@ -57,9 +68,10 @@
 }
 
 .searchBarInner {
-  border: 1px solid rgba(33, 37, 41, 0.2);
+  border: 1px solid rgba(1, 179, 228, 0.3);
   border-radius: 6px;
   display: flex;
+  align-items: center;
 
   svg {
     padding: 6px;
@@ -71,6 +83,7 @@
 
   input {
     font-size: 1rem;
+    line-height: 24px;
     padding: 6px 12px;
     border: none;
     border-radius: 6px;
