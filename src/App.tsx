@@ -33,10 +33,10 @@ export default function App() {
   };
 
   const handleReset = () => {
-    setMain("");
-    setFallback("");
-    localStorage.setItem("selectedMain", "");
-    localStorage.setItem("selectedFallback", "");
+    setMain(firstCode);
+    setFallback(firstCode);
+    localStorage.setItem("selectedMain", firstCode);
+    localStorage.setItem("selectedFallback", firstCode);
   };
 
   return (
