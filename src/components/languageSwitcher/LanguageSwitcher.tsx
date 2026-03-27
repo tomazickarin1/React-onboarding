@@ -1,5 +1,6 @@
 import styles from "./LanguageSwitcher.module.scss";
 import { useState, useEffect, useRef } from "react";
+import LanguageSelect from "./LanguageSelect";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
@@ -38,13 +39,9 @@ export default function LanguageSwitcher({
     setIsOpen(!isOpen);
   };
 
-  const handleSelectPrimary = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelect(e.target.value, "primary");
-  };
-
-  const handleSelectFallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelect(e.target.value, "fallback");
-  };
+  // const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>, type: "primary" | "fallback") => {
+  //   onSelect(e.target.value, type);
+  // };
 
   return (
     <section className={styles.languageSwitcher} ref={ref}>
@@ -64,34 +61,40 @@ export default function LanguageSwitcher({
                   </button>
                 </div>
 
-                <select
+
+                <LanguageSelect languageList={languageList} selected={selectedMain} onSelect={onSelect} />
+
+
+                {/* <select
                   name="Default Language"
                   id="defaultLanguage"
                   value={selectedMain}
-                  onChange={handleSelectPrimary}
+                  onChange={(e) => { handleSelect(e, 'primary'); }}
                 >
                   {languageList.map((list) => (
                     <option key={list.code} value={list.code}>
                       {list.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
               </div>
 
               <div>
                 <label htmlFor="fallbackLanguage">Fallback Language</label>
-                <select
+                <LanguageSelect languageList={languageList} selected={selectedFallback} onSelect={onSelect} />
+
+                {/* <select
                   name=""
                   id="fallbackLanguage"
                   value={selectedFallback}
-                  onChange={handleSelectFallback}
+                  onChange={(e) => { handleSelect(e, 'fallback'); }}
                 >
                   {languageList.map((list) => (
                     <option key={list.code} value={list.code}>
                       {list.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
               </div>
             </fieldset>
           </form>
