@@ -62,7 +62,8 @@ export default function LanguageSwitcher({
                 </div>
 
 
-                <LanguageSelect languageList={languageList} selected={selectedMain} onSelect={onSelect} />
+                <LanguageSelect languageList={languageList} selected={selectedMain} type="primary" onSelect={onSelect} />
+
 
 
                 {/* <select
@@ -81,7 +82,7 @@ export default function LanguageSwitcher({
 
               <div>
                 <label htmlFor="fallbackLanguage">Fallback Language</label>
-                <LanguageSelect languageList={languageList} selected={selectedFallback} onSelect={onSelect} />
+                <LanguageSelect languageList={languageList} selected={selectedFallback} type="fallback" onSelect={onSelect} />
 
                 {/* <select
                   name=""

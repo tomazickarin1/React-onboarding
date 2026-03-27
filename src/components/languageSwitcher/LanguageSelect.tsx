@@ -2,29 +2,22 @@ export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
   selected: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;
+  type: "primary" | "fallback";
 }
 
 export default function LanguageSelect({
   languageList,
   selected,
   onSelect,
+  type,
 }: LanguageSelectProps) {
-
-  
-  const handleSelect = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    type: "primary" | "fallback",
-  ) => {
-    onSelect(e.target.value, type);
-  };
-
   return (
     <select
       name="Default Language"
       id="defaultLanguage"
       value={selected}
       onChange={(e) => {
-        handleSelect(e, "primary");
+        onSelect(e.target.value, type);
       }}
     >
       {languageList.map((list) => (
