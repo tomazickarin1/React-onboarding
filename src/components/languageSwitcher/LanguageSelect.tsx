@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import styles from "./LanguageSelect.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
   selected: string;
@@ -14,6 +18,19 @@ export default function LanguageSelect({
 }: LanguageSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -23,57 +40,58 @@ export default function LanguageSelect({
     setFilter(e.target.value);
   };
 
-  // const listLabels = (list: { code: string; label: string }) => {
-  //   return list.label.toLowerCase().includes(filter.toLowerCase());
-  // };
+  const foundLanguage = languageList.find((label) => label.code === selected);
+  let selectedLabel;
 
-  // const filterList = () => {
-  //   return languageList.filter(listLabels);
-  // };
+  console.log(foundLanguage);
 
-  // const searchedList = (list: { code: string; label: string }) => {
-  //   return () => {
-  //     onSelect(list.code, type);
-  //   };
-  // };
+  if (foundLanguage) {
+    selectedLabel = foundLanguage.label;
+  } else {
+    selectedLabel = selected;
+  }
 
   const renderedList = () => {
     return languageList
       .filter((list) => list.label.toLowerCase().includes(filter.toLowerCase()))
       .map((list) => {
         return (
-          <li key={list.code} onMouseDown={() => { onSelect(list.code, type); }}>{list.label}</li>
+          <li
+            key={list.code}
+            onMouseDown={() => {
+              onSelect(list.code, type);
+            }}
+          >
+            {list.label} ({list.code})
+          </li>
         );
       });
   };
 
   return (
-    <>
-      <button type="button" onClick={handleOpen}>
-        {selected}
+    <div className={styles.selectWrapper} ref={ref}>
+      <button type="button" onClick={handleOpen} className={styles.languageBtn}>
+        {selectedLabel} ({selected})
+        <FontAwesomeIcon icon={faCaretDown} />
       </button>
 
       {isOpen && (
-        <div>
-          <input type="text" value={filter} onChange={handleFilter} />
+        <div className={styles.selectBox}>
+          <div className={styles.searchBar}>
+            <div className={styles.searchBarInner}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <input
+                type="text"
+                value={filter}
+                onChange={handleFilter}
+                placeholder="Filter"
+              />
+            </div>
+          </div>
+
           <ul>{renderedList()}</ul>
         </div>
       )}
-
-      <select
-        name="Default Language"
-        id="defaultLanguage"
-        value={selected}
-        onChange={(e) => {
-          onSelect(e.target.value, type);
-        }}
-      >
-        {languageList.map((list) => (
-          <option key={list.code} value={list.code}>
-            {list.label}
-          </option>
-        ))}
-      </select>
-    </>
+    </div>
   );
 }
