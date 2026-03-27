@@ -33,7 +33,6 @@ export default function App() {
   };
 
   const handleReset = () => {
-    console.log("click on reset");
     setMain("");
     setFallback("");
     localStorage.setItem("selectedMain", "");
