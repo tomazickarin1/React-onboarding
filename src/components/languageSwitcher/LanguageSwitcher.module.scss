@@ -49,6 +49,7 @@
 
 select {
   width: 100%;
+  cursor: pointer;
   font-size: 1rem;
   padding: 6px 12px;
   border-radius: 6px;
@@ -74,6 +75,7 @@ select {
 
 .restButton {
   background: transparent;
+  cursor: pointer;
   border: none;
   font-weight: 300;
   font-size: 1rem;

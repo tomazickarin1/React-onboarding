@@ -1,6 +1,6 @@
 import styles from "./LanguageSwitcher.module.scss";
 import { useState, useEffect, useRef } from "react";
-// import LanguageSelect from "./LanguageSelect";
+import LanguageSelect from "./LanguageSelect";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
@@ -39,9 +39,9 @@ export default function LanguageSwitcher({
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>, type: "primary" | "fallback") => {
-    onSelect(e.target.value, type);
-  };
+  // const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>, type: "primary" | "fallback") => {
+  //   onSelect(e.target.value, type);
+  // };
 
   return (
     <section className={styles.languageSwitcher} ref={ref}>
@@ -60,7 +60,7 @@ export default function LanguageSwitcher({
                     Reset
                   </button>
                 </div>
-                <select
+                {/* <select
                   name="Default Language"
                   id="defaultLanguage"
                   value={selectedMain}
@@ -71,13 +71,13 @@ export default function LanguageSwitcher({
                       {list.label}
                     </option>
                   ))}
-                </select>
-                {/* <LanguageSelect languageList={languageList} selected={selectedMain} type="primary" onSelect={onSelect} /> */}
+                </select> */}
+                <LanguageSelect languageList={languageList} selected={selectedMain} type="primary" onSelect={onSelect} />
               </div>
 
               <div>
                 <label htmlFor="fallbackLanguage">Fallback Language</label>
-                <select
+                {/* <select
                   name=""
                   id="fallbackLanguage"
                   value={selectedFallback}
@@ -88,8 +88,8 @@ export default function LanguageSwitcher({
                       {list.label}
                     </option>
                   ))}
-                </select>
-                {/* <LanguageSelect languageList={languageList} selected={selectedFallback} type="fallback" onSelect={onSelect} /> */}
+                </select> */}
+                <LanguageSelect languageList={languageList} selected={selectedFallback} type="fallback" onSelect={onSelect} />
               </div>
             </fieldset>
           </form>
