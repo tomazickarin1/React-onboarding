@@ -33,7 +33,7 @@ export default function LanguageSwitcher({
   },[]);
 
   const handleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
   };
 
   return (
