@@ -38,7 +38,7 @@ export default function LanguageSwitcher({
 
   return (
     <section className={styles.languageSwitcher} ref={ref}>
-      <button className={styles.languageButton} onClick={handleOpen} aria-label="Language settings" aria-expanded={isOpen}>
+      <button className={styles.languageButton} onClick={handleOpen} aria-label="Language settings" role="button" aria-expanded={isOpen}>
         {selectedMain.split("-").pop()}
       </button>
       {isOpen && (
