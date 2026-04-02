@@ -23,5 +23,9 @@ export default defineConfig(
     },
   },
   prettierConfig,
+  {
+    files: ['**/*.test.ts', '**/*.test.tsx'],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
   globalIgnores(['.storybook']),
 );
