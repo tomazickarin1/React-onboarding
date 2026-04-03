@@ -187,6 +187,7 @@ describe("LanguageSwitcher", () => {
 // needs state update
 describe("LanguageSwitcherHandler", () => {
   beforeEach(() => {
+    localStorage.clear();
     render(<LanguageSwitcherHandler />);
   });
 
@@ -247,9 +248,6 @@ describe("LanguageSwitcherHandler", () => {
 
     const resetBtn = screen.getByRole("button", { name: /reset/i });
     expect(resetBtn).toBeInTheDocument();
-    await user.click(resetBtn);
-    expect(buttonLanguageSettings).toHaveTextContent("ZA");
-
 
     const defaultLanguageParagraph = screen.getByText(/default language/i);
     const defaultLanguageHeader = defaultLanguageParagraph.parentElement;
@@ -272,25 +270,35 @@ describe("LanguageSwitcherHandler", () => {
       screen.getByRole("option", { name: /english \(en-US\)/i }),
     );
 
-    // reset again
-    await user.click(screen.getByRole("button", { name: /reset/i }));
-
-    // main button back to default
-    expect(buttonLanguageSettings).toHaveTextContent("ZA");
-
-    // language back to default
-    expect(
-      within(defaultLanguageSection).getByRole("button", {
-        name: /afrikaans \(af-ZA\)/i,
-      }),
-    ).toBeInTheDocument();
-
     // checks fallback language
     const fallbackLanguageParagraph = screen.getByText(/fallback language/i);
     const fallbackLanguageSection = fallbackLanguageParagraph.parentElement;
     if (!fallbackLanguageSection)
       throw new Error("fallback language section not found");
 
+    const buttonFallbackLanguage = within(fallbackLanguageSection).getByRole(
+      "button",
+      { name: /afrikaans/i },
+    );
+    await user.click(buttonFallbackLanguage);
+    await user.click(
+      screen.getByRole("option", { name: /english \(en-US\)/i }),
+    );
+
+    // reset
+    await user.click(resetBtn);
+
+    // main button back to default
+    expect(buttonLanguageSettings).toHaveTextContent("ZA");
+
+    // default language back
+    expect(
+      within(defaultLanguageSection).getByRole("button", {
+        name: /afrikaans \(af-ZA\)/i,
+      }),
+    ).toBeInTheDocument();
+
+    // fallback language back
     expect(
       within(fallbackLanguageSection).getByRole("button", {
         name: /afrikaans \(af-ZA\)/i,
