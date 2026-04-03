@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import LanguageSwitcherHandler from "./LanguageSwitcherHandler";
 import userEvent from "@testing-library/user-event";
 
 const mockLnaguagelist = [
@@ -149,5 +150,87 @@ describe("LanguageSwitcher", () => {
     expect(
       screen.queryByRole("textbox", { name: /filter languages/i }),
     ).not.toBeInTheDocument();
+  });
+
+  test("Language list filtering logic works as expected", async () => {
+    const user = userEvent.setup();
+
+    const buttonLanguageSettings = screen.getByRole("button", {
+      name: /language settings/i,
+    });
+    // open the Language Preferences form
+    await user.click(buttonLanguageSettings);
+
+    const buttonDefaultLanguage = screen.getByRole("button", {
+      name: /english/i,
+    });
+
+    // open filter
+    await user.click(buttonDefaultLanguage);
+
+    // select input
+    const filterInput = screen.getByRole("textbox", {
+      name: /filter languages/i,
+    });
+    // use types in
+    await user.type(filterInput, "eng");
+
+    expect(
+      screen.getByRole("option", { name: /english/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("option", { name: /german/i }),
+    ).not.toBeInTheDocument();
+  });
+});
+
+
+// needs state update
+describe("LanguageSwitcherHandler", () => {
+  beforeEach(() => {
+    render(<LanguageSwitcherHandler />);
+  });
+
+  test("Language select logic works as expected (main language button label change, selected languages changes).", async () => {
+    const user = userEvent.setup();
+
+    const buttonLanguageSettings = screen.getByRole("button", {
+      name: /language settings/i,
+    });
+    // open the Language Preferences form
+    await user.click(buttonLanguageSettings);
+
+    const defaultLanguageParagraph = screen.getByText(/default language/i);
+    const defaultLanguageHeader = defaultLanguageParagraph.parentElement;
+    if (!defaultLanguageHeader)
+      throw new Error("Default language header not found");
+    const defaultLanguageSection = defaultLanguageHeader.parentElement;
+    if (!defaultLanguageSection)
+      throw new Error("Default language section not found");
+
+    // add within to scope it to only default language section
+    const buttonDefaultLanguage = within(defaultLanguageSection).getByRole(
+      "button",
+      { name: /afrikaans/i },
+    );
+    await user.click(buttonDefaultLanguage); // open autocomplete on default language section
+
+    // find and click on the english option
+    const englishOption = screen.getByRole("option", {
+      name: /english \(en-US\)/i,
+    });
+    await user.click(englishOption);
+
+    // autocomplete close after selection
+    expect(
+      screen.queryByRole("textbox", { name: /filter languages/i }),
+    ).not.toBeInTheDocument();
+
+    // main button to update to from ZA to US
+    expect(buttonLanguageSettings).toHaveTextContent("US");
+
+    // defult lang button to have english
+    expect(within(defaultLanguageSection).getByRole("button", { name: /english \(en-US\)/i })).toBeInTheDocument();
+
   });
 });
