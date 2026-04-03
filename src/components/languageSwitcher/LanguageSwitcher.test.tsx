@@ -184,7 +184,6 @@ describe("LanguageSwitcher", () => {
   });
 });
 
-
 // needs state update
 describe("LanguageSwitcherHandler", () => {
   beforeEach(() => {
@@ -230,7 +229,72 @@ describe("LanguageSwitcherHandler", () => {
     expect(buttonLanguageSettings).toHaveTextContent("US");
 
     // defult lang button to have english
-    expect(within(defaultLanguageSection).getByRole("button", { name: /english \(en-US\)/i })).toBeInTheDocument();
+    expect(
+      within(defaultLanguageSection).getByRole("button", {
+        name: /english \(en-US\)/i,
+      }),
+    ).toBeInTheDocument();
+  });
 
+  test("Language reset button works as expected", async () => {
+    const user = userEvent.setup();
+
+    const buttonLanguageSettings = screen.getByRole("button", {
+      name: /language settings/i,
+    });
+    // open the Language Preferences form
+    await user.click(buttonLanguageSettings);
+
+    const resetBtn = screen.getByRole("button", { name: /reset/i });
+    expect(resetBtn).toBeInTheDocument();
+    await user.click(resetBtn);
+    expect(buttonLanguageSettings).toHaveTextContent("ZA");
+
+
+    const defaultLanguageParagraph = screen.getByText(/default language/i);
+    const defaultLanguageHeader = defaultLanguageParagraph.parentElement;
+    if (!defaultLanguageHeader)
+      throw new Error("Default language header not found");
+    const defaultLanguageSection = defaultLanguageHeader.parentElement;
+    if (!defaultLanguageSection)
+      throw new Error("Default language section not found");
+
+    const buttonDefaultLanguage = within(defaultLanguageSection).getByRole(
+      "button",
+      { name: /afrikaans/i },
+    );
+
+    // open autocomplete
+    await user.click(buttonDefaultLanguage);
+
+    // change default language
+    await user.click(
+      screen.getByRole("option", { name: /english \(en-US\)/i }),
+    );
+
+    // reset again
+    await user.click(screen.getByRole("button", { name: /reset/i }));
+
+    // main button back to default
+    expect(buttonLanguageSettings).toHaveTextContent("ZA");
+
+    // language back to default
+    expect(
+      within(defaultLanguageSection).getByRole("button", {
+        name: /afrikaans \(af-ZA\)/i,
+      }),
+    ).toBeInTheDocument();
+
+    // checks fallback language
+    const fallbackLanguageParagraph = screen.getByText(/fallback language/i);
+    const fallbackLanguageSection = fallbackLanguageParagraph.parentElement;
+    if (!fallbackLanguageSection)
+      throw new Error("fallback language section not found");
+
+    expect(
+      within(fallbackLanguageSection).getByRole("button", {
+        name: /afrikaans \(af-ZA\)/i,
+      }),
+    ).toBeInTheDocument();
   });
 });
