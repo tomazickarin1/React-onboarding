@@ -35,6 +35,7 @@ export default function LanguageSelect({
         !containerRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false);
+        setHighlighted(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -51,6 +52,8 @@ export default function LanguageSelect({
           inputRef.current.focus();
         }
       }, 0); // run after react finishes updating the DOM - wait untill the dropdown is there to focus
+    } else {
+      setHighlighted(null);
     }
     setIsOpen(!isOpen);
   };
@@ -146,13 +149,6 @@ export default function LanguageSelect({
               e.stopPropagation();
               onSelect(list.code, type);
               setIsOpen(false);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.stopPropagation();
-                onSelect(list.code, type);
-                setIsOpen(false);
-              }
             }}
             className={
               list.code === (highlighted ?? selected) ? styles.active : "" // checks and adds active class if active
