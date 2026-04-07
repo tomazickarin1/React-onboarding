@@ -18,7 +18,7 @@ export default function MainMenuItem({ label, links }: MainMenuItemProps) {
 
   return (
     <li
-      className={` ${styles.mainMenu ?? ""} ${open ? (styles.open ?? "") : ""}`}
+      className={` ${styles.mainMenu ?? ""} ${open ? (styles.open ?? "") : ""}`} aria-expanded={open}
     >
       <MainMenuLink label={label} handleMenuToggle={toggleMenuOpen} />
       <div className={styles.mainMenuList ?? ""}>

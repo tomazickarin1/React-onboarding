@@ -24,9 +24,9 @@ export default function MainMenu() {
   const items = isMobile ? mobileMenuItems : menuItems;
 
   return (
-    <ul className={styles.mainMenuItem}>
+    <ul className={styles.mainMenuItem} role="menubar">
       {items.map((item) => (
-        <MainMenuItem key={item.id} label={item.label} links={item.links} />
+        <MainMenuItem key={item.id} label={item.label} links={item.links} aria-label="Main menu" />
       ))}
       {isMobile && <MenuLinkList links={mobileMenuSmall} />}
     </ul>
