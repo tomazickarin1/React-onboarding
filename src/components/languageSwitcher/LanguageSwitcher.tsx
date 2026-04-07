@@ -43,6 +43,7 @@ export default function LanguageSwitcher({
       </button>
       {isOpen && (
         <div className={styles.languageDropdown}>
+          <div className={styles.callout} />
           <form>
             <fieldset>
               <legend>Language Preferences</legend>

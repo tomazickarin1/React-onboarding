@@ -44,6 +44,11 @@
 
 .selectWrapper {
   position: relative;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
 }
 
 .languageBtn {

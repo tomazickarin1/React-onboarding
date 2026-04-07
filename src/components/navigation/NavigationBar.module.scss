@@ -2,7 +2,7 @@
   background-color: #032541;
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0.5rem 40px;
 }
 
 .left,
@@ -24,8 +24,7 @@
   width: 23px;
 }
 
-a {
+.right a {
   color: white;
-  font-weight: bold;
   text-decoration: none;
 }
