@@ -1,0 +1,31 @@
+.navbar {
+  background-color: #032541;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  display: block;
+  margin-right: 16px;
+  width: 154px;
+  height: 20px;
+}
+
+.plus {
+  height: 23px;
+  width: 23px;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
