@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./LanguageSelect.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretDown,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../atoms/Icon/Icon";
 
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
@@ -177,14 +177,14 @@ export default function LanguageSelect({
         aria-haspopup="listbox"
       >
         {activeLabel} ({activeCode})
-        <FontAwesomeIcon icon={faCaretDown} aria-hidden="true" />
+        <Icon icon={faCaretDown}/>
       </button>
 
       {isOpen && (
         <div className={styles.selectBox}>
           <div className={styles.searchBar}>
             <div className={styles.searchBarInner}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
+                <Icon icon={faMagnifyingGlass}/>
               <input
                 type="text"
                 value={filter}

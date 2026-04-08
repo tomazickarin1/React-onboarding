@@ -3,8 +3,8 @@ import MainMenu from "../../components/mainmenu/MainMenu";
 import LanguageSwitcherHandler from "../../components/languageSwitcher/LanguageSwitcherHandler";
 import logo from "../../assets/logo.svg";
 import plus from "../../assets/plus.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../atoms/Icon/Icon";
 
 export default function NavigationBar() {
   return (
@@ -29,7 +29,7 @@ export default function NavigationBar() {
             <a href="#">Login link</a>
             <a href="#">Join link</a>
             <div className={styles.serchIcon}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
+              <Icon icon={faMagnifyingGlass} />
             </div>
           </div>
         </nav>
@@ -37,7 +37,7 @@ export default function NavigationBar() {
 
       <div className={styles.searchBarWrapper}>
         <form className={styles.searchBar} role="search">
-          <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
+          <Icon icon={faMagnifyingGlass} />
           <input
             type="search"
             aria-label="Search for a movie, tv show, person"
