@@ -5,6 +5,7 @@ import logo from "../../assets/logo.svg";
 import plus from "../../assets/plus.svg";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../atoms/Icon/Icon";
+import Input from "../atoms/Input/Input";
 
 export default function NavigationBar() {
   return (
@@ -38,9 +39,9 @@ export default function NavigationBar() {
       <div className={styles.searchBarWrapper}>
         <form className={styles.searchBar} role="search">
           <Icon icon={faMagnifyingGlass} />
-          <input
+          <Input
             type="search"
-            aria-label="Search for a movie, tv show, person"
+            ariaLabel="Search for a movie, tv show, person"
             placeholder="Search for a movie, tv show, person..."
           />
         </form>

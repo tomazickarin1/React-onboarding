@@ -5,6 +5,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../atoms/Icon/Icon";
+import Input from "../atoms/Input/Input";
 
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
@@ -177,20 +178,19 @@ export default function LanguageSelect({
         aria-haspopup="listbox"
       >
         {activeLabel} ({activeCode})
-        <Icon icon={faCaretDown}/>
+        <Icon icon={faCaretDown} />
       </button>
 
       {isOpen && (
         <div className={styles.selectBox}>
           <div className={styles.searchBar}>
             <div className={styles.searchBarInner}>
-                <Icon icon={faMagnifyingGlass}/>
-              <input
-                type="text"
+              <Icon icon={faMagnifyingGlass} />
+              <Input
                 value={filter}
                 onChange={handleFilter}
                 placeholder="Filter"
-                aria-label="Filter languages"
+                ariaLabel="Filter languages"
                 ref={inputRef}
               />
             </div>
