@@ -15,6 +15,7 @@
   padding: 1rem;
   color: rgb(33, 37, 41);
   width: 300px;
+  z-index: 2;
 
   form {
     margin: 0;
@@ -47,40 +48,6 @@
 .defaultLanguageHeader {
   display: flex;
   justify-content: space-between;
-}
-
-.languageButton {
-  padding: 3px 5px;
-  background: transparent;
-  border: 1px solid #fff;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: linear 0.1s;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  background-color: transparent;
-  height: 26px;
-  width: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background-color: white;
-    color: #032541;
-  }
-}
-
-.restButton {
-  background: transparent;
-  cursor: pointer;
-  border: none;
-  font-weight: 300;
-  font-size: 1rem;
-  color: rgb(33, 37, 41);
-  font-family: "Source Sans 3", sans-serif;
 }
 
 .callout {

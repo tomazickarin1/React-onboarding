@@ -1,6 +1,7 @@
 import styles from "./LanguageSwitcher.module.scss";
 import { useState, useEffect, useRef } from "react";
 import LanguageSelect from "./LanguageSelect";
+import Button from "../atoms/Button/Button";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
@@ -22,15 +23,15 @@ export default function LanguageSwitcher({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if(ref.current && !ref.current.contains(e.target as Node) ) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  },[]);
+  }, []);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -38,9 +39,13 @@ export default function LanguageSwitcher({
 
   return (
     <section className={styles.languageSwitcher} ref={ref}>
-      <button className={styles.languageButton} onClick={handleOpen} aria-label="Language settings" role="button" aria-expanded={isOpen}>
-        {selectedMain.split("-").pop()}
-      </button>
+      <Button
+        variant="language"
+        label={selectedMain.split("-").pop() ?? ""}
+        onClick={handleOpen}
+        aria-expanded={isOpen}
+        aria-label="Language settings"
+      />
       {isOpen && (
         <div className={styles.languageDropdown}>
           <div className={styles.callout} />
@@ -50,15 +55,23 @@ export default function LanguageSwitcher({
               <div className={styles.defaultLanguage}>
                 <div className={styles.defaultLanguageHeader}>
                   <p>Default Language</p>
-                  <button type="button" onClick={onReset} className={styles.restButton}>
-                    Reset
-                  </button>
+                  <Button label="Reset" variant="reset" onClick={onReset} />
                 </div>
-                <LanguageSelect languageList={languageList} selected={selectedMain} type="primary" onSelect={onSelect} />
+                <LanguageSelect
+                  languageList={languageList}
+                  selected={selectedMain}
+                  type="primary"
+                  onSelect={onSelect}
+                />
               </div>
               <div>
                 <p>Fallback Language</p>
-                <LanguageSelect languageList={languageList} selected={selectedFallback} type="fallback" onSelect={onSelect} />
+                <LanguageSelect
+                  languageList={languageList}
+                  selected={selectedFallback}
+                  type="fallback"
+                  onSelect={onSelect}
+                />
               </div>
             </fieldset>
           </form>
