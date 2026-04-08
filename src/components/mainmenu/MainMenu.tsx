@@ -5,7 +5,7 @@ import { menuItems, mobileMenuItems, mobileMenuSmall } from "../../data/menuItem
 import { useEffect, useState } from "react";
 
 export default function MainMenu() {
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 992);
 
   useEffect(() => {
     const watchWdith = window.matchMedia("(max-width: 767px)");

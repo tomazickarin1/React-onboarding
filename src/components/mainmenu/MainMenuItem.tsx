@@ -11,7 +11,7 @@ export interface MainMenuItemProps {
 export default function MainMenuItem({ label, links }: MainMenuItemProps) {
   const [open, setOpen] = useState(false);
   const toggleMenuOpen = () => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 992) {
       setOpen(!open);
     }
   };
