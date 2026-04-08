@@ -1,0 +1,69 @@
+.mobileNavbar {
+  display: none;
+
+  @media (max-width: 992px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 20px;
+    max-width: 1300px;
+    margin: auto;
+  }
+}
+
+.burgerBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.mobileLogo {
+  display: block;
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.mobileRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: white;
+}
+
+.serchIcon svg {
+  height: 25px;
+  width: 25px;
+  color: rgba(1, 179, 228);
+}
+
+.overlay {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9;
+}
+
+.drawer {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: calc(100% - 50px);
+  width: 75%;
+  background: rgba(3, 37, 65, 0.95);
+  z-index: 10;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding: 20px;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}

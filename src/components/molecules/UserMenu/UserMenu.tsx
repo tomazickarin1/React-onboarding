@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Icon from "../atoms/Icon/Icon";
+import Icon from "../../atoms/Icon/Icon";
 import styles from "./UserMenu.module.scss";
 
 export default function UserMenu() {
@@ -8,11 +8,15 @@ export default function UserMenu() {
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   return (
     <div className={styles.userMenu}>
-      <button onClick={toggleOpen} aria-expanded={isOpen} aria-label="User menu">
+      <button
+        onClick={toggleOpen}
+        aria-expanded={isOpen}
+        aria-label="User menu"
+      >
         <Icon icon={faUser} />
       </button>
       {isOpen && (
