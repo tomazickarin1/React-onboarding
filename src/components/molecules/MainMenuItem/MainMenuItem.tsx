@@ -1,6 +1,6 @@
 import styles from "./MainMenuItem.module.scss";
-import MainMenuLink from "./MainMenuLink";
-import MenuLinkList from "./MenuLinkList";
+import MainMenuLink from "../../atoms/MainMenuLink/MainMenuLink";
+import MenuLinkList from "../MenuLinkList/MenuLinkList";
 import { useState } from "react";
 
 export interface MainMenuItemProps {

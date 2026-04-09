@@ -1,5 +1,5 @@
 import styles from "./MobileNav.module.scss";
-import MainMenu from "../../mainmenu/MainMenu";
+import MainMenu from "../MainMenu/MainMenu";
 import Icon from "../../atoms/Icon/Icon";
 import UserMenu from "../../molecules/UserMenu/UserMenu";
 import mobileLogo from "../../../assets/mobile-logo.svg";

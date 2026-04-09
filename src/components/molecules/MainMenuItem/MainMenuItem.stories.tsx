@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import MenuLinkList from "./MenuLinkList";
+import MainMenuItem from "./MainMenuItem";
 
 const meta = {
-  title: "Component/MenuLinkList",
-  component: MenuLinkList,
-} satisfies Meta<typeof MenuLinkList>;
+  title: "Component/molecules/MainMenuItem",
+  component: MainMenuItem,
+} satisfies Meta<typeof MainMenuItem>;
 
 export default meta;
 
@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    label: "MainMenuItem text",
     links: [
       { label: "Home", url: "/home" },
       { label: "About", url: "/about" },

@@ -1,5 +1,5 @@
 import styles from "./MenuLinkList.module.scss";
-import MenuLink from "./MenuLink";
+import MenuLink from "../../atoms/MenuLink/MenuLink";
 
 export interface MenuLinkListProps {
   links: Array<{ label: string; url: string }>;

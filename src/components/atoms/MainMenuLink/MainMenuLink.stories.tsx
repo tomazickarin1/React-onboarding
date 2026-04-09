@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import MainMenuLink from "./MainMenuLink";
 
 const meta = {
-  title: "Component/MainMenuLink",
+  title: "Component/atoms/MainMenuLink",
   component: MainMenuLink,
 } satisfies Meta<typeof MainMenuLink>;
 
