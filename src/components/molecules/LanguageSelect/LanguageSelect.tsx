@@ -4,8 +4,8 @@ import {
   faCaretDown,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import Icon from "../atoms/Icon/Icon";
-import Input from "../atoms/Input/Input";
+import Icon from "../../atoms/Icon/Icon";
+import Input from "../../atoms/Input/Input";
 
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;

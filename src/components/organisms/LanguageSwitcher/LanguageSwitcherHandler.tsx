@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { languages } from "./../../data/language-list.json";
+import { languages } from "../../../data/language-list.json";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const languageList = languages.map((lang) => {

@@ -3,7 +3,7 @@ import LanguageSwitcherHandler from "./LanguageSwitcherHandler";
 import { expect } from "storybook/test";
 
 const meta = {
-  title: "Component/LanguageSwitcher",
+  title: "Component/organisms/LanguageSwitcher",
   component: LanguageSwitcherHandler,
 } satisfies Meta<typeof LanguageSwitcherHandler>;
 

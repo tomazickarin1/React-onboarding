@@ -1,7 +1,7 @@
 import styles from "./LanguageSwitcher.module.scss";
 import { useState, useEffect, useRef } from "react";
-import LanguageSelect from "./LanguageSelect";
-import Button from "../atoms/Button/Button";
+import LanguageSelect from "../../molecules/LanguageSelect/LanguageSelect";
+import Button from "../../atoms/Button/Button";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;

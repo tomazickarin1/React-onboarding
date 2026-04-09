@@ -1,6 +1,6 @@
 import styles from "./DesktopNav.module.scss";
 import MainMenu from "../../mainmenu/MainMenu";
-import LanguageSwitcherHandler from "../../languageSwitcher/LanguageSwitcherHandler";
+import LanguageSwitcherHandler from "../LanguageSwitcher/LanguageSwitcherHandler";
 import Icon from "../../atoms/Icon/Icon";
 import UserMenu from "../../molecules/UserMenu/UserMenu";
 
