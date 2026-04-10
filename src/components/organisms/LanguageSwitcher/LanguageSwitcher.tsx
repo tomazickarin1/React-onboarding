@@ -1,7 +1,8 @@
 import styles from "./LanguageSwitcher.module.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import LanguageSelect from "../../molecules/LanguageSelect/LanguageSelect";
 import Button from "../../atoms/Button/Button";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 export interface LanguageSwitcherProps {
   languageList: Array<{ code: string; label: string }>;
@@ -21,17 +22,15 @@ export default function LanguageSwitcher({
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+
+  // useClickOutside(ref, () => {
+  //   setIsOpen(false);
+  // });
+
+
+  // boolean value
+  const isClickedOutside = useClickOutside(ref);
+
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -46,7 +45,7 @@ export default function LanguageSwitcher({
         aria-expanded={isOpen}
         aria-label="Language settings"
       />
-      {isOpen && (
+      {isOpen && !isClickedOutside &&  (
         <div className={styles.languageDropdown}>
           <div className={styles.callout} />
           <form>

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./LanguageSelect.module.scss";
 import {
   faCaretDown,
@@ -6,6 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../atoms/Icon/Icon";
 import Input from "../../atoms/Input/Input";
+
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 export interface LanguageSelectProps {
   languageList: Array<{ code: string; label: string }>;
@@ -29,24 +31,22 @@ export default function LanguageSelect({
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-        setHighlighted(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+
+
+  // useClickOutside(containerRef, () => {
+  //   setIsOpen(false);
+  //   setHighlighted(null);
+  // });
+
+
+
+  // boolean value
+  const isClickedOutside = useClickOutside(containerRef);
+
 
   const handleOpen = () => {
-    if (!isOpen) {
+    const isCurrentlyOpen = isOpen && !isClickedOutside;
+    if (!isCurrentlyOpen) {
       // if dropdwown closed - if its closed when you clik it
       setTimeout(() => {
         if (inputRef.current !== null) {
@@ -56,7 +56,7 @@ export default function LanguageSelect({
     } else {
       setHighlighted(null);
     }
-    setIsOpen(!isOpen);
+    setIsOpen(!isCurrentlyOpen);
   };
 
   const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +121,7 @@ export default function LanguageSelect({
   };
 
   let activeCode;
-  if (highlighted !== null) {
+  if (highlighted !== null && !isClickedOutside) {
     // if highlighted/selected with arrow up/down
     activeCode = highlighted;
   } else {
@@ -181,7 +181,7 @@ export default function LanguageSelect({
         <Icon icon={faCaretDown} />
       </button>
 
-      {isOpen && (
+      {isOpen && !isClickedOutside && (
         <div className={styles.selectBox}>
           <div className={styles.searchBar}>
             <div className={styles.searchBarInner}>
