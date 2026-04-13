@@ -1,0 +1,17 @@
+.showcaseHeader {
+  display: flex;
+}
+.showcaseCards {
+  display: flex;
+  gap: 1rem;
+  margin-left: 40px;
+}
+
+.showcaseCard {
+  img {
+    height: 220px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}

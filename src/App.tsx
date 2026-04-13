@@ -1,13 +1,11 @@
 import styles from "./App.module.scss";
-import NavigationBar from "./components/organisms/NavigationBar/NavigationBar";
-import Footer from "./components/organisms/Footer/Footer";
+import HomePage from "./components/pages/HomePage/HomePage";
 
 export default function App() {
 
   return (
     <div className={styles.movieapp}>
-      <NavigationBar />
-      <Footer/>
+      <HomePage />
     </div>
   );
 }

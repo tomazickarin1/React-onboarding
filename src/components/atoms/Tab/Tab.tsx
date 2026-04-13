@@ -1,0 +1,17 @@
+import styles from "./Tab.module.scss";
+
+interface TabProps {
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+export default function Tab({label, isActive, onClick}: TabProps) {
+  return (
+    <div className={`${styles.selector ?? ""} ${isActive ? styles.active ?? "" : ""}`} onClick={onClick}>
+      <h3>
+        <a href="#">{label}</a>
+      </h3>
+    </div>
+  );
+}
