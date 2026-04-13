@@ -1,7 +1,22 @@
 .selector {
-  background-color: red;
+  h3 {
+    font-size: 1em;
+    padding: 4px 20px;
+    margin: 0;
+    font-weight: 600;
+
+    a {
+      text-decoration: none;
+      color: rgb(3, 37, 65);
+
+      &:hover {
+        color: rgba(3, 37, 65, .7);
+      }
+    }
+  }
 }
 
 .active {
-  background-color: red;
+  background-color: gray;
+  border-radius: 30px;
 }

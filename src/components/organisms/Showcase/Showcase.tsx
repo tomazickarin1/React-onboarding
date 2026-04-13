@@ -18,15 +18,23 @@ export default function Showcase() {
     { id: 2, title: "On TV", url: "/", date: "nov 15" },
     { id: 3, title: "For Rent", url: "/", date: "nov 15" },
     { id: 4, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 5, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 6, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 7, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 8, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 9, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 10, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 11, title: "In Theatres", url: "/", date: "nov 15" },
+    { id: 12, title: "In Theatres", url: "/", date: "nov 15" },
   ];
 
   return (
-    <>
+    <div className={styles.showcase}>
       <div className={styles.showcaseHeader}>
         <h2>What&apos;s popular</h2>
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
       <Cards cards={cards} />
-    </>
+    </div>
   );
 }

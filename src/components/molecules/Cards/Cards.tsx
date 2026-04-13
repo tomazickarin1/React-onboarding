@@ -8,7 +8,7 @@ interface CardsProps {
 export default function Cards({ cards }: CardsProps) {
   return (
     <>
-      <div className={styles.showcaseCards}>
+      <div className={styles.Cards}>
         {cards.map((card) => {
           return (
             <Card

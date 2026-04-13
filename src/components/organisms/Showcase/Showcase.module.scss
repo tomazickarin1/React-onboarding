@@ -1,3 +1,15 @@
+.showcase {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 30px 0;
+}
+
 .showcaseHeader {
   display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+  }
 }
