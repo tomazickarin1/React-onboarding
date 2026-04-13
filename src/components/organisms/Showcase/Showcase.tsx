@@ -1,7 +1,7 @@
 import styles from "./Showcase.module.scss";
 import { useState } from "react";
-import placeholder from "../../../assets/placeholder.jpg";
 import Tabs from "../../molecules/Tabs/Tabs";
+import Cards from "../../molecules/Cards/Cards";
 
 export default function Showcase() {
   const [activeTab, setActiveTab] = useState(1);
@@ -13,30 +13,20 @@ export default function Showcase() {
     { id: 4, label: "In Theatres" },
   ];
 
+  const cards = [
+    { id: 1, title: "Streaming", url: "/", date: "nov 15" },
+    { id: 2, title: "On TV", url: "/", date: "nov 15" },
+    { id: 3, title: "For Rent", url: "/", date: "nov 15" },
+    { id: 4, title: "In Theatres", url: "/", date: "nov 15" },
+  ];
+
   return (
     <>
       <div className={styles.showcaseHeader}>
         <h2>What&apos;s popular</h2>
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-
-      <div className={styles.showcaseCards}>
-        <div className={styles.showcaseCard}>
-          <img src={placeholder} alt="" />
-          <h3>The Boys</h3>
-          <div>25 July 2019</div>
-        </div>
-        <div className={styles.showcaseCard}>
-          <img src={placeholder} alt="" />
-          <h3>The Boys</h3>
-          <div>25 July 2019</div>
-        </div>
-        <div className={styles.showcaseCard}>
-          <img src={placeholder} alt="" />
-          <h3>The Boys</h3>
-          <div>25 July 2019</div>
-        </div>
-      </div>
+      <Cards cards={cards} />
     </>
   );
 }
