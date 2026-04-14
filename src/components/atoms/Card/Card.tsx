@@ -1,5 +1,5 @@
 import styles from "./Card.module.scss";
-import placeholder from "../../../assets/placeholder.jpg"
+import placeholder from "../../../assets/placeholder.jpg";
 
 interface CardProps {
   image?: string;
@@ -9,19 +9,17 @@ interface CardProps {
 }
 
 export default function Card({ image, title, date, isLoading }: CardProps) {
-
-if (isLoading) {
-  return (
-    <div className={styles.showcaseCard}>
-      <img src={placeholder} alt="" />
-      <div>
-        <h3>Loading...</h3>
-        <div className={styles.date}></div>
+  if (isLoading) {
+    return (
+      <div className={styles.showcaseCard}>
+        <img src={placeholder} alt="" />
+        <div>
+          <h3>Loading...</h3>
+          <div className={styles.date}></div>
+        </div>
       </div>
-    </div>
-  );
-}
-
+    );
+  }
 
   return (
     <div className={styles.showcaseCard}>

@@ -4,14 +4,11 @@
     padding: 4px 20px;
     margin: 0;
     font-weight: 600;
+    cursor: pointer;
+    color: rgb(3, 37, 65);
 
-    a {
-      text-decoration: none;
-      color: rgb(3, 37, 65);
-
-      &:hover {
-        color: rgba(3, 37, 65, 0.7);
-      }
+    &:hover {
+      color: rgba(3, 37, 65, 0.7);
     }
   }
 }
@@ -21,8 +18,8 @@
   position: relative;
   z-index: 1;
 
-  &:hover h3 a,
-  h3 a {
+  &:hover h3,
+  h3 {
     background: linear-gradient(to right, #c0fecf 0, #1ed5a9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
