@@ -21,14 +21,7 @@
   position: relative;
   z-index: 1;
 
-  &:hover {
-    h3 a {
-      background: linear-gradient(to right, #c0fecf 0, #1ed5a9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-
+  &:hover h3 a,
   h3 a {
     background: linear-gradient(to right, #c0fecf 0, #1ed5a9 100%);
     -webkit-background-clip: text;
