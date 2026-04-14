@@ -1,7 +1,7 @@
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import Showcase from "../../organisms/Showcase/Showcase";
 
-
+export default function HomePage() {
   const movies = [
     { id: 1, title: "Streaming", url: "/", date: "nov 15" },
     { id: 2, title: "On TV", url: "/", date: "nov 15" },
@@ -17,12 +17,10 @@ import Showcase from "../../organisms/Showcase/Showcase";
     { id: 12, title: "In Theatres", url: "/", date: "nov 15" },
   ];
 
-
-export default function HomePage() {
   return (
     <>
       <SingleColumn>
-        <Showcase movies={movies} />
+        <Showcase movies={movies} isLoading={false} />
       </SingleColumn>
     </>
   );

@@ -5,9 +5,10 @@ import Cards from "../../molecules/Cards/Cards";
 
 interface ShowcaseProps {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
+  isLoading: boolean;
 }
 
-export default function Showcase({movies}: ShowcaseProps) {
+export default function Showcase({movies, isLoading}: ShowcaseProps) {
   const [activeTab, setActiveTab] = useState(1);
 
   const tabs = [
@@ -23,7 +24,7 @@ export default function Showcase({movies}: ShowcaseProps) {
         <h2>What&apos;s popular</h2>
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-      <Cards movies={movies} />
+      <Cards movies={movies} isLoading={isLoading} />
     </div>
   );
 }
