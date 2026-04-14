@@ -1,11 +1,11 @@
-// functional component
-import MainMenu from "./components/mainmenu/MainMenu";
-import styles from './App.module.scss'
+import styles from "./App.module.scss";
+import HomePage from "./components/pages/HomePage/HomePage";
 
 export default function App() {
+
   return (
     <div className={styles.movieapp}>
-      <MainMenu />
+      <HomePage />
     </div>
   );
 }
