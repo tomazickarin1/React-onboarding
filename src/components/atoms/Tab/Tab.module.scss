@@ -10,13 +10,24 @@
       color: rgb(3, 37, 65);
 
       &:hover {
-        color: rgba(3, 37, 65, .7);
+        color: rgba(3, 37, 65, 0.7);
       }
     }
   }
 }
 
 .active {
-  background-color: gray;
   border-radius: 30px;
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    h3 a {
+      color: white;
+    }
+  }
+
+  h3 a {
+    color: white;
+  }
 }

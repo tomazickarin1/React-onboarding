@@ -6,9 +6,13 @@ interface TabProps {
   onClick: () => void;
 }
 
-export default function Tab({label, isActive, onClick}: TabProps) {
+export default function Tab({ label, isActive, onClick }: TabProps) {
   return (
-    <div className={`${styles.selector ?? ""} ${isActive ? styles.active ?? "" : ""}`} onClick={onClick}>
+    <div
+      data-tab
+      className={`${styles.selector ?? ""} ${isActive ? (styles.active ?? "") : ""}`}
+      onClick={onClick}
+    >
       <h3>
         <a href="#">{label}</a>
       </h3>
