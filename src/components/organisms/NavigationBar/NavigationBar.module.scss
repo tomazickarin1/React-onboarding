@@ -1,0 +1,23 @@
+.navbarWrapper {
+  background-color: #032541;
+  position: relative;
+}
+
+.plus {
+  height: 23px;
+  width: 23px;
+}
+
+.right a {
+  color: white;
+  text-decoration: none;
+}
+
+.joinDesktop {
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
