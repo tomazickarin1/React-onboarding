@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 
-import Tabs from "./Tabs";
+import TabsComponent from "./Tabs";
 
 const meta = {
   title: "Component/molecules/Tabs",
-  component: Tabs,
-} satisfies Meta<typeof Tabs>;
+  component: TabsComponent,
+} satisfies Meta<typeof TabsComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Tabs: Story = {
   args: {
     tabs: [
       { id: 1, label: "Streaming" },
