@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Showcase from "./Showcase";
 import pladeholderPoster from "../../../assets/placeholder-poster.jpg"
+
+import ShowcaseComponent from "./Showcase";
 
 const meta = {
   title: "Component/organisms/Showcase",
-  component: Showcase,
-} satisfies Meta<typeof Showcase>;
+  component: ShowcaseComponent,
+} satisfies Meta<typeof ShowcaseComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Showcase: Story = {
   args: {
     movies: [
       { id: 1, title: "Streaming", url: pladeholderPoster, date: "nov 15" },
@@ -28,12 +29,5 @@ export const Default: Story = {
       { id: 12, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
     ],
     isLoading: false,
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    movies: [],
-    isLoading: true,
   },
 };

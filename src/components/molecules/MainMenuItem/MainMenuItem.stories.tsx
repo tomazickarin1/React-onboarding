@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import MainMenuItem from "./MainMenuItem";
+import MainMenuItemComponent from "./MainMenuItem";
 
 const meta = {
   title: "Component/molecules/MainMenuItem",
-  component: MainMenuItem,
-} satisfies Meta<typeof MainMenuItem>;
+  component: MainMenuItemComponent,
+} satisfies Meta<typeof MainMenuItemComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const MainMenuItem: Story = {
   args: {
     label: "MainMenuItem text",
     links: [

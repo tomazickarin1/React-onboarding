@@ -1,18 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import Input from "./Input";
+
+import InputComponent from "./Input";
 
 const meta = {
   title: "Component/atoms/Input",
-  component: Input,
-} satisfies Meta<typeof Input>;
+  component: InputComponent,
+  argTypes: {
+    type: {
+      control: "radio",
+      options: ["text", "search"],
+    },
+  },
+} satisfies Meta<typeof InputComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Input: Story = {
   args: {
     placeholder: "Type something...",
     onChange: fn(),
+    type: "text",
   },
 };

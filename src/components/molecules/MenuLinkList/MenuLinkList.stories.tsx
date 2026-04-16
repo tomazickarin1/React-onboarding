@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import MenuLinkList from "./MenuLinkList";
+import MenuLinkListComponent from "./MenuLinkList";
 
 const meta = {
   title: "Component/molecules/MenuLinkList",
-  component: MenuLinkList,
-} satisfies Meta<typeof MenuLinkList>;
+  component: MenuLinkListComponent,
+} satisfies Meta<typeof MenuLinkListComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const MenuLinkList: Story = {
   args: {
     links: [
       { label: "Home", url: "/home" },

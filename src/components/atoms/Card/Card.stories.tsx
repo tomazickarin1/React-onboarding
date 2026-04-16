@@ -1,31 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import pladeholderPoster from "../../../assets/placeholder-poster.jpg"
 
-import Card from "./Card";
+import CardComponent from "./Card";
 
 const meta = {
   title: "Component/atoms/Card",
-  component: Card,
-} satisfies Meta<typeof Card>;
+  component: CardComponent,
+} satisfies Meta<typeof CardComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Card: Story = {
   args: {
-    image: "imageurl",
+    image: pladeholderPoster,
     title: "movie title",
     date: "12.4.2026",
     isLoading: false,
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    image: "imageurl",
-    title: "movie title",
-    date: "12.4.2026",
-    isLoading: true,
   },
 };
 
