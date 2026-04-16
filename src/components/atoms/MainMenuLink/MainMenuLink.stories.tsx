@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 
 import MainMenuLinkComponent from "./MainMenuLink";
 
@@ -15,6 +16,6 @@ export const MainMenuLink: Story = {
   args: {
     label: "MainMenuLink text",
     url: '#',
-    handleMenuToggle: () => {},
+    handleMenuToggle: fn(),
   },
 };

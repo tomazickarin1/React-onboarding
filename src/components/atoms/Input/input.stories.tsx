@@ -22,5 +22,6 @@ export const Input: Story = {
     placeholder: "Type something...",
     onChange: fn(),
     type: "text",
+    ariaLabel: "Text input",
   },
 };

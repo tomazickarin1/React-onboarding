@@ -35,6 +35,7 @@ export const Language: Story = {
     onClick: fn(),
     variant: "language",
     type: "button",
+    "aria-label": "Select language: English",
   },
 };
 

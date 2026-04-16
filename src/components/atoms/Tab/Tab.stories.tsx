@@ -19,3 +19,11 @@ export const Tab: Story = {
     onClick: fn(),
   },
 };
+
+export const Active: Story = {
+  args: {
+    label: "Streaming",
+    isActive: true,
+    onClick: fn(),
+  },
+};
