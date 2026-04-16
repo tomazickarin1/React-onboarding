@@ -23,11 +23,14 @@ export const Cards: Story = {
       { id: 6, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
       { id: 7, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
       { id: 8, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
-      { id: 9, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
-      { id: 10, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
-      { id: 11, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
-      { id: 12, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
     ],
     isLoading: false,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    movies: [],
+    isLoading: true,
   },
 };

@@ -6,6 +6,10 @@
   display: flex;
   justify-content: flex-start;
   height: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .slider {
@@ -18,4 +22,12 @@
     left 0.3s ease,
     width 0.3s ease;
   pointer-events: none;
+}
+
+.mobileSelect {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
