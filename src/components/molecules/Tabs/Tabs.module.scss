@@ -31,3 +31,39 @@
     display: block;
   }
 }
+
+.mobileDropdown {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileDropdown {
+    display: block;
+  }
+  .selectorWrap {
+    display: none;
+  }
+}
+
+.mobileDropdownList,
+.mobileDropdown,
+.mobileDropdownTrigger,
+.iconDown,
+.activeOption {
+  display: block;
+}
+
+.dropdownWrapper {
+  position: absolute;
+  background: white;
+  border: 1px solid;
+  list-style: none;
+  padding: 1rem;
+  border-radius: 15px;
+
+  background: linear-gradient(
+    to right,
+    rgba(192, 254, 207) 0%,
+    rgba(30, 213, 169) 100%
+  );
+}
