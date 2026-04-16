@@ -5,6 +5,16 @@ import Button from "./Button";
 const meta = {
   title: "Component/atoms/Button",
   component: Button,
+  argTypes: {
+    variant: {
+      control: "radio",
+      options: ["default", "language", "reset"],
+    },
+    type: {
+      control: "radio",
+      options: ["button", "submit", "reset"],
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -14,21 +24,25 @@ export const Default: Story = {
   args: {
     label: "Click me",
     onClick: fn(),
+    variant: "default",
+    type: "button",
   },
 };
 
 export const Language: Story = {
   args: {
     label: "EN",
-    variant: "language",
     onClick: fn(),
+    variant: "language",
+    type: "button",
   },
 };
 
 export const Reset: Story = {
   args: {
     label: "Reset",
-    variant: "reset",
     onClick: fn(),
+    variant: "reset",
+    type: "reset",
   },
 };
