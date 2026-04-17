@@ -34,6 +34,60 @@
 
 .mobileDropdown {
   display: none;
+  height: 30px;
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  .activeBtnWrapper {
+    background-color: rgb(3, 37, 65);
+
+    padding: 4px 20px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    border-radius: 30px;
+    display: block;
+  }
+
+  button {
+    font-size: 1rem;
+    background: linear-gradient(to right, #c0fecf 0, #1ed5a9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0;
+  }
+
+  ul {
+    background: linear-gradient(
+      to right,
+      rgba(192, 254, 207) 0%,
+      rgba(30, 213, 169) 100%
+    );
+    position: absolute;
+    padding: 0;
+    list-style: none;
+    border: 1px solid;
+    border-radius: 15px;
+
+    li {
+      font-size: 1rem;
+      margin-bottom: 0;
+      white-space: nowrap;
+      padding: 4px 20px;
+
+      &.activeOption {
+        padding: 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -43,6 +97,15 @@
   .selectorWrap {
     display: none;
   }
+}
+
+.mobileDropdownList {
+  margin: 0;
+}
+
+.iconDown svg {
+  filter: invert(89%) sepia(21%) saturate(454%) hue-rotate(75deg)
+    brightness(104%) contrast(99%);
 }
 
 .mobileDropdownList,
