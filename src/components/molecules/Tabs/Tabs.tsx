@@ -28,18 +28,22 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
     });
   }, [activeTab, tabs]);
 
-  // const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   onTabChange(Number(e.target.value));
-  // };
+  const handleOnKeyDown = (e: React.KeyboardEvent, id: number) => {
+    if (e.key === "Enter") {
+      onTabChange(id);
+      setIsOpen(false);
+    }
+  };
 
-  // const handleOpen = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const handleClick = (id: number) => {
+    onTabChange(id);
+    setIsOpen(false);
+  };
 
-  // const handleSelect = (id: number) => {
-  //   onTabChange(id);
-  //    setIsOpen(false);
-  // }
+  const handleOpen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -54,14 +58,10 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
                 className={tab.id === activeTab ? styles.activeOption : ""}
                 aria-selected={tab.id === activeTab}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    onTabChange(tab.id);
-                    setIsOpen(false);
-                  }
+                  handleOnKeyDown(e, tab.id);
                 }}
                 onClick={() => {
-                  onTabChange(tab.id);
-                  setIsOpen(false);
+                  handleClick(tab.id);
                 }}
               >
                 {tab.id === activeTab ? (
@@ -69,10 +69,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
                     <button
                       type="button"
                       className={styles.mobileDropdownTrigger}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsOpen(false);
-                      }}
+                      onClick={handleOpen}
                     >
                       {tab.label}{" "}
                       <span className={styles.iconDown}>
