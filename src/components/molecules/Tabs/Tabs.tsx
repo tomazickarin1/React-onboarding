@@ -68,7 +68,6 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
                   <div className={styles.activeBtnWrapper}>
                     <button
                       type="button"
-                      className={styles.mobileDropdownTrigger}
                       onClick={handleOpen}
                     >
                       {tab.label}{" "}
@@ -89,7 +88,6 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
           <div className={styles.activeBtnWrapper}>
             <button
               type="button"
-              className={styles.mobileDropdownTrigger}
               onClick={() => {
                 setIsOpen(true);
               }}

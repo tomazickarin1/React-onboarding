@@ -6,6 +6,7 @@
   display: flex;
   justify-content: flex-start;
   height: 100%;
+  width: fit-content;
 
   @media (max-width: 768px) {
     display: none;
@@ -35,11 +36,16 @@
 .mobileDropdown {
   display: none;
   height: 30px;
-  display: block;
   position: relative;
   top: 0;
   left: 0;
   z-index: 5;
+  min-width: 100px;
+  width: fit-content;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 
   .activeBtnWrapper {
     background-color: rgb(3, 37, 65);
@@ -90,15 +96,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .mobileDropdown {
-    display: block;
-  }
-  .selectorWrap {
-    display: none;
-  }
-}
-
 .mobileDropdownList {
   margin: 0;
 }
@@ -106,14 +103,6 @@
 .iconDown svg {
   filter: invert(89%) sepia(21%) saturate(454%) hue-rotate(75deg)
     brightness(104%) contrast(99%);
-}
-
-.mobileDropdownList,
-.mobileDropdown,
-.mobileDropdownTrigger,
-.iconDown,
-.activeOption {
-  display: block;
 }
 
 .dropdownWrapper {

@@ -5,9 +5,14 @@
 }
 
 .showcaseHeader {
-  display: flex;
+  display: grid;
   gap: 2rem;
   align-items: center;
+  grid-template-columns: auto 1fr;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   h2 {
     margin: 0;
