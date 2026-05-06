@@ -24,7 +24,11 @@ export default function Showcase({movies, isLoading}: ShowcaseProps) {
         <h2>What&apos;s popular</h2>
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-      <Cards movies={movies} isLoading={isLoading} />
+      {!isLoading && movies.length === 0 ? (
+        <p>No movies found.</p>
+      ) : (
+        <Cards movies={movies} isLoading={isLoading} />
+      )}
     </div>
   );
 }
