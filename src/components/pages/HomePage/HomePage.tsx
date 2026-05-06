@@ -1,10 +1,12 @@
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import ShowcaseFetch from "../../organisms/ShowcaseFetch/ShowcaseFetch";
+// import ShowcaseFetch from "../../organisms/ShowcaseFetch/ShowcaseFetch";
+import ShowcaseQueryFetch from "../../organisms/ShowcaseQueryFetch/ShowcaseQueryFetch";
+
 
 export default function HomePage() {
   return (
     <SingleColumn>
-      <ShowcaseFetch />
+      <ShowcaseQueryFetch />
     </SingleColumn>
   );
 }
