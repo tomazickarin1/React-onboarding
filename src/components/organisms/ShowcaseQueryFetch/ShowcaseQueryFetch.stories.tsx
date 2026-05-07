@@ -21,11 +21,14 @@ const meta = {
   title: "Component/organisms/ShowcaseQueryFetch",
   component: ShowcaseQueryFetch,
   decorators: [
-    (Story) => (
-      <QueryClientProvider client={new QueryClient()}>
-        <Story />
-      </QueryClientProvider>
-    ),
+    (Story) => {
+      const queryClient = new QueryClient()
+      return (
+        <QueryClientProvider client={queryClient}>
+          <Story />
+        </QueryClientProvider>
+      )
+    },
   ],
 } satisfies Meta<typeof ShowcaseQueryFetch>;
 
