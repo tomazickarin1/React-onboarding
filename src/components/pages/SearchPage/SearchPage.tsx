@@ -1,6 +1,7 @@
 import styles from "./SearchPage.module.scss";
 import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -15,6 +16,7 @@ interface TmdbMovie {
 
 interface TmdbResponse {
   results: TmdbMovie[];
+  total_pages: number;
 }
 
 type Movie = {
@@ -25,10 +27,12 @@ type Movie = {
   description: string;
 };
 
-async function fetchSearchMovies(): Promise<Movie[]> {
+type SearchResult = { movies: Movie[]; totalPages: number };
+
+async function fetchSearchMovies(page: number): Promise<SearchResult> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/search/movie?api_key=${apiKey}&query=The%20Mandalorian`,
+    `${tmbUrl}/search/movie?api_key=${apiKey}&query=The&page=${String(page)}`
   );
 
   if (!response.ok) {
@@ -38,25 +42,37 @@ async function fetchSearchMovies(): Promise<Movie[]> {
 
   console.log(data);
 
-  return data.results.map((movie) => ({
-    id: movie.id,
-    title: movie.title,
-    url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
-    date: movie.release_date,
-    description: movie.overview,
-  }));
+  const searchData = {
+    movies: data.results.map((movie) => ({
+      id: movie.id,
+      title: movie.title,
+      url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
+      date: movie.release_date,
+      description: movie.overview,
+      totalPages: data.total_pages
+    })),
+    totalPages: data.total_pages,
+  }
+
+  return searchData
 }
 
 export default function SearchPage() {
+  const [page, setPage] = useState(1);
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["search-movies"],
-    queryFn: fetchSearchMovies,
+    queryKey: ["search-movies", page],
+    queryFn: () => fetchSearchMovies(page),
   });
 
   if (error) {
     return (
       <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
     );
+  }
+
+  if (!data) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -104,7 +120,7 @@ export default function SearchPage() {
           </div>
         </div>
         <div>
-          {(data ?? []).map((movie) => (
+          {(data.movies).map((movie) => (
             <MovieCard
               key={movie.id}
               imageUrl={movie.url}
@@ -115,6 +131,10 @@ export default function SearchPage() {
             />
           ))}
         </div>
+
+        <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}>Previous</button>
+        <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}>Next</button>
+
       </div>
     </>
   );

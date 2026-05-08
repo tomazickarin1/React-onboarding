@@ -1,5 +1,5 @@
 import style from "./MovieCard.module.scss";
-import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
+import pladeholderPoster from "../../../assets/placeholder.jpg";
 
 interface MovieCardProps {
   imageUrl: string;
