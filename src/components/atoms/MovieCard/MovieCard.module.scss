@@ -1,0 +1,26 @@
+.movieCard {
+  display: flex;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border: 1px solid #e3e3e3;
+  border-radius: 0.5rem;
+}
+
+.poster {
+  width: 94px;
+  min-width: 94px;
+  position: relative;
+
+  a {
+    display: flex;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.content {
+  padding: 0.8rem;
+}
