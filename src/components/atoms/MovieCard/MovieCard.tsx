@@ -28,9 +28,13 @@ const MovieCard = ({
         </a>
       </div>
       <div className={style.content}>
-        <a href="">{title}</a>
-        <p>{date}</p>
-        <p>{content}</p>
+        <div>
+          <a href="">{title}</a>
+          <p className={style.date}>{date}</p>
+        </div>
+        <div>
+          <p className={style.description}>{content}</p>
+        </div>
       </div>
     </div>
   );

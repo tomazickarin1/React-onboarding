@@ -23,4 +23,32 @@
 
 .content {
   padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+
+    &:hover {
+      color: #01b4e4;
+      text-decoration: underline;
+    }
+  }
+
+  .date {
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .description {
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 }
