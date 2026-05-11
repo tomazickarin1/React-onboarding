@@ -32,15 +32,13 @@ type SearchResult = { movies: Movie[]; totalPages: number };
 async function fetchSearchMovies(page: number): Promise<SearchResult> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/search/movie?api_key=${apiKey}&query=The&page=${String(page)}`
+    `${tmbUrl}/search/movie?api_key=${apiKey}&query=twilight&page=${String(page)}`
   );
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
   const data = (await response.json()) as TmdbResponse;
-
-  console.log(data);
 
   const searchData = {
     movies: data.results.map((movie) => ({
@@ -74,6 +72,11 @@ export default function SearchPage() {
   if (!data) {
     return <p>Loading...</p>;
   }
+
+  // calculate start page
+  const startPage = Math.max(1, Math.min(page - 2, data.totalPages - 4));
+  // calculate which 5 pages are showing
+  const pageNumbers = Array.from({ length: 5 }).map((e, i) => startPage + i);
 
   return (
     <>
@@ -130,11 +133,13 @@ export default function SearchPage() {
               isLoading={isLoading}
             />
           ))}
+          <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}>Previous</button>
+          {pageNumbers.map((pageNum) => (
+            <button key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
+            </button>
+          ))}
+          <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}>Next</button>
         </div>
-
-        <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}>Previous</button>
-        <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}>Next</button>
-
       </div>
     </>
   );
