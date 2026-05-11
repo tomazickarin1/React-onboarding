@@ -1,6 +1,6 @@
 .selectBox {
   position: absolute;
-  background: white;
+  background: var(--color-white);
   border: 1px solid;
   z-index: 2;
   line-height: 24px;
@@ -28,7 +28,7 @@
 
       &.active {
         background-color: var(--color-blue);
-        color: white;
+        color: var(--color-white);
 
         &:hover {
           background-color: var(--color-navy-dark);
