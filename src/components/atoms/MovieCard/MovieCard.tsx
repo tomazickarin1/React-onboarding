@@ -25,7 +25,7 @@ const MovieCard = ({
     <div className={style.movieCard}>
       <div className={imageUrl ? style.poster : style.placeholder}>
         <a href="#">
-          {imageUrl ? <img src={imageUrl} alt="" /> : <FontAwesomeIcon icon={faImage} />}
+          {imageUrl ? <img src={imageUrl} alt="placeholder image" /> : <FontAwesomeIcon icon={faImage} />}
         </a>
       </div>
       <div className={style.content}>

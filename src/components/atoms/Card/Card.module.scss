@@ -43,9 +43,15 @@
     align-items: center;
     border-radius: 8px;
 
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     svg {
-      width: 20%;
-      height: 20%;
+      height: auto;
+      width: 50%;
     }
   }
 }
