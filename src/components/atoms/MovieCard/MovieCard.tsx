@@ -1,5 +1,6 @@
 import style from "./MovieCard.module.scss";
-import pladeholderPoster from "../../../assets/placeholder.jpg";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface MovieCardProps {
   imageUrl: string;
@@ -22,9 +23,9 @@ const MovieCard = ({
 
   return (
     <div className={style.movieCard}>
-      <div className={style.poster}>
+      <div className={imageUrl ? style.poster : style.placeholder}>
         <a href="#">
-          <img src={imageUrl ? imageUrl : pladeholderPoster} alt="" />
+          {imageUrl ? <img src={imageUrl} alt="" /> : <FontAwesomeIcon icon={faImage} />}
         </a>
       </div>
       <div className={style.content}>

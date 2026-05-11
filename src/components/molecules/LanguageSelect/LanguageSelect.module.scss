@@ -27,16 +27,16 @@
       cursor: pointer;
 
       &.active {
-        background-color: #01b3e4;
+        background-color: var(--color-blue);
         color: white;
 
         &:hover {
-          background-color: #052c65;
+          background-color: var(--color-navy-dark);
         }
       }
 
       &:hover {
-        background-color: #dee2e6;
+        background-color: var(--color-grey);
       }
     }
   }
@@ -47,7 +47,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #f8f9fa;
+    background-color: var(--color-grey-light);
   }
 }
 
@@ -58,7 +58,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid rgba(33, 37, 41, 0.2);
-  color: rgb(33, 37, 41);
+  color: var(--color-text);
   font-family: "Source Sans 3", sans-serif;
   background: transparent;
   text-align: left;

@@ -4,7 +4,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid rgba(33, 37, 41, 0.2);
-  color: rgb(33, 37, 41);
+  color: var(--color-text);
   font-family: "Source Sans 3", sans-serif;
   background: transparent;
 }
@@ -15,7 +15,7 @@
   border: 1px solid #fff;
   cursor: pointer;
   border-radius: 3px;
-  color: #fff;
+  color: var(--color-white);
   font-weight: 600;
   font-size: 0.9em;
   text-transform: uppercase;
@@ -27,7 +27,7 @@
 
   &:hover {
     background-color: white;
-    color: #032541;
+    color: var(--color-navy);
   }
 }
 
@@ -37,6 +37,6 @@
   border: none;
   font-weight: 300;
   font-size: 1rem;
-  color: rgb(33, 37, 41);
+  color: var(--color-text);
   font-family: "Source Sans 3", sans-serif;
 }

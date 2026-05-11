@@ -26,12 +26,12 @@
   a {
     display: block;
     padding: 6px 16px;
-    color: rgb(33, 37, 41);
+    color: var(--color-text);
     text-decoration: none;
     font-size: 1rem;
 
     &:hover {
-      background-color: #dee2e6;
+      background-color: var(--color-grey);
     }
   }
 }

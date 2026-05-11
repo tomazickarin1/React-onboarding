@@ -7,7 +7,7 @@
   position: relative;
   padding: 0 40px;
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color-white);
   max-width: var(--max-width);
   margin: auto;
 
@@ -34,7 +34,7 @@
     font-family: Arial, sans-serif;
     font-style: italic;
     font-size: 100%;
-    color: #acacac;
+    color: var(--color-text-muted);
     text-indent: 0;
     padding-left: 30px;
     padding-right: 0;
@@ -44,7 +44,7 @@
     }
 
     &::placeholder {
-      color: #acacac;
+      color: var(--color-text-muted);
       font-size: 1.1rem;
     }
   }

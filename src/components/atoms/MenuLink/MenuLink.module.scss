@@ -5,13 +5,13 @@
   display: inline-block;
 
   @media (min-width: 992px) {
-    color: #212529;
+    color: var(--color-text);
     padding: 0.25rem 1rem;
     width: 100%;
     font-size: 0.9rem;
   }
 
   &:hover {
-    background-color: #dee2e6;
+    background-color: var(--color-grey);
   }
 }
