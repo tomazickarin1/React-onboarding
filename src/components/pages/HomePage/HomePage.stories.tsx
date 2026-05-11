@@ -36,13 +36,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const HomePage: Story = {
-    parameters: {
-      msw: {
-        handlers: [
-          http.get(TMDB_POPULAR_URL, () =>
-            HttpResponse.json({ results: mockMovies }),
-          ),
-        ],
-      },
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(TMDB_POPULAR_URL, () =>
+          HttpResponse.json({ results: mockMovies }),
+        ),
+      ],
     },
+  },
 };

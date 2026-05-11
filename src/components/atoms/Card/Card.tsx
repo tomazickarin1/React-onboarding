@@ -1,6 +1,7 @@
 import styles from "./Card.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
+import pladeholderPoster from "../../../assets/placeholder.jpg";
 
 interface CardProps {
   image?: string;
@@ -26,7 +27,7 @@ export default function Card({ image, title, date, isLoading }: CardProps) {
 
   return (
     <div className={styles.showcaseCard}>
-      <img src={image} alt="" />
+      <img src={image ? image : pladeholderPoster} alt="" />
       <div>
         <a href="">
           <h3>{title}</h3>
