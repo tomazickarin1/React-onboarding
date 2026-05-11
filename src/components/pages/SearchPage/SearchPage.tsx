@@ -2,6 +2,8 @@ import styles from "./SearchPage.module.scss";
 import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -69,8 +71,16 @@ export default function SearchPage() {
     );
   }
 
+  if (isLoading) {
+        return (
+      <div className={styles.spinnerWrapper}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
+  }
+
   if (!data) {
-    return <p>Loading...</p>;
+    return <p>No results found.</p>;
   }
 
   // calculate start page
@@ -122,7 +132,7 @@ export default function SearchPage() {
             </ul>
           </div>
         </div>
-        <div>
+        <div className={styles.movieCards}>
           {(data.movies).map((movie) => (
             <MovieCard
               key={movie.id}
@@ -133,12 +143,14 @@ export default function SearchPage() {
               isLoading={isLoading}
             />
           ))}
-          <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}>Previous</button>
-          {pageNumbers.map((pageNum) => (
-            <button key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
-            </button>
-          ))}
-          <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}>Next</button>
+          <nav className={styles.pageNumbers}>
+            <a onClick={() => { setPage(p => p - 1); }} data-disabled={page === 1}><FontAwesomeIcon icon={faChevronLeft} /></a>
+            {pageNumbers.map((pageNum) => (
+              <a key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
+              </a>
+            ))}
+            <a onClick={() => { setPage(p => p + 1); }} data-disabled={page === data.totalPages}><FontAwesomeIcon icon={faChevronRight} /></a>
+          </nav>
         </div>
       </div>
     </>
