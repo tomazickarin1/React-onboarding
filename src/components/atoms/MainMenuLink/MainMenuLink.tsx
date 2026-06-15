@@ -1,4 +1,5 @@
 import styles from "./MainMenuLink.module.scss";
+import { Link } from "react-router";
 
 export interface MainMenuLinkProps {
   label: string;
@@ -12,16 +13,13 @@ export default function MainMenuLink({
   handleMenuToggle,
 }: MainMenuLinkProps) {
   return (
-    <a
-      onClick={(e) => {
-        e.preventDefault();
-        handleMenuToggle();
-      }}
+    <Link
+      onClick={handleMenuToggle}
       className={styles.link}
+      to={url}
       aria-label={label}
-      href={url}
     >
       {label}
-    </a>
+    </Link>
   );
 }

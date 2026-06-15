@@ -1,6 +1,8 @@
+/// <reference path="../src/declarations.d.ts" />
 import type { Preview } from "@storybook/react-vite";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import "../src/styles/global.scss";
+import { MemoryRouter } from "react-router";
 
 // Initialize MSW
 initialize({
@@ -8,6 +10,13 @@ initialize({
 })
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    )
+  ],
   parameters: {
     controls: {
       matchers: {
