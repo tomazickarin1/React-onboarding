@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styles from "./App.module.scss";
 import HomePage from "./components/pages/HomePage/HomePage";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
+import SearchResults from "./components/pages/SearchResults/SearchResults";
+
 import { Routes, Route } from "react-router";
 
 const queryClient = new QueryClient();
@@ -12,7 +14,16 @@ export default function App() {
       <div className={styles.movieapp}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/search" element={<SearchPage />}>
+            <Route path="tv" element={<SearchResults />} />
+            <Route path="movie" element={<SearchResults />} />
+            <Route path="person" element={<SearchResults />} />
+            <Route path="collection" element={<SearchResults />} />
+            <Route path="company" element={<SearchResults />} />
+            <Route path="keyword" element={<SearchResults />} />
+          </Route>
+
+
         </Routes>
       </div>
     </QueryClientProvider>
