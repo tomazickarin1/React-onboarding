@@ -1,6 +1,6 @@
 import styles from "./SearchPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import { Outlet } from "react-router";
+import { Outlet, Link } from "react-router";
 
 export default function SearchPage() {
   return (
@@ -13,35 +13,27 @@ export default function SearchPage() {
           <div>
             <ul>
               <li>
-                <a href="">TV Show</a>
+                <Link to="tv">TV Show</Link>
                 <span>3</span>
               </li>
               <li>
-                <a href="">Movies</a>
+                <Link to="movie">Movies</Link>
                 <span>3</span>
               </li>
               <li>
-                <a href="">People</a>
+                <Link to="person">People</Link>
                 <span>3</span>
               </li>
               <li>
-                <a href="">Collections</a>
+                <Link to="collection">Collections</Link>
                 <span>3</span>
               </li>
               <li>
-                <a href="">Companies</a>
+                <Link to="company">Companies</Link>
                 <span>3</span>
               </li>
               <li>
-                <a href="">Keywords</a>
-                <span>3</span>
-              </li>
-              <li>
-                <a href="">Networks</a>
-                <span>3</span>
-              </li>
-              <li>
-                <a href="">Awards</a>
+                <Link to="keyword">Keywords</Link>
                 <span>3</span>
               </li>
             </ul>

@@ -1,10 +1,10 @@
 import styles from "./SearchResults.module.scss";
 import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
 import { useState } from "react";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { useParams } from "react-router";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -32,10 +32,10 @@ type Movie = {
 
 type SearchResult = { movies: Movie[]; totalPages: number };
 
-async function fetchSearchMovies(page: number): Promise<SearchResult> {
+async function fetchSearchMovies(page: number, filter: string): Promise<SearchResult> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/search/movie?api_key=${apiKey}&query=twilight&page=${String(page)}`
+    `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=twilight&page=${String(page)}`
   );
 
   if (!response.ok) {
@@ -49,8 +49,7 @@ async function fetchSearchMovies(page: number): Promise<SearchResult> {
       title: movie.title,
       url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
       date: movie.release_date,
-      description: movie.overview,
-      totalPages: data.total_pages
+      description: movie.overview
     })),
     totalPages: data.total_pages,
   }
@@ -61,12 +60,11 @@ async function fetchSearchMovies(page: number): Promise<SearchResult> {
 export default function SearchResults() {
   const [page, setPage] = useState(1);
 
-
-  // const { filter } = useParams();
+  const { filter } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["search-movies", page],
-    queryFn: () => fetchSearchMovies(page),
+    queryKey: ["search-movies", page, filter],
+    queryFn: () => fetchSearchMovies(page, filter ?? "movie"),
   });
 
   if (error) {

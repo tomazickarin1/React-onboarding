@@ -15,15 +15,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />}>
-            <Route path="tv" element={<SearchResults />} />
-            <Route path="movie" element={<SearchResults />} />
-            <Route path="person" element={<SearchResults />} />
-            <Route path="collection" element={<SearchResults />} />
-            <Route path="company" element={<SearchResults />} />
-            <Route path="keyword" element={<SearchResults />} />
+            <Route path=":filter" element={<SearchResults />} />
           </Route>
-
-
         </Routes>
       </div>
     </QueryClientProvider>
