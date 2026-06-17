@@ -1,7 +1,7 @@
 import styles from "./SearchResults.module.scss";
 import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import { useState } from "react";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,10 +32,10 @@ type Movie = {
 
 type SearchResult = { movies: Movie[]; totalPages: number };
 
-async function fetchSearchMovies(page: number, filter: string): Promise<SearchResult> {
+async function fetchSearchMovies(page: number, filter: string, query: string): Promise<SearchResult> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=twilight&page=${String(page)}`
+    `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=${query}&page=${String(page)}`
   );
 
   if (!response.ok) {
@@ -61,10 +61,12 @@ export default function SearchResults() {
   const [page, setPage] = useState(1);
 
   const { filter } = useParams();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query") ?? "";
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["search-movies", page, filter],
-    queryFn: () => fetchSearchMovies(page, filter ?? "movie"),
+    queryKey: ["search-movies", page, filter, query],
+    queryFn: () => fetchSearchMovies(page, filter ?? "tv", query),
   });
 
   if (error) {
@@ -74,7 +76,7 @@ export default function SearchResults() {
   }
 
   if (isLoading) {
-        return (
+    return (
       <div className={styles.spinnerWrapper}>
         <div className={styles.spinner}></div>
       </div>

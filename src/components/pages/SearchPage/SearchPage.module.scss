@@ -63,6 +63,7 @@
       a {
         text-decoration: none;
         display: inline-flex;
+        justify-content: space-between;
         align-items: center;
         color: var(--color-black);
         width: 100%;
@@ -71,6 +72,11 @@
 
         @media (max-width: 768px) {
           padding: 14px 0;
+        }
+
+        &:global(.active) {
+          font-weight: 600;
+          background: rgba(0, 0, 0, 0.08);
         }
       }
 
@@ -83,7 +89,6 @@
         background-color: rgba(0, 0, 0, 0.08);
         padding: 0px 10px;
         border-radius: 8px;
-        margin-right: 20px;
         white-space: nowrap;
 
         @media (max-width: 768px) {

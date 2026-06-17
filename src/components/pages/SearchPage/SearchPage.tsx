@@ -1,8 +1,19 @@
 import styles from "./SearchPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import { Outlet, Link } from "react-router";
+import { Outlet, NavLink, useSearchParams } from "react-router";
 
 export default function SearchPage() {
+  const [searchParams] = useSearchParams();
+
+  const linkNames = [
+    { label: "TV Show", link: "tv" },
+    { label: "Movies", link: "movie" },
+    { label: "People", link: "person" },
+    { label: "Collections", link: "collection" },
+    { label: "Companies", link: "company" },
+    { label: "Keywords", link: "keyword" },
+  ];
+
   return (
     <SingleColumn>
       <div className={styles.searchWrapper}>
@@ -12,34 +23,20 @@ export default function SearchPage() {
           </div>
           <div>
             <ul>
-              <li>
-                <Link to="tv">TV Show</Link>
-                <span>3</span>
-              </li>
-              <li>
-                <Link to="movie">Movies</Link>
-                <span>3</span>
-              </li>
-              <li>
-                <Link to="person">People</Link>
-                <span>3</span>
-              </li>
-              <li>
-                <Link to="collection">Collections</Link>
-                <span>3</span>
-              </li>
-              <li>
-                <Link to="company">Companies</Link>
-                <span>3</span>
-              </li>
-              <li>
-                <Link to="keyword">Keywords</Link>
-                <span>3</span>
-              </li>
+              {linkNames.map((links) => (
+                <li key={links.link}>
+                  <NavLink
+                    to={{ pathname: links.link , search: searchParams.toString() }}
+                  >
+                    {links.label}
+                    <span>3</span>
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
-          <Outlet />
+        <Outlet />
       </div>
     </SingleColumn>
   );

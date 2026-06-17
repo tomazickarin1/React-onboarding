@@ -15,6 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />}>
+            <Route index element={<SearchResults />} />
             <Route path=":filter" element={<SearchResults />} />
           </Route>
         </Routes>
