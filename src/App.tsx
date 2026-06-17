@@ -4,7 +4,12 @@ import HomePage from "./components/pages/HomePage/HomePage";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
 import SearchResults from "./components/pages/SearchResults/SearchResults";
 
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate, useSearchParams  } from "react-router";
+
+function SearchRedirect() {
+  const [searchParams] = useSearchParams();
+  return <Navigate to={{ pathname: "tv", search: searchParams.toString() }} replace />;
+}
 
 const queryClient = new QueryClient();
 
@@ -15,7 +20,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />}>
-            <Route index element={<SearchResults />} />
+            <Route index element={<SearchRedirect />} />
             <Route path=":filter" element={<SearchResults />} />
           </Route>
         </Routes>
