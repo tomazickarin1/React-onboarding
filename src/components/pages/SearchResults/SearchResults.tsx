@@ -46,7 +46,6 @@ async function fetchSearchMovies(page: number, filter: string, query: string): P
   }
   const data = (await response.json()) as TmdbResponse;
 
-  console.log(data);
 
   const searchData = {
     movies: data.results.map((movie) => ({
