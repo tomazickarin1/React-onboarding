@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import NavigationBar from "../../organisms/NavigationBar/NavigationBar";
 import Footer from "../../organisms/Footer/Footer";
+import styles from "../SingleColumn/SingleColumn.module.scss"
 
 interface SingleColumnProps {
   children?: ReactNode;
@@ -8,10 +9,10 @@ interface SingleColumnProps {
 
 export default function SingleColumn({ children }: SingleColumnProps) {
   return (
-    <>
+    <div className={styles.singleColumnWrapper}>
       <NavigationBar />
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

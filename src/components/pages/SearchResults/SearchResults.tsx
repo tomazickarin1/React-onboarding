@@ -90,7 +90,7 @@ export default function SearchResults() {
   // calculate start page
   const startPage = Math.max(1, Math.min(page - 2, data.totalPages - 4));
   // calculate which 5 pages are showing
-  const pageNumbers = Array.from({ length: 5 }).map((e, i) => startPage + i);
+  const pageNumbers = Array.from({ length: Math.min(5, data.totalPages) }).map((e, i) => startPage + i);
 
   return (
     <div className={styles.movieCards}>
@@ -105,12 +105,12 @@ export default function SearchResults() {
         />
       ))}
       <nav className={styles.pageNumbers}>
-        <a onClick={() => { setPage(p => p - 1); }} data-disabled={page === 1}><FontAwesomeIcon icon={faChevronLeft} /></a>
+        <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}><FontAwesomeIcon icon={faChevronLeft} /></button>
         {pageNumbers.map((pageNum) => (
-          <a key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
-          </a>
+          <button key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
+          </button>
         ))}
-        <a onClick={() => { setPage(p => p + 1); }} data-disabled={page === data.totalPages}><FontAwesomeIcon icon={faChevronRight} /></a>
+        <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}><FontAwesomeIcon icon={faChevronRight} /></button>
       </nav>
     </div>
   );

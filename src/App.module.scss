@@ -1,3 +1,6 @@
 .movieapp {
   font-family: "Source Sans 3", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

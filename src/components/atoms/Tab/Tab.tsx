@@ -8,12 +8,12 @@ interface TabProps {
 
 export default function Tab({ label, isActive, onClick }: TabProps) {
   return (
-    <div
+    <button
       data-tab
       className={`${styles.selector ?? ""} ${isActive ? (styles.active ?? "") : ""}`}
       onClick={onClick}
     >
       <h3>{label}</h3>
-    </div>
+    </button>
   );
 }
