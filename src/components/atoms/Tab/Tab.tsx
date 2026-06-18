@@ -13,7 +13,7 @@ export default function Tab({ label, isActive, onClick }: TabProps) {
       className={`${styles.selector ?? ""} ${isActive ? (styles.active ?? "") : ""}`}
       onClick={onClick}
     >
-      <h3>{label}</h3>
+      <span>{label}</span>
     </button>
   );
 }

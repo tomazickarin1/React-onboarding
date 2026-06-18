@@ -1,6 +1,7 @@
 import styles from "./Card.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { formatDate } from "../../../utils/formatDate";
 
 interface CardProps {
   image?: string;
@@ -18,7 +19,7 @@ export default function Card({ image, title, date, isLoading }: CardProps) {
         </div>
         <div>
           <h3>Loading...</h3>
-          <div className={styles.date}></div>
+          <time className={styles.date}></time>
         </div>
       </div>
     );
@@ -35,7 +36,7 @@ export default function Card({ image, title, date, isLoading }: CardProps) {
         <a href="">
           <h3>{title}</h3>
         </a>
-        <div className={styles.date}>{date}</div>
+        <time className={styles.date}>{date ? formatDate(date) : ""}</time>
       </div>
     </div>
   );

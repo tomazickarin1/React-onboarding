@@ -3,7 +3,7 @@
   border: none;
   padding: 0;
 
-  h3 {
+  span {
     font-size: 1rem;
     padding: 4px 20px;
     margin: 0;
@@ -22,8 +22,8 @@
   position: relative;
   z-index: 1;
 
-  &:hover h3,
-  h3 {
+  &:hover span,
+  span {
     background: linear-gradient(to right, #c0fecf 0, #1ed5a9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

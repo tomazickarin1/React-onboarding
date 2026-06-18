@@ -5,15 +5,18 @@ import { useParams, useSearchParams } from "react-router";
 import { useState } from "react";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatDate } from "../../../utils/formatDate";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
 interface TmdbMovie {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   poster_path: string | null;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
   overview: string;
 }
 
@@ -43,12 +46,14 @@ async function fetchSearchMovies(page: number, filter: string, query: string): P
   }
   const data = (await response.json()) as TmdbResponse;
 
+  console.log(data);
+
   const searchData = {
     movies: data.results.map((movie) => ({
       id: movie.id,
-      title: movie.title,
+      title: movie.title ?? movie.name ?? "",
       url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
-      date: movie.release_date,
+      date: movie.release_date ?? movie.first_air_date ?? "",
       description: movie.overview
     })),
     totalPages: data.total_pages,
@@ -99,7 +104,7 @@ export default function SearchResults() {
           key={movie.id}
           imageUrl={movie.url}
           title={movie.title}
-          date={movie.date}
+          date={movie.date ? formatDate(movie.date) : ""}
           content={movie.description}
           isLoading={isLoading}
         />
