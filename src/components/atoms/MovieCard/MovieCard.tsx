@@ -1,8 +1,10 @@
 import style from "./MovieCard.module.scss";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router";
 
 interface MovieCardProps {
+  id: string,
   imageUrl: string;
   title: string;
   date: string;
@@ -11,6 +13,7 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({
+  id,
   imageUrl,
   title,
   date,
@@ -30,7 +33,7 @@ const MovieCard = ({
       </div>
       <div className={style.content}>
         <div>
-          <a href="">{title}</a>
+          <Link to={`/movie/${id}-${title.toLowerCase().replace(/\s+/g, "-")}`}>{title}</Link>
           <p className={style.date}>{date}</p>
         </div>
         <div>

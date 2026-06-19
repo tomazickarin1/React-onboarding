@@ -32,8 +32,6 @@ export default function SearchPage() {
 
   const totalCount = filterQuery.data;
 
-  console.log(totalCount);
-
   const filteLinks = searchFilters.map((links) => {
     const match = totalCount?.find((r) => r.filter === links.linkName);
     const count = match?.count ?? 0;
