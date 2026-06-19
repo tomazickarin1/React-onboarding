@@ -2,43 +2,56 @@ import styles from "./SearchPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import { Outlet, NavLink, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { searchFilters } from "../../../data/filterList";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 
-async function fetchCount(filter: string, query: string) {
+async function fetchAllCounts(query: string) {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(
-     `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=${query}`
+
+  const results = await Promise.all(
+    searchFilters.map(({ linkName }) =>
+      fetch(`${tmbUrl}/search/${linkName}?api_key=${apiKey}&query=${query}&page=1`)
+        .then((r) => r.json() as Promise<{ total_results: number }>)
+        .then((data) => ({ filter: linkName, count: data.total_results })),
+    ),
   );
-    const data = await response.json() as { total_results: number };
 
-    return data.total_results;
+  return results;
 }
-
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
 
   const query = searchParams.get("query") ?? "";
 
-
-  const tvQuery = useQuery({
-    queryKey: ["count-tv", query],
-    queryFn: () => fetchCount("tv", query),
+  const filterQuery = useQuery({
+    queryKey: ["filter-counts", query],
+    queryFn: () => fetchAllCounts(query),
   });
 
-  const tvCount = tvQuery.data;
+  const totalCount = filterQuery.data;
 
-  console.log(tvCount);
+  console.log(totalCount);
 
-  const linkNames = [
-    { label: "TV Show", link: "tv" },
-    { label: "Movies", link: "movie" },
-    { label: "People", link: "person" },
-    { label: "Collections", link: "collection" },
-    { label: "Companies", link: "company" },
-    { label: "Keywords", link: "keyword" },
-  ];
+  const filteLinks = searchFilters.map((links) => {
+    const match = totalCount?.find((r) => r.filter === links.linkName);
+    const count = match?.count ?? 0;
+
+    return (
+      <li key={links.linkName}>
+        <NavLink
+          to={{
+            pathname: links.linkName,
+            search: searchParams.toString(),
+          }}
+        >
+          {links.label}
+          <span>{count}</span>
+        </NavLink>
+      </li>
+    );
+  });
 
   return (
     <SingleColumn>
@@ -48,19 +61,7 @@ export default function SearchPage() {
             <h3>Search Results</h3>
           </div>
           <div>
-            <ul>
-              {linkNames.map((links) => (
-                <li key={links.link}>
-                  <NavLink
-                    to={{ pathname: links.link , search: searchParams.toString() }}
-                  >
-                    {links.label}
-                    <span>3</span>
-                    <span>{tvCount}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            <ul>{filteLinks}</ul>
           </div>
         </div>
         <Outlet />
