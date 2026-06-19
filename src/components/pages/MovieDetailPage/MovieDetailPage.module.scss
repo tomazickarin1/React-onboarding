@@ -1,0 +1,50 @@
+.backdrop {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.backdropBackground {
+  background-image: linear-gradient(
+    to right,
+    rgba(115.5, 73.5, 52.5, 1) calc((50vw - 170px) - 340px),
+    rgba(115.5, 73.5, 52.5, 0.84) 50%,
+    rgba(115.5, 73.5, 52.5, 0.84) 100%
+  );
+  color: white;
+}
+
+.innerWrapper {
+  display: flex;
+  gap: 40px;
+  padding: 60px 40px;
+  align-items: flex-start;
+
+  img {
+    width: 350px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+}
+
+.facts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+
+  span + span::before {
+    content: "\2022";
+    margin-right: 8px;
+  }
+}
