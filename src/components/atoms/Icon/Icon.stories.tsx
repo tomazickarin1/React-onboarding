@@ -1,0 +1,31 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { faStar, faHeart, faUser, faMagnifyingGlass, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import Icon from "./Icon";
+
+const meta = {
+  title: "Component/atoms/Icon",
+  component: Icon,
+} satisfies Meta<typeof Icon>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Star: Story = {
+  args: { icon: faStar },
+};
+
+export const Heart: Story = {
+  args: { icon: faHeart },
+};
+
+export const User: Story = {
+  args: { icon: faUser },
+};
+
+export const Search: Story = {
+  args: { icon: faMagnifyingGlass },
+};
+
+export const Bookmark: Story = {
+  args: { icon: faBookmark },
+};
