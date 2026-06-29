@@ -29,8 +29,6 @@ async function fetchMovieDetails(id: string) {
     `${tmbUrl}/movie/${id}?api_key=${apiKey}&append_to_response=credits,release_dates`,
   );
 
-  console.log(response);
-
   if (!response.ok) {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
@@ -70,6 +68,12 @@ export default function MovieDetailPage() {
   const storyJobs = movieDetails?.credits.crew
     .filter((c) => c.id === story?.id)
     .map((c) => c.job);
+
+  const userScore = Math.round((movieDetails?.vote_average ?? 0) * 10);
+  const radius = 38;
+  const circumference = 2 * Math.PI * radius;
+  const scoreOffset = ((100 - userScore) / 100) * circumference;
+  const scoreColor = userScore >= 70 ? "#21d07a" : userScore >= 40 ? "#d2d531" : "#db2360";
 
   const screenplays = movieDetails?.credits.crew
     .filter((c) => c.job === "Screenplay")
@@ -118,6 +122,28 @@ export default function MovieDetailPage() {
                   {Math.floor((movieDetails?.runtime ?? 0) / 60)}h{" "}
                   {(movieDetails?.runtime ?? 0) % 60}m
                 </span>
+              </div>
+
+              <div className={styles.scoreWrapper}>
+                <div className={styles.scoreCircleContainer}>
+                  <svg viewBox="0 0 100 100" className={styles.scoreCircle}>
+                    <circle cx="50" cy="50" r="48" className={styles.scoreBg} />
+                    <circle cx="50" cy="50" r={radius} className={styles.scoreTrack} />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r={radius}
+                      className={styles.scoreProgress}
+                      strokeDasharray={circumference}
+                      strokeDashoffset={scoreOffset}
+                      stroke={scoreColor}
+                    />
+                  </svg>
+                  <span className={styles.scoreText}>
+                    {userScore}<sup>%</sup>
+                  </span>
+                </div>
+                <span className={styles.scoreLabel}>User<br />Score</span>
               </div>
 
               <div className={styles.info}>
