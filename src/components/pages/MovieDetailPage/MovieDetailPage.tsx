@@ -18,7 +18,7 @@ interface MovieDetails {
   tagline: string;
   runtime: number;
   credits: {
-    crew: Array<{ name: string; job: string }>;
+    crew: Array<{ id: number; name: string; job: string }>;
   };
   vote_average: number;
 }
@@ -28,6 +28,8 @@ async function fetchMovieDetails(id: string) {
   const response = await fetch(
     `${tmbUrl}/movie/${id}?api_key=${apiKey}&append_to_response=credits,release_dates`,
   );
+
+  console.log(response);
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${String(response.status)}`);
@@ -46,7 +48,6 @@ export default function MovieDetailPage() {
   });
 
   const movieDetails = movieDetailQuery.data;
-  console.log(movieDetails);
 
   const releaseYear = movieDetails?.release_date
     ? new Date(movieDetails.release_date).getFullYear()
@@ -59,6 +60,32 @@ export default function MovieDetailPage() {
         year: "numeric",
       })
     : "";
+
+  const director = movieDetails?.credits.crew.find((c) => c.job === "Director");
+  const directorJobs = movieDetails?.credits.crew
+    .filter((c) => c.id === director?.id)
+    .map((c) => c.job);
+
+  const story = movieDetails?.credits.crew.find((c) => c.job === "Story");
+  const storyJobs = movieDetails?.credits.crew
+    .filter((c) => c.id === story?.id)
+    .map((c) => c.job);
+
+  const screenplays = movieDetails?.credits.crew
+    .filter((c) => c.job === "Screenplay")
+    .slice(0, 3);
+
+  const screenplayInfo = screenplays?.map((s) => {
+    const jobs = movieDetails?.credits.crew
+      .filter((crew) => crew.id === s.id)
+      .map((crew) => crew.job);
+    return (
+      <div key={s.id} className={styles.crewMember}>
+        <p>{s.name}</p>
+        <p>{jobs?.join(", ")}</p>
+      </div>
+    );
+  });
 
   return (
     <SingleColumn>
@@ -93,16 +120,24 @@ export default function MovieDetailPage() {
                 </span>
               </div>
 
-              <div>
-                <p>{movieDetails?.tagline}</p>
+              <div className={styles.info}>
+                <p className={styles.tagline}>{movieDetails?.tagline}</p>
                 <h3>Overview</h3>
                 <p>{movieDetails?.overview}</p>
               </div>
 
-              <div>
-                <div>{movieDetails?.credits.crew.map((c) => c.name)}</div>
-                <div>{movieDetails?.credits.crew.map((c) => c.job)}</div>
+              <div className={styles.crewGrid}>
+                <div className={styles.crewMember}>
+                  <p>{director?.name}</p>
+                  <p>{directorJobs?.join(", ")}</p>
+                </div>
 
+                {screenplayInfo}
+
+                <div className={styles.crewMember}>
+                  <p>{story?.name}</p>
+                  <p>{storyJobs?.join(", ")}</p>
+                </div>
               </div>
             </div>
           </div>
