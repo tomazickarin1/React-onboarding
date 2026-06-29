@@ -1,5 +1,7 @@
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList, faHeart, faBookmark, faPlay, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "./MovieDetailPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 
@@ -144,6 +146,23 @@ export default function MovieDetailPage() {
                   </span>
                 </div>
                 <span className={styles.scoreLabel}>User<br />Score</span>
+                <div className={styles.reactions}>
+                  <span>😍</span>
+                  <span>😆</span>
+                  <span>🥲</span>
+                </div>
+                <button className={styles.vibeButton}>
+                  What&apos;s your Vibe? <FontAwesomeIcon icon={faCircleInfo} />
+                </button>
+              </div>
+
+              <div className={styles.actions}>
+                <button className={styles.iconButton}><FontAwesomeIcon icon={faList} /></button>
+                <button className={styles.iconButton}><FontAwesomeIcon icon={faHeart} /></button>
+                <button className={styles.iconButton}><FontAwesomeIcon icon={faBookmark} /></button>
+                <button className={styles.trailerButton}>
+                  <FontAwesomeIcon icon={faPlay} /> Play Trailer
+                </button>
               </div>
 
               <div className={styles.info}>
