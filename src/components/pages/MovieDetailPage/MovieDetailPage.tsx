@@ -112,7 +112,7 @@ export default function MovieDetailPage() {
             </div>
             <div>
               <h2>
-                {movieDetails?.title} ({releaseYear})
+                {movieDetails?.title} <span>({releaseYear})</span>
               </h2>
 
               <div className={styles.facts}>

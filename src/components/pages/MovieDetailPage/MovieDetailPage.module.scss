@@ -30,6 +30,10 @@
   h2 {
     font-size: 2rem;
     margin-bottom: 8px;
+
+    span {
+      font-weight: 300;
+    }
   }
 
   h3 {
@@ -196,5 +200,63 @@
   span + span::before {
     content: "\2022";
     margin-right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .backdropBackground {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(115.5, 73.5, 52.5, 0.3) 0%,
+      rgba(115.5, 73.5, 52.5, 1) 100%
+    );
+  }
+
+  .innerWrapper {
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+    align-items: stretch;
+
+    img {
+      width: 150px;
+    }
+
+    > div:first-child {
+      padding: 20px 16px 12px;
+    }
+
+    > div:last-child {
+      padding: 16px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+
+  .scoreWrapper {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .facts {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .info {
+    text-align: left;
+  }
+
+  .crewGrid {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
   }
 }
