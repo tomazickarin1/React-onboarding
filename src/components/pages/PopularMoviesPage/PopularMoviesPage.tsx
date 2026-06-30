@@ -45,15 +45,36 @@ export default function PopularMovies() {
 
   return (
     <SingleColumn>
-      <div>
+      <div className={styles.popularWrapper}>
         <div>
           <h2>Popular Movies</h2>
-          <div className={styles.filterWrapper}>sort</div>
+          <div className={styles.filterWrapper}>
+            <div>
+              <div className={styles.name}>
+                <h2>Sort</h2>
+                <span>X</span>
+              </div>
+              <div className={styles.filters}>
+                <h3>Sort results by</h3>
+              </div>
+
+              <p>sort</p>
+            </div>
+            <div>
+              <p>filters</p>
+            </div>
+          </div>
         </div>
-        <div>
+        <div className={styles.moviesGrid}>
           {data?.map((r) => {
             return (
-              <Card key={r.id} image={r.url} title={r.title} date={r.date} />
+              <Card
+                key={r.id}
+                image={r.url}
+                title={r.title}
+                date={r.date}
+                variant="popular"
+              />
             );
           })}
         </div>

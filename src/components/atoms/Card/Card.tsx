@@ -8,12 +8,13 @@ interface CardProps {
   title?: string;
   date?: string;
   isLoading?: boolean;
+  variant: "showcase" | "popular";
 }
 
-export default function Card({ image, title, date, isLoading }: CardProps) {
+export default function Card({ image, title, date, isLoading, variant }: CardProps) {
   if (isLoading) {
     return (
-      <div className={styles.showcaseCard}>
+      <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
         <div className={styles.placeholder}>
           <FontAwesomeIcon icon={faImage} />
         </div>
@@ -26,13 +27,13 @@ export default function Card({ image, title, date, isLoading }: CardProps) {
   }
 
   return (
-    <div className={styles.showcaseCard}>
+    <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
       <div className={image ? '' : styles.placeholder}>
         <a href="">
           {image ? <img src={image} alt="placeholder image" /> : <FontAwesomeIcon icon={faImage} />}
         </a>
       </div>
-      <div>
+      <div className={styles.cardText}>
         <a href="">
           <h3>{title}</h3>
         </a>

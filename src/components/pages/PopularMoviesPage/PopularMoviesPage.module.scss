@@ -1,3 +1,20 @@
+.popularWrapper {
+  display: flex;
+  gap: 30px;
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 30px 40px;
+}
+
+.moviesGrid {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
 .filterWrapper {
   background-color: red;
+  min-width: 260px;
+  width: 260px;
 }

@@ -11,7 +11,7 @@ export default function Cards({ movies, isLoading }: CardsProps) {
     <div className={styles.Cards}>
       {isLoading
         ? Array.from({ length: 8 }).map((item, index) => (
-            <Card key={index} isLoading={true} />
+            <Card key={index} isLoading={true} variant="showcase" />
           ))
         : movies.map((movie) => {
             return (
@@ -20,6 +20,7 @@ export default function Cards({ movies, isLoading }: CardsProps) {
                 image={movie.url}
                 title={movie.title}
                 date={movie.date}
+                variant="showcase"
               />
             );
           })}
