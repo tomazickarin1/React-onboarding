@@ -4,6 +4,7 @@ import HomePage from "./components/pages/HomePage/HomePage";
 import SearchPage from "./components/pages/SearchPage/SearchPage";
 import SearchResults from "./components/pages/SearchResults/SearchResults";
 import MovieDetailPage from "./components/pages/MovieDetailPage/MovieDetailPage";
+import PopularMoviesPage from "./components/pages/PopularMoviesPage/PopularMoviesPage";
 
 import { Routes, Route, Navigate, useSearchParams  } from "react-router";
 
@@ -20,11 +21,12 @@ export default function App() {
       <div className={styles.movieapp}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />}>
+          <Route path="/search" element={<SearchPage />} >
             <Route index element={<SearchRedirect />} />
             <Route path=":filter" element={<SearchResults />} />
           </Route>
           <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route path="/popular" element={<PopularMoviesPage />} />
         </Routes>
       </div>
     </QueryClientProvider>
