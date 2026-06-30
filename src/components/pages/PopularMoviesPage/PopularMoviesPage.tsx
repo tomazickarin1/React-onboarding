@@ -1,10 +1,30 @@
+import { useRef, useState } from "react";
 import styles from "./PopularMoviesPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import Card from "../../atoms/Card/Card";
+import Icon from "../../atoms/Icon/Icon";
 import { useQuery } from "@tanstack/react-query";
+import {
+  faChevronRight,
+  faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
+
+const DEFAULT_SORT = { value: "popularity.desc", label: "Popularity Descending" };
+
+const sortOptions = [
+  DEFAULT_SORT,
+  { value: "popularity.asc", label: "Popularity Ascending" },
+  { value: "vote_average.desc", label: "Rating Descending" },
+  { value: "vote_average.asc", label: "Rating Ascending" },
+  { value: "primary_release_date.desc", label: "Release Date Descending" },
+  { value: "primary_release_date.asc", label: "Release Date Ascending" },
+  { value: "title.asc", label: "Title (A-Z)" },
+  { value: "title.desc", label: "Title (Z-A)" },
+];
 
 interface Tmdbmovie {
   id: number;
@@ -41,7 +61,15 @@ export default function PopularMovies() {
     queryFn: fetchPopularMovies,
   });
 
-  console.log(data);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [sortBy, setSortBy] = useState(DEFAULT_SORT);
+  const sortRef = useRef<HTMLDivElement>(null);
+  const isClickedOutsideSort = useClickOutside(sortRef);
+
+  const handleSortToggle = () => {
+    const isCurrentlyOpen = isSortOpen && !isClickedOutsideSort;
+    setIsSortOpen(!isCurrentlyOpen);
+  };
 
   return (
     <SingleColumn>
@@ -49,16 +77,51 @@ export default function PopularMovies() {
         <div>
           <h2>Popular Movies</h2>
           <div className={styles.filterWrapper}>
-            <div>
+            <div className={styles.filterPanel}>
               <div className={styles.name}>
                 <h2>Sort</h2>
-                <span>X</span>
+                <Icon icon={faChevronRight} className={styles.chevron ?? ""} />
               </div>
-              <div className={styles.filters}>
-                <h3>Sort results by</h3>
-              </div>
+              <div className={styles.filter}>
+                <h3>Sort Results By</h3>
+                <div className={styles.sortWrapper} ref={sortRef}>
+                  <button
+                    type="button"
+                    onClick={handleSortToggle}
+                    className={styles.sortBtn}
+                    aria-expanded={isSortOpen}
+                    aria-haspopup="listbox"
+                  >
+                    {sortBy.label}
+                    <Icon icon={faCaretDown} className={styles.caret ?? ""} />
+                  </button>
 
-              <p>sort</p>
+                  {isSortOpen && !isClickedOutsideSort && (
+                    <ul className={styles.sortList} role="listbox">
+                      {sortOptions.map((option) => (
+                        <li
+                          key={option.value}
+                          role="option"
+                          tabIndex={0}
+                          aria-selected={option.value === sortBy.value}
+                          className={
+                            option.value === sortBy.value
+                              ? styles.active
+                              : ""
+                          }
+                          onMouseDown={(e) => {
+                            e.stopPropagation();
+                            setSortBy(option);
+                            setIsSortOpen(false);
+                          }}
+                        >
+                          {option.label}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
             </div>
             <div>
               <p>filters</p>
