@@ -60,6 +60,33 @@
   }
 }
 
+.genreList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+
+  li {
+    border: 1px solid #e3e3e3;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-grey);
+    }
+
+    &.active {
+      background-color: var(--color-text);
+      color: var(--color-white);
+      border-color: var(--color-text);
+    }
+  }
+}
+
 .sortWrapper {
   position: relative;
   margin-top: 8px;

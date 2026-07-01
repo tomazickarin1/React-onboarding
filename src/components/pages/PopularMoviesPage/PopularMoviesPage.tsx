@@ -37,20 +37,25 @@ interface Tmdbmovie {
   release_date: string;
 }
 type Movie = { id: number; url: string; title: string; date: string };
-
 type Genre = { id: number; name: string };
 
-async function fetchPopularMovies(): Promise<Movie[]> {
+async function fetchPopularMovies(
+  sortBy: string,
+  genreId: number[],
+): Promise<Movie[]> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(`${tmbUrl}/movie/popular?api_key=${apiKey}`);
+  const genreParam =
+    genreId.length > 0 ? `&with_genres=${genreId.join(",")}` : "";
+  console.log(genreParam);
+  const response = await fetch(
+    `${tmbUrl}/discover/movie?api_key=${apiKey}&sort_by=${sortBy}${genreParam}`,
+  );
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
   const data = (await response.json()) as { results: Tmdbmovie[] };
-
-  // console.log(data);
 
   return data.results.map((movie) => ({
     id: movie.id,
@@ -74,9 +79,18 @@ async function getGenres(): Promise<Genre[]> {
 }
 
 export default function PopularMovies() {
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [sortBy, setSortBy] = useState(DEFAULT_SORT);
+  const sortRef = useRef<HTMLDivElement>(null);
+  const isClickedOutsideSort = useClickOutside(sortRef);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+
+  console.log(sortBy);
+  console.log(selectedGenres);
+
   const { data: movies } = useQuery({
-    queryKey: ["popular-movies-page"],
-    queryFn: fetchPopularMovies,
+    queryKey: ["popular-movies-page", sortBy.value, selectedGenres],
+    queryFn: () => fetchPopularMovies(sortBy.value, selectedGenres),
   });
 
   const { data: genre } = useQuery({
@@ -86,11 +100,6 @@ export default function PopularMovies() {
 
   console.log(genre);
 
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const [sortBy, setSortBy] = useState(DEFAULT_SORT);
-  const sortRef = useRef<HTMLDivElement>(null);
-  const isClickedOutsideSort = useClickOutside(sortRef);
-
   const handleSortOpen = () => {
     const isCurrentlyOpen = isSortOpen && !isClickedOutsideSort;
     setIsSortOpen(!isCurrentlyOpen);
@@ -99,7 +108,6 @@ export default function PopularMovies() {
   const [sortToggle, setSortToggle] = useState(false);
 
   const handleSortToggle = () => {
-    console.log("toggle");
     setSortToggle(!sortToggle);
   };
 
@@ -180,10 +188,30 @@ export default function PopularMovies() {
                 </div>
                 <div className={styles.genresFilter}>
                   <p>Genres</p>
-                  <ul></ul>
-                  {genre?.map((g) => {
-                    return <li key={g.id}>{g.name}</li>;
-                  })}
+                  <ul className={styles.genreList}>
+                    {genre?.map((g) => {
+                      console.log(g);
+                      return (
+                        <li
+                          key={g.id}
+                          onClick={() => {
+                            setSelectedGenres((prev) =>
+                              prev.includes(g.id)
+                                ? prev.filter((id) => id !== g.id)
+                                : [...prev, g.id],
+                            );
+                          }}
+                          className={
+                            selectedGenres.includes(g.id)
+                              ? (styles.active ?? "")
+                              : ""
+                          }
+                        >
+                          {g.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
             </div>
