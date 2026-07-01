@@ -46,7 +46,7 @@ async function fetchPopularMovies(
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const genreParam =
     genreId.length > 0 ? `&with_genres=${genreId.join(",")}` : "";
-  console.log(genreParam);
+
   const response = await fetch(
     `${tmbUrl}/discover/movie?api_key=${apiKey}&sort_by=${sortBy}${genreParam}`,
   );
@@ -87,9 +87,12 @@ export default function PopularMovies() {
   const sortRef = useRef<HTMLDivElement>(null);
   const isClickedOutsideSort = useClickOutside(sortRef);
 
+  const [appliedGenres, setApliedGenres] = useState<number[]>([]);
+  const [appliedSortBy, setAppliedSortBy] = useState(DEFAULT_SORT);
+
   const { data: movies } = useQuery({
-    queryKey: ["popular-movies-page", sortBy.value, selectedGenres],
-    queryFn: () => fetchPopularMovies(sortBy.value, selectedGenres),
+    queryKey: ["popular-movies-page", appliedSortBy.value, appliedGenres],
+    queryFn: () => fetchPopularMovies(appliedSortBy.value, appliedGenres),
   });
 
   const { data: genre } = useQuery({
@@ -109,6 +112,15 @@ export default function PopularMovies() {
   const handleGenreToggle = () => {
     setGenreToggle(!genreToggle);
   };
+
+  const applyFilters = () => {
+    setApliedGenres(selectedGenres);
+    setAppliedSortBy(sortBy);
+  };
+
+  const hasChanges =
+    sortBy.value !== appliedSortBy.value ||
+    JSON.stringify(selectedGenres) !== JSON.stringify(appliedGenres);
 
   return (
     <SingleColumn>
@@ -136,7 +148,7 @@ export default function PopularMovies() {
 
                 {sortToggle && (
                   <div className={styles.sortFilter}>
-                    <h3>Sort Results By</h3>
+                    <h4>Sort Results By</h4>
                     <div className={styles.sortWrapper} ref={sortRef}>
                       <button
                         type="button"
@@ -199,10 +211,9 @@ export default function PopularMovies() {
 
                 {genreToggle && (
                   <div className={styles.genresFilter}>
-                    <p>Genres</p>
+                    <h4>Genres</h4>
                     <ul className={styles.genreList}>
                       {genre?.map((g) => {
-                        console.log(g);
                         return (
                           <li
                             key={g.id}
@@ -227,6 +238,13 @@ export default function PopularMovies() {
                   </div>
                 )}
               </div>
+              <button
+                onClick={applyFilters}
+                disabled={!hasChanges}
+                className={styles.submitBtn}
+              >
+                Search
+              </button>
             </div>
           </div>
           <div className={styles.moviesGrid}>
