@@ -80,13 +80,12 @@ async function getGenres(): Promise<Genre[]> {
 
 export default function PopularMovies() {
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [sortToggle, setSortToggle] = useState(false);
+  const [genreToggle, setGenreToggle] = useState(false);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState(DEFAULT_SORT);
   const sortRef = useRef<HTMLDivElement>(null);
   const isClickedOutsideSort = useClickOutside(sortRef);
-  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
-
-  console.log(sortBy);
-  console.log(selectedGenres);
 
   const { data: movies } = useQuery({
     queryKey: ["popular-movies-page", sortBy.value, selectedGenres],
@@ -98,17 +97,17 @@ export default function PopularMovies() {
     queryFn: getGenres,
   });
 
-  console.log(genre);
-
   const handleSortOpen = () => {
     const isCurrentlyOpen = isSortOpen && !isClickedOutsideSort;
     setIsSortOpen(!isCurrentlyOpen);
   };
 
-  const [sortToggle, setSortToggle] = useState(false);
-
   const handleSortToggle = () => {
     setSortToggle(!sortToggle);
+  };
+
+  const handleGenreToggle = () => {
+    setGenreToggle(!genreToggle);
   };
 
   return (
@@ -182,37 +181,51 @@ export default function PopularMovies() {
                 )}
               </div>
               <div className={styles.filterPanel}>
-                <div className={styles.genresName}>
+                <div className={styles.genresName} onClick={handleGenreToggle}>
                   <h3>Filters</h3>
-                  <Icon icon={faChevronDown} className={styles.chevron ?? ""} />
+
+                  {genreToggle ? (
+                    <Icon
+                      icon={faChevronDown}
+                      className={styles.chevron ?? ""}
+                    />
+                  ) : (
+                    <Icon
+                      icon={faChevronRight}
+                      className={styles.chevron ?? ""}
+                    />
+                  )}
                 </div>
-                <div className={styles.genresFilter}>
-                  <p>Genres</p>
-                  <ul className={styles.genreList}>
-                    {genre?.map((g) => {
-                      console.log(g);
-                      return (
-                        <li
-                          key={g.id}
-                          onClick={() => {
-                            setSelectedGenres((prev) =>
-                              prev.includes(g.id)
-                                ? prev.filter((id) => id !== g.id)
-                                : [...prev, g.id],
-                            );
-                          }}
-                          className={
-                            selectedGenres.includes(g.id)
-                              ? (styles.active ?? "")
-                              : ""
-                          }
-                        >
-                          {g.name}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+
+                {genreToggle && (
+                  <div className={styles.genresFilter}>
+                    <p>Genres</p>
+                    <ul className={styles.genreList}>
+                      {genre?.map((g) => {
+                        console.log(g);
+                        return (
+                          <li
+                            key={g.id}
+                            onClick={() => {
+                              setSelectedGenres((prev) =>
+                                prev.includes(g.id)
+                                  ? prev.filter((id) => id !== g.id)
+                                  : [...prev, g.id],
+                              );
+                            }}
+                            className={
+                              selectedGenres.includes(g.id)
+                                ? (styles.active ?? "")
+                                : ""
+                            }
+                          >
+                            {g.name}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
