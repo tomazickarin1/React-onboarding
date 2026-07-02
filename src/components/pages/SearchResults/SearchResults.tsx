@@ -3,9 +3,8 @@ import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "react-router";
 import { useState } from "react";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatDate } from "../../../utils/formatDate";
+import Pagination from "../../molecules/Pagination/Pagination";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -63,7 +62,6 @@ async function fetchSearchMovies(page: number, filter: string, query: string): P
 
 export default function SearchResults() {
   const [page, setPage] = useState(1);
-
   const { filter } = useParams();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") ?? "";
@@ -91,11 +89,6 @@ export default function SearchResults() {
     return <p>No results found.</p>;
   }
 
-  // calculate start page
-  const startPage = Math.max(1, Math.min(page - 2, data.totalPages - 4));
-  // calculate which 5 pages are showing
-  const pageNumbers = Array.from({ length: Math.min(5, data.totalPages) }).map((e, i) => startPage + i);
-
   return (
     <div className={styles.movieCards}>
       {(data.movies).map((movie) => (
@@ -109,14 +102,8 @@ export default function SearchResults() {
           isLoading={isLoading}
         />
       ))}
-      <nav className={styles.pageNumbers}>
-        <button onClick={() => { setPage(p => p - 1); }} disabled={page === 1}><FontAwesomeIcon icon={faChevronLeft} /></button>
-        {pageNumbers.map((pageNum) => (
-          <button key={pageNum} onClick={() => { setPage(pageNum); }} data-active={page == pageNum}> {pageNum}
-          </button>
-        ))}
-        <button onClick={() => { setPage(p => p + 1); }} disabled={page === data.totalPages}><FontAwesomeIcon icon={faChevronRight} /></button>
-      </nav>
+
+      <Pagination page={page} totalPages={data.totalPages} onPageChange={setPage} />
     </div>
   );
 }
