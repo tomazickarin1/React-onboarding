@@ -196,7 +196,7 @@ export default function LanguageSelect({
             </div>
           </div>
 
-          <ul role="listbox" ref={listRef}>
+          <ul role="listbox" ref={listRef} aria-label="Select language">
             {renderedList()}
           </ul>
         </div>

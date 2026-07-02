@@ -1,6 +1,8 @@
 import styles from "./SearchPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import { Outlet, NavLink, useSearchParams } from "react-router";
+import SearchFilterPanel from "../../molecules/SearchFilterPanel/SearchFilterPanel";
+import SearchFilterLink from "../../atoms/SearchFilterLink/SearchFilterLink";
+import { Outlet, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { searchFilters } from "../../../data/filterList";
 
@@ -11,7 +13,9 @@ async function fetchAllCounts(query: string) {
 
   const results = await Promise.all(
     searchFilters.map(({ linkName }) =>
-      fetch(`${tmbUrl}/search/${linkName}?api_key=${apiKey}&query=${query}&page=1`)
+      fetch(
+        `${tmbUrl}/search/${linkName}?api_key=${apiKey}&query=${query}&page=1`,
+      )
         .then((r) => r.json() as Promise<{ total_results: number }>)
         .then((data) => ({ filter: linkName, count: data.total_results })),
     ),
@@ -37,31 +41,20 @@ export default function SearchPage() {
     const count = match?.count ?? 0;
 
     return (
-      <li key={links.linkName}>
-        <NavLink
-          to={{
-            pathname: links.linkName,
-            search: searchParams.toString(),
-          }}
-        >
-          {links.label}
-          <span>{count}</span>
-        </NavLink>
-      </li>
+      <SearchFilterLink
+        key={links.linkName}
+        linkName={links.linkName}
+        linkLabel={links.label}
+        count={count}
+        searchParams={searchParams.toString()}
+      />
     );
   });
 
   return (
     <SingleColumn>
       <div className={styles.searchWrapper}>
-        <div className={styles.searchFilters}>
-          <div className={styles.searchHeader}>
-            <h3>Search Results</h3>
-          </div>
-          <div>
-            <ul>{filteLinks}</ul>
-          </div>
-        </div>
+        <SearchFilterPanel>{filteLinks}</SearchFilterPanel>
         <Outlet />
       </div>
     </SingleColumn>

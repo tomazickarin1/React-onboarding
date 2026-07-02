@@ -49,7 +49,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
     <>
       <div className={styles.mobileDropdown}>
         {isOpen && (
-          <ul className={styles.mobileDropdownList} role="listbox">
+          <ul className={styles.mobileDropdownList} role="listbox" aria-label="Select tab">
             {tabs.map((tab) => (
               <li
                 key={tab.id}

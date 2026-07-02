@@ -45,7 +45,7 @@ export const mobileMenuItems = [
   {
     label: "Movies",
     links: [
-      { label: "Popular", url: "#" },
+      { label: "Popular", url: "/popular" },
       { label: "Now playing", url: "#" },
     ],
     id: 1,

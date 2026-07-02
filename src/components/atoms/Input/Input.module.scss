@@ -5,4 +5,8 @@
   border: none;
   border-radius: 6px;
   flex: 1;
+
+  &::placeholder {
+    color: #767676;
+  }
 }
