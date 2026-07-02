@@ -130,7 +130,11 @@ export default function PopularMovies() {
           <div>
             <div className={styles.filterWrapper}>
               <div className={styles.filterPanel}>
-                <div className={styles.sortName} onClick={handleSortToggle}>
+                <button
+                  className={styles.sortName}
+                  onClick={handleSortToggle}
+                  aria-expanded={sortToggle}
+                >
                   <h3>Sort</h3>
 
                   {sortToggle ? (
@@ -144,7 +148,7 @@ export default function PopularMovies() {
                       className={styles.chevron ?? ""}
                     />
                   )}
-                </div>
+                </button>
 
                 {sortToggle && (
                   <div className={styles.sortFilter}>
@@ -165,7 +169,7 @@ export default function PopularMovies() {
                       </button>
 
                       {isSortOpen && !isClickedOutsideSort && (
-                        <ul className={styles.sortList} role="listbox">
+                        <ul className={styles.sortList} role="listbox" aria-label="Sort results by">
                           {sortOptions.map((option) => (
                             <li
                               key={option.value}
@@ -193,7 +197,11 @@ export default function PopularMovies() {
                 )}
               </div>
               <div className={styles.filterPanel}>
-                <div className={styles.genresName} onClick={handleGenreToggle}>
+                <button
+                  className={styles.genresName}
+                  onClick={handleGenreToggle}
+                  aria-expanded={genreToggle}
+                >
                   <h3>Filters</h3>
 
                   {genreToggle ? (
@@ -207,16 +215,20 @@ export default function PopularMovies() {
                       className={styles.chevron ?? ""}
                     />
                   )}
-                </div>
+                </button>
 
                 {genreToggle && (
                   <div className={styles.genresFilter}>
                     <h4>Genres</h4>
-                    <ul className={styles.genreList}>
+                    <ul className={styles.genreList} aria-label="Filter by genre">
                       {genre?.map((g) => {
+                        const isSelected = selectedGenres.includes(g.id);
                         return (
                           <li
                             key={g.id}
+                            role="checkbox"
+                            aria-checked={isSelected}
+                            tabIndex={0}
                             onClick={() => {
                               setSelectedGenres((prev) =>
                                 prev.includes(g.id)
@@ -224,11 +236,17 @@ export default function PopularMovies() {
                                   : [...prev, g.id],
                               );
                             }}
-                            className={
-                              selectedGenres.includes(g.id)
-                                ? (styles.active ?? "")
-                                : ""
-                            }
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setSelectedGenres((prev) =>
+                                  prev.includes(g.id)
+                                    ? prev.filter((id) => id !== g.id)
+                                    : [...prev, g.id],
+                                );
+                              }
+                            }}
+                            className={isSelected ? (styles.active ?? "") : ""}
                           >
                             {g.name}
                           </li>
@@ -247,7 +265,7 @@ export default function PopularMovies() {
               </button>
             </div>
           </div>
-          <div className={styles.moviesGrid}>
+          <div className={styles.moviesGrid} aria-live="polite" aria-label="Movie results">
             {movies?.map((r) => {
               return (
                 <Card
