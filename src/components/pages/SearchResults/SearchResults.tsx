@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "react-router";
 import { useState } from "react";
 import { formatDate } from "../../../utils/formatDate";
 import Pagination from "../../molecules/Pagination/Pagination";
+import Spinner from "../../atoms/Spinner/Spinner";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -34,10 +35,14 @@ type Movie = {
 
 type SearchResult = { movies: Movie[]; totalPages: number };
 
-async function fetchSearchMovies(page: number, filter: string, query: string): Promise<SearchResult> {
+async function fetchSearchMovies(
+  page: number,
+  filter: string,
+  query: string,
+): Promise<SearchResult> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=${query}&page=${String(page)}`
+    `${tmbUrl}/search/${filter}?api_key=${apiKey}&query=${query}&page=${String(page)}`,
   );
 
   if (!response.ok) {
@@ -45,19 +50,18 @@ async function fetchSearchMovies(page: number, filter: string, query: string): P
   }
   const data = (await response.json()) as TmdbResponse;
 
-
   const searchData = {
     movies: data.results.map((movie) => ({
       id: movie.id,
       title: movie.title ?? movie.name ?? "",
       url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
       date: movie.release_date ?? movie.first_air_date ?? "",
-      description: movie.overview
+      description: movie.overview,
     })),
     totalPages: data.total_pages,
-  }
+  };
 
-  return searchData
+  return searchData;
 }
 
 export default function SearchResults() {
@@ -78,11 +82,7 @@ export default function SearchResults() {
   }
 
   if (isLoading) {
-    return (
-      <div className={styles.spinnerWrapper}>
-        <div className={styles.spinner}></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (!data) {
@@ -91,7 +91,7 @@ export default function SearchResults() {
 
   return (
     <div className={styles.movieCards}>
-      {(data.movies).map((movie) => (
+      {data.movies.map((movie) => (
         <MovieCard
           key={movie.id}
           id={String(movie.id)}
@@ -103,7 +103,11 @@ export default function SearchResults() {
         />
       ))}
 
-      <Pagination page={page} totalPages={data.totalPages} onPageChange={setPage} />
+      <Pagination
+        page={page}
+        totalPages={data.totalPages}
+        onPageChange={setPage}
+      />
     </div>
   );
 }
