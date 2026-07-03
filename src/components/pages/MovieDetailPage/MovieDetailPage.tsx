@@ -4,6 +4,8 @@ import styles from "./MovieDetailPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import UserScore from "../../molecules/UserScore/UserScore";
 import MovieActions from "../../molecules/MovieActions/MovieActions";
+import MovieInfo from "../../molecules/MovieInfo/MovieInfo";
+import CrewGrid from "../../molecules/CrewGrid/CrewGrid";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -61,32 +63,6 @@ export default function MovieDetailPage() {
       })
     : "";
 
-  const director = movieDetails?.credits.crew.find((c) => c.job === "Director");
-  const directorJobs = movieDetails?.credits.crew
-    .filter((c) => c.id === director?.id)
-    .map((c) => c.job);
-
-  const story = movieDetails?.credits.crew.find((c) => c.job === "Story");
-  const storyJobs = movieDetails?.credits.crew
-    .filter((c) => c.id === story?.id)
-    .map((c) => c.job);
-
-  const screenplays = movieDetails?.credits.crew
-    .filter((c) => c.job === "Screenplay")
-    .slice(0, 3);
-
-  const screenplayInfo = screenplays?.map((s) => {
-    const jobs = movieDetails?.credits.crew
-      .filter((crew) => crew.id === s.id)
-      .map((crew) => crew.job);
-    return (
-      <div key={s.id} className={styles.crewMember}>
-        <p>{s.name}</p>
-        <p>{jobs?.join(", ")}</p>
-      </div>
-    );
-  });
-
   return (
     <SingleColumn>
       <div
@@ -119,29 +95,10 @@ export default function MovieDetailPage() {
                   {(movieDetails?.runtime ?? 0) % 60}m
                 </span>
               </div>
-
               <UserScore score={movieDetails?.vote_average ?? 0}/>
               <MovieActions/>
-
-              <div className={styles.info}>
-                <p className={styles.tagline}>{movieDetails?.tagline}</p>
-                <h3>Overview</h3>
-                <p>{movieDetails?.overview}</p>
-              </div>
-
-              <div className={styles.crewGrid}>
-                <div className={styles.crewMember}>
-                  <p>{director?.name}</p>
-                  <p>{directorJobs?.join(", ")}</p>
-                </div>
-
-                {screenplayInfo}
-
-                <div className={styles.crewMember}>
-                  <p>{story?.name}</p>
-                  <p>{storyJobs?.join(", ")}</p>
-                </div>
-              </div>
+              <MovieInfo tagline={movieDetails?.tagline ?? ""} overview={movieDetails?.overview ?? ""}/>
+              <CrewGrid crewDetails={movieDetails?.credits.crew ?? []}/>
             </div>
           </div>
         </div>

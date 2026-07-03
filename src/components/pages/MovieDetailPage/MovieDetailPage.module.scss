@@ -42,41 +42,6 @@
   }
 }
 
-.tagline {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  font-weight: 400;
-  font-style: italic;
-  opacity: 0.7;
-}
-
-.crewGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 16px;
-  margin-top: 24px;
-}
-
-.crewMember {
-  p:first-child {
-    font-weight: bold;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-
-  p:last-child {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    margin: 0;
-  }
-}
-
-.info {
-  h3 {
-    font-size: 1.3rem;
-  }
-}
-
 .facts {
   display: flex;
   align-items: center;
@@ -135,10 +100,6 @@
   .facts {
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .info {
-    text-align: left;
   }
 
   .crewGrid {
