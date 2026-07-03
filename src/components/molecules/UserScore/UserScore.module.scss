@@ -1,0 +1,59 @@
+.scoreWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.scoreCircleContainer {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.scoreText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  sup {
+    font-size: 0.55rem;
+    vertical-align: super;
+  }
+}
+
+.scoreLabel {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.reactions {
+  display: flex;
+  gap: 4px;
+  font-size: 1.8rem;
+}
+
+
+.vibeButton {
+  background: #032541;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 1rem;
+}

@@ -1,10 +1,9 @@
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faHeart, faBookmark, faPlay, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "./MovieDetailPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import ScoreCircle from "../../atoms/ScoreCircle/ScoreCircle";
+import UserScore from "../../molecules/UserScore/UserScore";
+import MovieActions from "../../molecules/MovieActions/MovieActions";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -72,8 +71,6 @@ export default function MovieDetailPage() {
     .filter((c) => c.id === story?.id)
     .map((c) => c.job);
 
-  const userScore = Math.round((movieDetails?.vote_average ?? 0) * 10);
-
   const screenplays = movieDetails?.credits.crew
     .filter((c) => c.job === "Screenplay")
     .slice(0, 3);
@@ -123,32 +120,8 @@ export default function MovieDetailPage() {
                 </span>
               </div>
 
-              <div className={styles.scoreWrapper}>
-                <div className={styles.scoreCircleContainer}>
-                  <ScoreCircle score={movieDetails?.vote_average ?? 0}/>
-                  <span className={styles.scoreText}>
-                    {userScore}<sup>%</sup>
-                  </span>
-                </div>
-                <span className={styles.scoreLabel}>User<br />Score</span>
-                <div className={styles.reactions}>
-                  <span>😍</span>
-                  <span>😆</span>
-                  <span>🥲</span>
-                </div>
-                <button className={styles.vibeButton}>
-                  What&apos;s your Vibe? <FontAwesomeIcon icon={faCircleInfo} />
-                </button>
-              </div>
-
-              <div className={styles.actions}>
-                <button className={styles.iconButton}><FontAwesomeIcon icon={faList} /></button>
-                <button className={styles.iconButton}><FontAwesomeIcon icon={faHeart} /></button>
-                <button className={styles.iconButton}><FontAwesomeIcon icon={faBookmark} /></button>
-                <button className={styles.trailerButton}>
-                  <FontAwesomeIcon icon={faPlay} /> Play Trailer
-                </button>
-              </div>
+              <UserScore score={movieDetails?.vote_average ?? 0}/>
+              <MovieActions/>
 
               <div className={styles.info}>
                 <p className={styles.tagline}>{movieDetails?.tagline}</p>

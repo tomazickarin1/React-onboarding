@@ -1,8 +1,8 @@
 import styles from "./ScoreCircle.module.scss";
 
-type Movies = {score: number}
+type MoviesProps = {score: number}
 
-export default function ScoreCircle({score}: Movies) {
+export default function ScoreCircle({score}: MoviesProps) {
 
   const userScore = Math.round((score) * 10);
   const radius = 38;
