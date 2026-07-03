@@ -2,8 +2,10 @@ import styles from "./Card.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { formatDate } from "../../../utils/formatDate";
+import { Link } from "react-router";
 
 interface CardProps {
+  id: string,
   image?: string;
   title?: string;
   date?: string;
@@ -11,7 +13,7 @@ interface CardProps {
   variant: "showcase" | "popular";
 }
 
-export default function Card({ image, title, date, isLoading, variant }: CardProps) {
+export default function Card({ image, title, date, isLoading, variant, id }: CardProps) {
   if (isLoading) {
     return (
       <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
@@ -29,13 +31,16 @@ export default function Card({ image, title, date, isLoading, variant }: CardPro
   return (
     <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
       <div className={image ? '' : styles.placeholder}>
+
         <a href="">
           {image ? <img src={image} alt="placeholder image" /> : <FontAwesomeIcon icon={faImage} />}
         </a>
       </div>
       <div className={styles.cardText}>
         <a href="">
-          <h3>{title}</h3>
+          <h3>
+            <Link to={`/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}>{title}</Link>
+          </h3>
         </a>
         <time className={styles.date}>{date ? formatDate(date) : ""}</time>
       </div>

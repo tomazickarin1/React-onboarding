@@ -270,6 +270,7 @@ export default function PopularMovies() {
               return (
                 <Card
                   key={r.id}
+                  id={r.id.toString()}
                   image={r.url}
                   title={r.title}
                   date={r.date}

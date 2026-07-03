@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faHeart, faBookmark, faPlay, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "./MovieDetailPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
+import ScoreCircle from "../../atoms/ScoreCircle/ScoreCircle";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -72,10 +73,6 @@ export default function MovieDetailPage() {
     .map((c) => c.job);
 
   const userScore = Math.round((movieDetails?.vote_average ?? 0) * 10);
-  const radius = 38;
-  const circumference = 2 * Math.PI * radius;
-  const scoreOffset = ((100 - userScore) / 100) * circumference;
-  const scoreColor = userScore >= 70 ? "#21d07a" : userScore >= 40 ? "#d2d531" : "#db2360";
 
   const screenplays = movieDetails?.credits.crew
     .filter((c) => c.job === "Screenplay")
@@ -128,19 +125,7 @@ export default function MovieDetailPage() {
 
               <div className={styles.scoreWrapper}>
                 <div className={styles.scoreCircleContainer}>
-                  <svg viewBox="0 0 100 100" className={styles.scoreCircle}>
-                    <circle cx="50" cy="50" r="48" className={styles.scoreBg} />
-                    <circle cx="50" cy="50" r={radius} className={styles.scoreTrack} />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r={radius}
-                      className={styles.scoreProgress}
-                      strokeDasharray={circumference}
-                      strokeDashoffset={scoreOffset}
-                      stroke={scoreColor}
-                    />
-                  </svg>
+                  <ScoreCircle score={movieDetails?.vote_average ?? 0}/>
                   <span className={styles.scoreText}>
                     {userScore}<sup>%</sup>
                   </span>

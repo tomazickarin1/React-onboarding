@@ -1,0 +1,22 @@
+
+.scoreCircle {
+  width: 68px;
+  height: 68px;
+  transform: rotate(-90deg);
+}
+
+.scoreBg {
+  fill: #081c22;
+}
+
+.scoreTrack {
+  fill: none;
+  stroke: #204529;
+  stroke-width: 6;
+}
+
+.scoreProgress {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}

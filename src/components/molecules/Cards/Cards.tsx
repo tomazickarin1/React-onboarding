@@ -11,12 +11,13 @@ export default function Cards({ movies, isLoading }: CardsProps) {
     <div className={styles.Cards}>
       {isLoading
         ? Array.from({ length: 8 }).map((item, index) => (
-            <Card key={index} isLoading={true} variant="showcase" />
+            <Card key={index} id={"1"} isLoading={true} variant="showcase" />
           ))
         : movies.map((movie) => {
             return (
               <Card
                 key={movie.id}
+                id={movie.id.toString()}
                 image={movie.url}
                 title={movie.title}
                 date={movie.date}
