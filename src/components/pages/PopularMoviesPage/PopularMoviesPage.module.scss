@@ -71,49 +71,6 @@
   }
 }
 
-.filterPanel {
-  background-color: var(--card-background, #fff);
-  border: 1px solid #e3e3e3;
-  border-radius: 8px;
-}
-
-.genresName,
-.sortName {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #e3e3e3;
-  border-radius: 0;
-  padding: 14px 16px;
-  background: transparent;
-  cursor: pointer;
-  font-family: "Source Sans 3", sans-serif;
-
-  h3 {
-    font-size: 1.1rem;
-    margin: 0;
-    font-weight: 600;
-  }
-}
-
-.chevron {
-  width: 12px;
-  height: 12px;
-}
-
-.genresFilter,
-.sortFilter {
-  padding: 14px 16px 16px 16px;
-
-  h4 {
-    font-weight: 300;
-    font-size: 1rem;
-    margin: 0;
-  }
-}
-
 .genreList {
   display: flex;
   flex-wrap: wrap;

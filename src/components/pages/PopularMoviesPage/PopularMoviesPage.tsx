@@ -5,11 +5,11 @@ import Card from "../../atoms/Card/Card";
 import Icon from "../../atoms/Icon/Icon";
 import { useQuery } from "@tanstack/react-query";
 import {
-  faChevronRight,
-  faChevronDown,
   faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useClickOutside } from "../../../hooks/useClickOutside";
+
+import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -127,135 +127,84 @@ export default function PopularMovies() {
       <div className={styles.container}>
         <h2>Popular Movies</h2>
         <div className={styles.popularWrapper}>
-          <div>
             <div className={styles.filterWrapper}>
-              <div className={styles.filterPanel}>
-                <button
-                  className={styles.sortName}
-                  onClick={handleSortToggle}
-                  aria-expanded={sortToggle}
-                >
-                  <h3>Sort</h3>
-
-                  {sortToggle ? (
+              <FilterPanel title={"Sort"} subtitle={"Sort Results By"} toggleAction={handleSortToggle} toggle={sortToggle}>
+                <div className={styles.sortWrapper} ref={sortRef}>
+                  <button
+                    type="button"
+                    onClick={handleSortOpen}
+                    className={styles.sortBtn}
+                    aria-expanded={isSortOpen}
+                    aria-haspopup="listbox"
+                  >
+                    {sortBy.label}
                     <Icon
-                      icon={faChevronDown}
-                      className={styles.chevron ?? ""}
+                      icon={faCaretDown}
+                      className={styles.caret ?? ""}
                     />
-                  ) : (
-                    <Icon
-                      icon={faChevronRight}
-                      className={styles.chevron ?? ""}
-                    />
-                  )}
-                </button>
+                  </button>
 
-                {sortToggle && (
-                  <div className={styles.sortFilter}>
-                    <h4>Sort Results By</h4>
-                    <div className={styles.sortWrapper} ref={sortRef}>
-                      <button
-                        type="button"
-                        onClick={handleSortOpen}
-                        className={styles.sortBtn}
-                        aria-expanded={isSortOpen}
-                        aria-haspopup="listbox"
-                      >
-                        {sortBy.label}
-                        <Icon
-                          icon={faCaretDown}
-                          className={styles.caret ?? ""}
-                        />
-                      </button>
-
-                      {isSortOpen && !isClickedOutsideSort && (
-                        <ul className={styles.sortList} role="listbox" aria-label="Sort results by">
-                          {sortOptions.map((option) => (
-                            <li
-                              key={option.value}
-                              role="option"
-                              tabIndex={0}
-                              aria-selected={option.value === sortBy.value}
-                              className={
-                                option.value === sortBy.value
-                                  ? styles.active
-                                  : ""
-                              }
-                              onMouseDown={(e) => {
-                                e.stopPropagation();
-                                setSortBy(option);
-                                setIsSortOpen(false);
-                              }}
-                            >
-                              {option.label}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className={styles.filterPanel}>
-                <button
-                  className={styles.genresName}
-                  onClick={handleGenreToggle}
-                  aria-expanded={genreToggle}
-                >
-                  <h3>Filters</h3>
-
-                  {genreToggle ? (
-                    <Icon
-                      icon={faChevronDown}
-                      className={styles.chevron ?? ""}
-                    />
-                  ) : (
-                    <Icon
-                      icon={faChevronRight}
-                      className={styles.chevron ?? ""}
-                    />
-                  )}
-                </button>
-
-                {genreToggle && (
-                  <div className={styles.genresFilter}>
-                    <h4>Genres</h4>
-                    <ul className={styles.genreList} aria-label="Filter by genre">
-                      {genre?.map((g) => {
-                        const isSelected = selectedGenres.includes(g.id);
-                        return (
-                          <li
-                            key={g.id}
-                            role="checkbox"
-                            aria-checked={isSelected}
-                            tabIndex={0}
-                            onClick={() => {
-                              setSelectedGenres((prev) =>
-                                prev.includes(g.id)
-                                  ? prev.filter((id) => id !== g.id)
-                                  : [...prev, g.id],
-                              );
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                setSelectedGenres((prev) =>
-                                  prev.includes(g.id)
-                                    ? prev.filter((id) => id !== g.id)
-                                    : [...prev, g.id],
-                                );
-                              }
-                            }}
-                            className={isSelected ? (styles.active ?? "") : ""}
-                          >
-                            {g.name}
-                          </li>
-                        );
-                      })}
+                  {isSortOpen && !isClickedOutsideSort && (
+                    <ul className={styles.sortList} role="listbox" aria-label="Sort results by">
+                      {sortOptions.map((option) => (
+                        <li
+                          key={option.value}
+                          role="option"
+                          tabIndex={0}
+                          aria-selected={option.value === sortBy.value}
+                          className={
+                            option.value === sortBy.value
+                              ? styles.active
+                              : ""
+                          }
+                          onMouseDown={(e) => {
+                            e.stopPropagation();
+                            setSortBy(option);
+                            setIsSortOpen(false);
+                          }}
+                        >
+                          {option.label}
+                        </li>
+                      ))}
                     </ul>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </FilterPanel>
+              <FilterPanel title={"Filters"} subtitle={"Genres"} toggleAction={handleGenreToggle} toggle={genreToggle}>
+                <ul className={styles.genreList} aria-label="Filter by genre">
+                  {genre?.map((g) => {
+                    const isSelected = selectedGenres.includes(g.id);
+                    return (
+                      <li
+                        key={g.id}
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        tabIndex={0}
+                        onClick={() => {
+                          setSelectedGenres((prev) =>
+                            prev.includes(g.id)
+                              ? prev.filter((id) => id !== g.id)
+                              : [...prev, g.id],
+                          );
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setSelectedGenres((prev) =>
+                              prev.includes(g.id)
+                                ? prev.filter((id) => id !== g.id)
+                                : [...prev, g.id],
+                            );
+                          }
+                        }}
+                        className={isSelected ? (styles.active ?? "") : ""}
+                      >
+                        {g.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </FilterPanel>
               <button
                 onClick={applyFilters}
                 disabled={!hasChanges}
@@ -263,7 +212,6 @@ export default function PopularMovies() {
               >
                 Search
               </button>
-            </div>
           </div>
           <div className={styles.moviesGrid} aria-live="polite" aria-label="Movie results">
             {movies?.map((r) => {

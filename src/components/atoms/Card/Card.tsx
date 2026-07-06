@@ -5,7 +5,7 @@ import { formatDate } from "../../../utils/formatDate";
 import { Link } from "react-router";
 
 interface CardProps {
-  id: string,
+  id: string;
   image?: string;
   title?: string;
   date?: string;
@@ -13,7 +13,14 @@ interface CardProps {
   variant: "showcase" | "popular";
 }
 
-export default function Card({ image, title, date, isLoading, variant, id }: CardProps) {
+export default function Card({
+  image,
+  title,
+  date,
+  isLoading,
+  variant,
+  id,
+}: CardProps) {
   if (isLoading) {
     return (
       <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
@@ -30,18 +37,23 @@ export default function Card({ image, title, date, isLoading, variant, id }: Car
 
   return (
     <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
-      <div className={image ? '' : styles.placeholder}>
-
+      <div className={image ? "" : styles.placeholder}>
         <a href="">
-          {image ? <img src={image} alt="placeholder image" /> : <FontAwesomeIcon icon={faImage} />}
+          {image ? (
+            <img src={image} alt="placeholder image" />
+          ) : (
+            <FontAwesomeIcon icon={faImage} />
+          )}
         </a>
       </div>
       <div className={styles.cardText}>
-        <a href="">
-          <h3>
-            <Link to={`/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}>{title}</Link>
-          </h3>
-        </a>
+        <h3>
+          <Link
+            to={`/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}
+          >
+            {title}
+          </Link>
+        </h3>
         <time className={styles.date}>{date ? formatDate(date) : ""}</time>
       </div>
     </div>
