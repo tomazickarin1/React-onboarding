@@ -1,4 +1,5 @@
 import styles from "./GenreFilter.module.scss";
+import GenrePill from "../../atoms/GenrePill/GenrePill";
 
 type Genre = { id: number; name: string };
 type GenresProps = {
@@ -16,34 +17,19 @@ export default function GenreFilter({
     <ul className={styles.genreList} aria-label="Filter by genre">
       {genre?.map((g) => {
         const isSelected = selectedGenres.includes(g.id);
-        console.log(isSelected);
         return (
-          <li
+          <GenrePill
             key={g.id}
-            role="checkbox"
-            aria-checked={isSelected}
-            tabIndex={0}
-            onClick={() => {
+            isSelected={isSelected}
+            genre={g}
+            onToggle={() => {
               setSelectedGenres((prev) =>
                 prev.includes(g.id)
                   ? prev.filter((id) => id !== g.id)
                   : [...prev, g.id],
               );
             }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setSelectedGenres((prev) =>
-                  prev.includes(g.id)
-                    ? prev.filter((id) => id !== g.id)
-                    : [...prev, g.id],
-                );
-              }
-            }}
-            className={isSelected ? (styles.active ?? "") : ""}
-          >
-            {g.name}
-          </li>
+          />
         );
       })}
     </ul>
