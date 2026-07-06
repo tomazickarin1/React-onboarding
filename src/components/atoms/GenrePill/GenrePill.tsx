@@ -28,7 +28,7 @@ export default function GenrePill({
           onToggle();
         }
       }}
-      className={isSelected ? (styles.active ?? "") : ""}
+      className={`${isSelected ? (styles.active ?? "") : ""} ${styles.pill ?? ""}`}
     >
       {genre.name}
     </li>

@@ -5,23 +5,4 @@
   list-style: none;
   padding: 0;
   margin: 8px 0 0 0;
-
-  li {
-    border: 1px solid #e3e3e3;
-    border-radius: 14px;
-    padding: 4px 12px;
-    font-size: 0.9rem;
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-blue);
-      color: var(--color-white);
-    }
-
-    &.active {
-      background-color: var(--color-blue);
-      color: var(--color-white);
-      border-color: var(--color-blue);
-    }
-  }
 }
