@@ -5,14 +5,11 @@ import Card from "../../atoms/Card/Card";
 import { useQuery } from "@tanstack/react-query";
 import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
+import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
+import { DEFAULT_SORT } from "../../../data/sortingOptions";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
-
-const DEFAULT_SORT = {
-  value: "popularity.desc",
-  label: "Popularity Descending",
-};
 
 interface Tmdbmovie {
   id: number;
@@ -107,39 +104,7 @@ export default function PopularMovies() {
               <SortDropdown sortBy={sortBy} setSortBy={setSortBy}/>
             </FilterPanel>
             <FilterPanel title={"Filters"} subtitle={"Genres"} toggleAction={handleGenreToggle} toggle={genreToggle}>
-              <ul className={styles.genreList} aria-label="Filter by genre">
-                {genre?.map((g) => {
-                  const isSelected = selectedGenres.includes(g.id);
-                  return (
-                    <li
-                      key={g.id}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={0}
-                      onClick={() => {
-                        setSelectedGenres((prev) =>
-                          prev.includes(g.id)
-                            ? prev.filter((id) => id !== g.id)
-                            : [...prev, g.id],
-                        );
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setSelectedGenres((prev) =>
-                            prev.includes(g.id)
-                              ? prev.filter((id) => id !== g.id)
-                              : [...prev, g.id],
-                          );
-                        }
-                      }}
-                      className={isSelected ? (styles.active ?? "") : ""}
-                    >
-                      {g.name}
-                    </li>
-                  );
-                })}
-              </ul>
+              <GenreFilter genre={genre} selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres}/>
             </FilterPanel>
             <button
               onClick={applyFilters}
