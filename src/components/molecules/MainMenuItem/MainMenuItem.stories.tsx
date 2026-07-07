@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const MainMenuItem: Story = {
   args: {
-    label: "MainMenuItem text",
+    label: "Main Menu Item text",
     links: [
       { label: "Home", url: "/home" },
       { label: "About", url: "/about" },

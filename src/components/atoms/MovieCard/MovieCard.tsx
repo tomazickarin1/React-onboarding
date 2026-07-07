@@ -21,7 +21,7 @@ const MovieCard = ({
   isLoading,
 }: MovieCardProps) => {
   if (isLoading) {
-    return <div className={style.movieCard}>Loading...</div>;
+    return <div className={`${style.movieCard ?? ""} ${style.loading ?? ""}`}>Loading...</div>;
   }
 
   return (

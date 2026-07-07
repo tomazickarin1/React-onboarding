@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const MenuLink: Story = {
   args: {
-    label: "MenuLink text",
+    label: "Menu Link text",
     url: '#',
   },
 };
