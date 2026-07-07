@@ -7,6 +7,8 @@ type CrewDetailsProps = {
 export default function CrewGrid({ crewDetails }: CrewDetailsProps) {
   const director = crewDetails.find((c) => c.job === "Director");
 
+  console.log(crewDetails);
+
   console.log(director);
   const directorJobs = crewDetails
     .filter((c) => c.id === director?.id)
