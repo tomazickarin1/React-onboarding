@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./PopularMoviesPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import Card from "../../atoms/Card/Card";
@@ -7,6 +7,8 @@ import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
+
+import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -62,12 +64,14 @@ async function getGenres(): Promise<Genre[]> {
 export default function PopularMovies() {
   const [sortToggle, setSortToggle] = useState(false);
   const [genreToggle, setGenreToggle] = useState(false);
-  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
-  const [sortBy, setSortBy] = useState(DEFAULT_SORT);
   const [appliedGenres, setApliedGenres] = useState<number[]>([]);
   const [appliedSortBy, setAppliedSortBy] = useState(DEFAULT_SORT);
 
-  const { data: movies } = useQuery({
+  const { sortBy, setSortBy, selectedGenres, setSelectedGenres, movies, setMovies } = useContext(PopularMoviesContext);
+
+
+
+  const { data: movieData } = useQuery({
     queryKey: ["popular-movies-page", appliedSortBy.value, appliedGenres],
     queryFn: () => fetchPopularMovies(appliedSortBy.value, appliedGenres),
   });
@@ -76,6 +80,12 @@ export default function PopularMovies() {
     queryKey: ["genre-list"],
     queryFn: getGenres,
   });
+
+  useEffect(() => {
+    if (movieData) {
+      setMovies(movieData);
+    }
+  }, [movieData, setMovies])
 
   const handleSortToggle = () => {
     setSortToggle(!sortToggle);
@@ -115,7 +125,7 @@ export default function PopularMovies() {
             </button>
           </div>
           <div className={styles.moviesGrid} aria-live="polite" aria-label="Movie results">
-            {movies?.map((r) => {
+            {movies.map((r) => {
               return (
                 <Card
                   key={r.id}
