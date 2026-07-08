@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import NavigationBar from "../../organisms/NavigationBar/NavigationBar";
 import Footer from "../../organisms/Footer/Footer";
 
-interface TwoColumnProps {
+type TwoColumnProps = {
   main: ReactNode;
   sidebar: ReactNode;
 }

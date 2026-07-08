@@ -4,14 +4,14 @@ import Showcase from "../Showcase/Showcase";
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
-interface TmdbMovie {
+type TmdbMovie = {
   id: number;
   title: string;
   poster_path: string | null;
   release_date: string;
 }
 
-interface TmdbResponse {
+type TmdbResponse = {
   results: TmdbMovie[];
 }
 

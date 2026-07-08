@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tabs from "../../molecules/Tabs/Tabs";
 import Cards from "../../molecules/Cards/Cards";
 
-interface ShowcaseProps {
+type ShowcaseProps = {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
   isLoading: boolean;
 }

@@ -4,7 +4,7 @@ import LanguageSelect from "../../molecules/LanguageSelect/LanguageSelect";
 import Button from "../../atoms/Button/Button";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
-export interface LanguageSwitcherProps {
+export type LanguageSwitcherProps = {
   languageList: Array<{ code: string; label: string }>;
   selectedMain: string;
   selectedFallback: string;

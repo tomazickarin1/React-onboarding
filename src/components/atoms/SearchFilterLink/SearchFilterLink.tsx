@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-interface searchFilterLinkProps {
+type searchFilterLinkProps = {
   linkName: string;
   linkLabel: string;
   count: number;

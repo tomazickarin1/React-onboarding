@@ -3,7 +3,7 @@ import NavigationBar from "../../organisms/NavigationBar/NavigationBar";
 import Footer from "../../organisms/Footer/Footer";
 import styles from "../SingleColumn/SingleColumn.module.scss";
 
-interface SingleColumnProps {
+type SingleColumnProps = {
   children?: ReactNode;
 }
 

@@ -9,7 +9,7 @@ import Input from "../../atoms/Input/Input";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
-export interface LanguageSelectProps {
+export type LanguageSelectProps = {
   languageList: Array<{ code: string; label: string }>;
   selected: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-export interface IconProps {
+export type IconProps = {
   icon: IconDefinition;
   className?: string;
 }

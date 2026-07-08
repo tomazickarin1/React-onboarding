@@ -1,6 +1,6 @@
 import styles from "./Button.module.scss";
 
-export interface ButtonProps {
+export type ButtonProps = {
   label: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";

@@ -11,7 +11,7 @@ const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 const tmbBackdropUrl = "https://image.tmdb.org/t/p/w1280";
 
-interface MovieDetails {
+type MovieDetails = {
   id: string;
   overview: string;
   title: string;

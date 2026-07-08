@@ -1,7 +1,7 @@
 import styles from "./MenuLink.module.scss";
 import { Link } from "react-router";
 
-export interface MenuLinkProps {
+export type MenuLinkProps = {
   label: string;
   url: string;
 }

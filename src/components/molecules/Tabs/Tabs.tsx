@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-interface TabsProps {
+type TabsProps = {
   tabs: Array<{ id: number; label: string }>;
   activeTab: number;
   onTabChange: (id: number) => void;

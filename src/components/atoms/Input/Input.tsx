@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import styles from "./Input.module.scss";
 
-export interface InputProps {
+export type InputProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;

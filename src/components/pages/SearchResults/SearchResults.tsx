@@ -10,7 +10,7 @@ import Spinner from "../../atoms/Spinner/Spinner";
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
-interface TmdbMovie {
+type TmdbMovie = {
   id: number;
   title?: string;
   name?: string;
@@ -20,7 +20,7 @@ interface TmdbMovie {
   overview: string;
 }
 
-interface TmdbResponse {
+type TmdbResponse = {
   results: TmdbMovie[];
   total_pages: number;
 }

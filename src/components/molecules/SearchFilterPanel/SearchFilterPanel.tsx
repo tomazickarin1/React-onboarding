@@ -1,6 +1,6 @@
 import styles from "./SearchFilterPanel.module.scss";
 
-interface searchFilterPanelProps {
+type searchFilterPanelProps = {
   children: React.ReactNode;
 }
 

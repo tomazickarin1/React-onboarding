@@ -13,7 +13,7 @@ import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
-interface Tmdbmovie {
+type Tmdbmovie = {
   id: number;
   title: string;
   poster_path: string | null;

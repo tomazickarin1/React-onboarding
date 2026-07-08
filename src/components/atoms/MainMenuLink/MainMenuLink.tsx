@@ -1,7 +1,7 @@
 import styles from "./MainMenuLink.module.scss";
 import { Link } from "react-router";
 
-export interface MainMenuLinkProps {
+export type MainMenuLinkProps = {
   label: string;
   url?: string;
   handleMenuToggle: () => void;

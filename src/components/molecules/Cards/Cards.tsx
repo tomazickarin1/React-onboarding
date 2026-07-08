@@ -1,7 +1,7 @@
 import styles from "./Cards.module.scss";
 import Card from "../../atoms/Card/Card";
 
-interface CardsProps {
+type CardsProps = {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
   isLoading: boolean;
 }

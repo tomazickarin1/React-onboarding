@@ -4,7 +4,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { formatDate } from "../../../utils/formatDate";
 import { Link } from "react-router";
 
-interface CardProps {
+type CardProps = {
   id: string;
   image?: string;
   title?: string;

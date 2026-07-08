@@ -3,7 +3,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router";
 
-export interface MovieCardProps {
+export type MovieCardProps = {
   id: string;
   imageUrl: string;
   title: string;

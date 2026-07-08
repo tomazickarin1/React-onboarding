@@ -3,7 +3,7 @@ import MainMenuLink from "../../atoms/MainMenuLink/MainMenuLink";
 import MenuLinkList from "../MenuLinkList/MenuLinkList";
 import { useState } from "react";
 
-export interface MainMenuItemProps {
+export type MainMenuItemProps = {
   label: string;
   links: Array<{ label: string; url: string }>;
 }
