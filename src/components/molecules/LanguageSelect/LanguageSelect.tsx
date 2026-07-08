@@ -31,18 +31,8 @@ export default function LanguageSelect({
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-
-
-  // useClickOutside(containerRef, () => {
-  //   setIsOpen(false);
-  //   setHighlighted(null);
-  // });
-
-
-
   // boolean value
   const isClickedOutside = useClickOutside(containerRef);
-
 
   const handleOpen = () => {
     const isCurrentlyOpen = isOpen && !isClickedOutside;

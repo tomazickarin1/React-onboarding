@@ -22,15 +22,8 @@ export default function LanguageSwitcher({
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
-
-  // useClickOutside(ref, () => {
-  //   setIsOpen(false);
-  // });
-
-
   // boolean value
   const isClickedOutside = useClickOutside(ref);
-
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -45,7 +38,7 @@ export default function LanguageSwitcher({
         aria-expanded={isOpen}
         aria-label="Language settings"
       />
-      {isOpen && !isClickedOutside &&  (
+      {isOpen && !isClickedOutside && (
         <div className={styles.languageDropdown}>
           <div className={styles.callout} />
           <form>

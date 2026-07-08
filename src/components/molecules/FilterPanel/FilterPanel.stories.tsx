@@ -29,4 +29,3 @@ export const Open: Story = {
     children: "Filter content goes here",
   },
 };
-

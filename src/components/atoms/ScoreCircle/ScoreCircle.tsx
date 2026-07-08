@@ -1,12 +1,13 @@
 import styles from "./ScoreCircle.module.scss";
 
-type MoviesProps = {score: number}
+type MoviesProps = { score: number };
 
-export default function ScoreCircle({score}: MoviesProps) {
+export default function ScoreCircle({ score }: MoviesProps) {
   const radius = 38;
   const circumference = 2 * Math.PI * radius;
   const scoreOffset = ((100 - score) / 100) * circumference;
-  const scoreColor = score >= 70 ? "#21d07a" : score >= 40 ? "#d2d531" : "#db2360";
+  const scoreColor =
+    score >= 70 ? "#21d07a" : score >= 40 ? "#d2d531" : "#db2360";
 
   return (
     <svg viewBox="0 0 100 100" className={styles.scoreCircle}>

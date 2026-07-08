@@ -37,7 +37,9 @@ export default function ShowcaseFetch() {
     fetch(`${tmbUrl}/movie/popular?api_key=${apiKey}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Request failed with status ${String(response.status)}`);
+          throw new Error(
+            `Request failed with status ${String(response.status)}`,
+          );
         }
         return response.json() as Promise<TmdbResponse>;
       })

@@ -4,6 +4,8 @@
     "dev": "vite",
     "build": "vite build",
     "check": "tsc --noEmit && eslint . && vitest run --project=unit",
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,json,css,scss,md}\"",
+    "format:write": "prettier --write \"src/**/*.{js,ts,tsx,json,css,scss,md}\"",
     "lint": "eslint .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

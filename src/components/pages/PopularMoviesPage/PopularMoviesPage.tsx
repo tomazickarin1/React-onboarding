@@ -67,9 +67,14 @@ export default function PopularMovies() {
   const [appliedGenres, setApliedGenres] = useState<number[]>([]);
   const [appliedSortBy, setAppliedSortBy] = useState(DEFAULT_SORT);
 
-  const { sortBy, setSortBy, selectedGenres, setSelectedGenres, movies, setMovies } = useContext(PopularMoviesContext);
-
-
+  const {
+    sortBy,
+    setSortBy,
+    selectedGenres,
+    setSelectedGenres,
+    movies,
+    setMovies,
+  } = useContext(PopularMoviesContext);
 
   const { data: movieData } = useQuery({
     queryKey: ["popular-movies-page", appliedSortBy.value, appliedGenres],
@@ -85,7 +90,7 @@ export default function PopularMovies() {
     if (movieData) {
       setMovies(movieData);
     }
-  }, [movieData, setMovies])
+  }, [movieData, setMovies]);
 
   const handleSortToggle = () => {
     setSortToggle(!sortToggle);
@@ -110,11 +115,25 @@ export default function PopularMovies() {
         <h2>Popular Movies</h2>
         <div className={styles.popularWrapper}>
           <div className={styles.filterWrapper}>
-            <FilterPanel title={"Sort"} subtitle={"Sort Results By"} toggleAction={handleSortToggle} toggle={sortToggle}>
-              <SortDropdown sortBy={sortBy} setSortBy={setSortBy}/>
+            <FilterPanel
+              title={"Sort"}
+              subtitle={"Sort Results By"}
+              toggleAction={handleSortToggle}
+              toggle={sortToggle}
+            >
+              <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
             </FilterPanel>
-            <FilterPanel title={"Filters"} subtitle={"Genres"} toggleAction={handleGenreToggle} toggle={genreToggle}>
-              <GenreFilter genre={genre} selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres}/>
+            <FilterPanel
+              title={"Filters"}
+              subtitle={"Genres"}
+              toggleAction={handleGenreToggle}
+              toggle={genreToggle}
+            >
+              <GenreFilter
+                genre={genre}
+                selectedGenres={selectedGenres}
+                setSelectedGenres={setSelectedGenres}
+              />
             </FilterPanel>
             <button
               onClick={applyFilters}
@@ -124,7 +143,11 @@ export default function PopularMovies() {
               Search
             </button>
           </div>
-          <div className={styles.moviesGrid} aria-live="polite" aria-label="Movie results">
+          <div
+            className={styles.moviesGrid}
+            aria-live="polite"
+            aria-label="Movie results"
+          >
             {movies.map((r) => {
               return (
                 <Card

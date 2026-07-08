@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const SortDropdown: Story = {
   args: {
-    sortBy: {value: "popularity.desc", label: "Popularity Descending"},
+    sortBy: { value: "popularity.desc", label: "Popularity Descending" },
     setSortBy: fn(),
   },
 };

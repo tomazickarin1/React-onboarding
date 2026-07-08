@@ -1,7 +1,11 @@
 import MainMenuItem from "../../molecules/MainMenuItem/MainMenuItem";
 import MenuLinkList from "../../molecules/MenuLinkList/MenuLinkList";
 import styles from "./MainMenu.module.scss";
-import { menuItems, mobileMenuItems, mobileMenuSmall } from "../../../data/menuItems";
+import {
+  menuItems,
+  mobileMenuItems,
+  mobileMenuSmall,
+} from "../../../data/menuItems";
 import { useEffect, useState } from "react";
 
 export default function MainMenu() {

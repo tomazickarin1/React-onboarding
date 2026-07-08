@@ -19,14 +19,10 @@ type Movie = { id: number; url: string; title: string; date: string };
 
 async function fetchPopularMovies(): Promise<Movie[]> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(
-    `${tmbUrl}/movie/popular?api_key=${apiKey}`,
-  );
+  const response = await fetch(`${tmbUrl}/movie/popular?api_key=${apiKey}`);
 
   if (!response.ok) {
-    throw new Error(
-      `Request failed with status ${String(response.status)}`,
-    );
+    throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
   const data = (await response.json()) as TmdbResponse;
@@ -34,9 +30,7 @@ async function fetchPopularMovies(): Promise<Movie[]> {
   return data.results.map((movie) => ({
     id: movie.id,
     title: movie.title,
-    url: movie.poster_path
-      ? `${tmbImageUrl}${movie.poster_path}`
-      : "",
+    url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
     date: movie.release_date,
   }));
 }

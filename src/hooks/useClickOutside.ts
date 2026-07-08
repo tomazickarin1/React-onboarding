@@ -1,3 +1,4 @@
+// Another example:
 // import { useEffect, type RefObject } from "react";
 
 // export function useClickOutside(
@@ -18,8 +19,6 @@
 //     };
 //   }, [ref, onClickOutside]);
 // }
-
-
 
 // returns a boolean
 import { useEffect, useState, type RefObject } from "react";

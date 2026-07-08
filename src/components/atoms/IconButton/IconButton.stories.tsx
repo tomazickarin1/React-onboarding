@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import IconButtonComponent from "./IconButton";
 
-import {
-  faList,
-  faHeart,
-  faBookmark
-} from "@fortawesome/free-solid-svg-icons";
+import { faList, faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const meta = {
   title: "Component/atoms/IconButton",
@@ -17,18 +13,18 @@ type Story = StoryObj<typeof meta>;
 
 export const List: Story = {
   args: {
-    icon: faList
+    icon: faList,
   },
 };
 
 export const Heart: Story = {
   args: {
-    icon: faHeart
+    icon: faHeart,
   },
 };
 
 export const Bookmark: Story = {
   args: {
-    icon: faBookmark
+    icon: faBookmark,
   },
 };

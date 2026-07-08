@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import TwoColumnComponent from "./TwoColumn";
 

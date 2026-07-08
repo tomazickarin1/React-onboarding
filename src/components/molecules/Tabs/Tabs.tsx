@@ -49,7 +49,11 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
     <>
       <div className={styles.mobileDropdown}>
         {isOpen && (
-          <ul className={styles.mobileDropdownList} role="listbox" aria-label="Select tab">
+          <ul
+            className={styles.mobileDropdownList}
+            role="listbox"
+            aria-label="Select tab"
+          >
             {tabs.map((tab) => (
               <li
                 key={tab.id}
@@ -66,10 +70,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
               >
                 {tab.id === activeTab ? (
                   <div className={styles.activeBtnWrapper}>
-                    <button
-                      type="button"
-                      onClick={handleOpen}
-                    >
+                    <button type="button" onClick={handleOpen}>
                       {tab.label}{" "}
                       <span className={styles.iconDown}>
                         <FontAwesomeIcon icon={faChevronDown} />

@@ -7,11 +7,16 @@ import MovieDetailPage from "./components/pages/MovieDetailPage/MovieDetailPage"
 import PopularMoviesPage from "./components/pages/PopularMoviesPage/PopularMoviesPage";
 import { PopularMoviesProvider } from "./store/PopularMoviesContext";
 
-import { Routes, Route, Navigate, useSearchParams  } from "react-router";
+import { Routes, Route, Navigate, useSearchParams } from "react-router";
 
 function SearchRedirect() {
   const [searchParams] = useSearchParams();
-  return <Navigate to={{ pathname: "tv", search: searchParams.toString() }} replace />;
+  return (
+    <Navigate
+      to={{ pathname: "tv", search: searchParams.toString() }}
+      replace
+    />
+  );
 }
 
 const queryClient = new QueryClient();
@@ -22,12 +27,19 @@ export default function App() {
       <div className={styles.movieapp}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} >
+          <Route path="/search" element={<SearchPage />}>
             <Route index element={<SearchRedirect />} />
             <Route path=":filter" element={<SearchResults />} />
           </Route>
           <Route path="/movie/:id" element={<MovieDetailPage />} />
-          <Route path="/popular" element={<PopularMoviesProvider><PopularMoviesPage /></PopularMoviesProvider>} />
+          <Route
+            path="/popular"
+            element={
+              <PopularMoviesProvider>
+                <PopularMoviesPage />
+              </PopularMoviesProvider>
+            }
+          />
         </Routes>
       </div>
     </QueryClientProvider>

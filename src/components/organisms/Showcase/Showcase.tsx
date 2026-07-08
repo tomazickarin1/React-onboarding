@@ -8,7 +8,7 @@ interface ShowcaseProps {
   isLoading: boolean;
 }
 
-export default function Showcase({movies, isLoading}: ShowcaseProps) {
+export default function Showcase({ movies, isLoading }: ShowcaseProps) {
   const [activeTab, setActiveTab] = useState(1);
 
   const tabs = [
@@ -27,7 +27,7 @@ export default function Showcase({movies, isLoading}: ShowcaseProps) {
       {!isLoading && movies.length === 0 ? (
         <p>No movies found.</p>
       ) : (
-        <Cards movies={movies} isLoading={isLoading}/>
+        <Cards movies={movies} isLoading={isLoading} />
       )}
     </div>
   );

@@ -11,18 +11,18 @@ type Story = StoryObj<typeof meta>;
 
 export const HighScore: Story = {
   args: {
-    score: 85
+    score: 85,
   },
 };
 
 export const MidScore: Story = {
   args: {
-    score: 55
+    score: 55,
   },
 };
 
 export const LowScore: Story = {
   args: {
-    score: 25
+    score: 25,
   },
 };

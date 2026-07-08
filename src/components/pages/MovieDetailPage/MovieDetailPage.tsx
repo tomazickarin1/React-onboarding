@@ -95,10 +95,13 @@ export default function MovieDetailPage() {
                   {(movieDetails?.runtime ?? 0) % 60}m
                 </span>
               </div>
-              <UserScore score={movieDetails?.vote_average ?? 0}/>
-              <MovieActions/>
-              <MovieInfo tagline={movieDetails?.tagline ?? ""} overview={movieDetails?.overview ?? ""}/>
-              <CrewGrid crewDetails={movieDetails?.credits.crew ?? []}/>
+              <UserScore score={movieDetails?.vote_average ?? 0} />
+              <MovieActions />
+              <MovieInfo
+                tagline={movieDetails?.tagline ?? ""}
+                overview={movieDetails?.overview ?? ""}
+              />
+              <CrewGrid crewDetails={movieDetails?.credits.crew ?? []} />
             </div>
           </div>
         </div>

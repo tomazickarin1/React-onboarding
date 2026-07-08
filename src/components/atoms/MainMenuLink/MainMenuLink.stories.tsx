@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const MainMenuLink: Story = {
   args: {
     label: "Main Menu Link text",
-    url: '#',
+    url: "#",
     handleMenuToggle: fn(),
   },
 };

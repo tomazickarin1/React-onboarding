@@ -9,28 +9,22 @@ export interface InputProps {
   type?: "text" | "search";
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
-  value,
-  onChange,
-  placeholder,
-  ariaLabel,
-  type = "text",
-}, ref) => {
-  return (
-    <input
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      aria-label={ariaLabel}
-      className={styles.input}
-      ref={ref}
-    />
-  );
-});
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ value, onChange, placeholder, ariaLabel, type = "text" }, ref) => {
+    return (
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        className={styles.input}
+        ref={ref}
+      />
+    );
+  },
+);
 
 Input.displayName = "Input";
 
 export default Input;
-
-

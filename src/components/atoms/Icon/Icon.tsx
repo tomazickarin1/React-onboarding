@@ -7,5 +7,7 @@ export interface IconProps {
 }
 
 export default function Icon({ icon, className }: IconProps) {
-  return <FontAwesomeIcon icon={icon} aria-hidden="true" className={className} />;
+  return (
+    <FontAwesomeIcon icon={icon} aria-hidden="true" className={className} />
+  );
 }

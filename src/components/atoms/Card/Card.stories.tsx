@@ -19,7 +19,7 @@ export const ShowcaseCard: Story = {
     date: "12.4.2026",
     isLoading: false,
     variant: "showcase",
-    id: "2"
+    id: "2",
   },
 };
 
@@ -30,6 +30,6 @@ export const PopularCard: Story = {
     date: "12.4.2026",
     isLoading: false,
     variant: "popular",
-    id: "1"
+    id: "1",
   },
 };

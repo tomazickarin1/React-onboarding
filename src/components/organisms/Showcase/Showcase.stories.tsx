@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import pladeholderPoster from "../../../assets/placeholder-poster.jpg"
+import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
 
 import ShowcaseComponent from "./Showcase";
 

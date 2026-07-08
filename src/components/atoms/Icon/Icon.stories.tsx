@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { faStar, faHeart, faUser, faMagnifyingGlass, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faHeart,
+  faUser,
+  faMagnifyingGlass,
+  faBookmark,
+} from "@fortawesome/free-solid-svg-icons";
 import Icon from "./Icon";
 
 const meta = {

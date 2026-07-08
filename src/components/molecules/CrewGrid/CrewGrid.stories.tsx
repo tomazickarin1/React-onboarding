@@ -11,6 +11,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CrewGrid: Story = {
   args: {
-    crewDetails: [{job: "Director", name: "Lorem Ipsum", id: 1 }]
+    crewDetails: [{ job: "Director", name: "Lorem Ipsum", id: 1 }],
   },
 };
