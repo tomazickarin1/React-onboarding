@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { DEFAULT_SORT } from "../data/sortingOptions";
+import type { Dispatch, SetStateAction, ReactNode } from "react";
 
 type Movie = { id: number; url: string; title: string; date: string };
 
@@ -7,13 +8,13 @@ const defaultValue = {
   movies: [] as Movie[],
   selectedGenres: [] as number[],
   sortBy: DEFAULT_SORT,
-  setSelectedGenres: (() => {}) as React.Dispatch<
-    React.SetStateAction<number[]>
+  setSelectedGenres: (() => {}) as Dispatch<
+    SetStateAction<number[]>
   >,
-  setSortBy: (() => {}) as React.Dispatch<
-    React.SetStateAction<{ value: string; label: string }>
+  setSortBy: (() => {}) as Dispatch<
+    SetStateAction<{ value: string; label: string }>
   >,
-  setMovies: (() => {}) as React.Dispatch<React.SetStateAction<Movie[]>>,
+  setMovies: (() => {}) as Dispatch<SetStateAction<Movie[]>>,
 };
 
 export const PopularMoviesContext = createContext(defaultValue);
@@ -21,7 +22,7 @@ export const PopularMoviesContext = createContext(defaultValue);
 export function PopularMoviesProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState(DEFAULT_SORT);

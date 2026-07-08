@@ -4,13 +4,14 @@ import {
   faChevronRight,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import type { ReactNode } from "react";
 
 type PannelProps = {
   title: string;
   subtitle: string;
   toggleAction: () => void;
   toggle: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default function FilterPanel({

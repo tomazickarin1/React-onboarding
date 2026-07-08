@@ -1,13 +1,14 @@
 import { forwardRef } from "react";
 import styles from "./Input.module.scss";
+import type { ChangeEvent } from "react";
 
 export type InputProps = {
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   ariaLabel?: string;
   type?: "text" | "search";
-}
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, placeholder, ariaLabel, type = "text" }, ref) => {

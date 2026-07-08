@@ -1,7 +1,8 @@
 import styles from "./SearchFilterPanel.module.scss";
+import type { ReactNode } from "react";
 
 type searchFilterPanelProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function SearchFilterPanel({

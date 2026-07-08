@@ -3,6 +3,7 @@ import Tab from "../../atoms/Tab/Tab";
 import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import type { KeyboardEvent, MouseEvent } from "react";
 
 type TabsProps = {
   tabs: Array<{ id: number; label: string }>;
@@ -28,7 +29,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
     });
   }, [activeTab, tabs]);
 
-  const handleOnKeyDown = (e: React.KeyboardEvent, id: number) => {
+  const handleOnKeyDown = (e: KeyboardEvent, id: number) => {
     if (e.key === "Enter") {
       onTabChange(id);
       setIsOpen(false);
@@ -40,7 +41,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
     setIsOpen(false);
   };
 
-  const handleOpen = (e: React.MouseEvent) => {
+  const handleOpen = (e: MouseEvent) => {
     e.stopPropagation();
     setIsOpen(false);
   };

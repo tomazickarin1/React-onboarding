@@ -1,11 +1,12 @@
 import styles from "./GenreFilter.module.scss";
 import GenrePill from "../../atoms/GenrePill/GenrePill";
+import type { Dispatch, SetStateAction } from "react";
 
 type Genre = { id: number; name: string };
 type GenresProps = {
   genre: Genre[] | undefined;
   selectedGenres: number[];
-  setSelectedGenres: React.Dispatch<React.SetStateAction<number[]>>;
+  setSelectedGenres: Dispatch<SetStateAction<number[]>>;
 };
 
 export default function GenreFilter({

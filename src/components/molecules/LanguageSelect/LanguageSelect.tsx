@@ -6,6 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../atoms/Icon/Icon";
 import Input from "../../atoms/Input/Input";
+import type { ChangeEvent, KeyboardEvent } from "react";
+
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
@@ -49,11 +51,11 @@ export default function LanguageSelect({
     setIsOpen(!isCurrentlyOpen);
   };
 
-  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       setIsOpen(false);
       setHighlighted(null);
