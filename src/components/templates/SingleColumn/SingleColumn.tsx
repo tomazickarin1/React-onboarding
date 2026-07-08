@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import NavigationBar from "../../organisms/NavigationBar/NavigationBar";
 import Footer from "../../organisms/Footer/Footer";
-import styles from "../SingleColumn/SingleColumn.module.scss";
+import styles from "./SingleColumn.module.scss";
 
 type SingleColumnProps = {
   children?: ReactNode;

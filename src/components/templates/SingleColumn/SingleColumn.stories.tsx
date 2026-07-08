@@ -4,6 +4,9 @@ import SingleColumnComponent from "./SingleColumn";
 const meta = {
   title: "Component/templates/SingleColumn",
   component: SingleColumnComponent,
+  parameters: {
+    layout: "fullscreen",
+  },
 } satisfies Meta<typeof SingleColumnComponent>;
 
 export default meta;

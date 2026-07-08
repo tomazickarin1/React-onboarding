@@ -1,6 +1,9 @@
-.movieapp {
-  font-family: "Source Sans 3", sans-serif;
+.twoColumnWrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.content {
+  flex: 1;
 }

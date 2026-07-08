@@ -4,6 +4,9 @@ import TwoColumnComponent from "./TwoColumn";
 const meta = {
   title: "Component/templates/TwoColumn",
   component: TwoColumnComponent,
+  parameters: {
+    layout: "fullscreen",
+  },
 } satisfies Meta<typeof TwoColumnComponent>;
 
 export default meta;

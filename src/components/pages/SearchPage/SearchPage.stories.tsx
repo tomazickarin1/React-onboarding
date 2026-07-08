@@ -39,6 +39,9 @@ const mockMovies = [
 const meta = {
   title: "Component/pages/SearchPage",
   component: SearchPageComponent,
+  parameters: {
+    layout: "fullscreen",
+  },
   decorators: [
     (Story) => {
       const queryClient = new QueryClient();
