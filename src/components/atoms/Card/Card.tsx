@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { formatDate } from "../../../utils/formatDate";
 import { Link } from "react-router";
+import { cardLabels } from "../../../data/labels";
 
 type CardProps = {
   id: string;
@@ -11,6 +12,7 @@ type CardProps = {
   date?: string;
   isLoading?: boolean;
   variant: "showcase" | "popular";
+  loadingLabel?: string;
 }
 
 export default function Card({
@@ -20,6 +22,7 @@ export default function Card({
   isLoading,
   variant,
   id,
+  loadingLabel = cardLabels.loading,
 }: CardProps) {
   if (isLoading) {
     return (
@@ -28,7 +31,7 @@ export default function Card({
           <FontAwesomeIcon icon={faImage} />
         </div>
         <div>
-          <h3>Loading...</h3>
+          <h3>{loadingLabel}</h3>
           <time className={styles.date}></time>
         </div>
       </div>

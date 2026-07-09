@@ -6,6 +6,7 @@ import { useState } from "react";
 import { formatDate } from "../../../utils/formatDate";
 import Pagination from "../../molecules/Pagination/Pagination";
 import Spinner from "../../atoms/Spinner/Spinner";
+import { searchResultsLabels } from "../../../data/labels";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -64,7 +65,15 @@ async function fetchSearchMovies(
   return searchData;
 }
 
-export default function SearchResults() {
+type SearchResultsProps = {
+  errorLabel?: string;
+  emptyLabel?: string;
+};
+
+export default function SearchResults({
+  errorLabel = searchResultsLabels.error,
+  emptyLabel = searchResultsLabels.empty,
+}: SearchResultsProps) {
   const [page, setPage] = useState(1);
   const { filter } = useParams();
   const [searchParams] = useSearchParams();
@@ -77,7 +86,7 @@ export default function SearchResults() {
 
   if (error) {
     return (
-      <p>{error instanceof Error ? error.message : "Something went wrong"}</p>
+      <p>{error instanceof Error ? error.message : errorLabel}</p>
     );
   }
 
@@ -86,7 +95,7 @@ export default function SearchResults() {
   }
 
   if (!data) {
-    return <p>No results found.</p>;
+    return <p>{emptyLabel}</p>;
   }
 
   return (

@@ -2,8 +2,19 @@ import { useState } from "react";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../atoms/Icon/Icon";
 import styles from "./UserMenu.module.scss";
+import { userMenuLabels } from "../../../data/labels";
 
-export default function UserMenu() {
+type UserMenuProps = {
+  ariaLabel?: string;
+  loginLabel?: string;
+  joinLabel?: string;
+};
+
+export default function UserMenu({
+  ariaLabel = userMenuLabels.ariaLabel,
+  loginLabel = userMenuLabels.login,
+  joinLabel = userMenuLabels.join,
+}: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -12,17 +23,13 @@ export default function UserMenu() {
 
   return (
     <div className={styles.userMenu}>
-      <button
-        onClick={toggleOpen}
-        aria-expanded={isOpen}
-        aria-label="User menu"
-      >
+      <button onClick={toggleOpen} aria-expanded={isOpen} aria-label={ariaLabel}>
         <Icon icon={faUser} />
       </button>
       {isOpen && (
         <div className={styles.dropdown}>
-          <a href="#">Login</a>
-          <a href="#">Join</a>
+          <a href="#">{loginLabel}</a>
+          <a href="#">{joinLabel}</a>
         </div>
       )}
     </div>

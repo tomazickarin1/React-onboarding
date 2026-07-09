@@ -14,17 +14,20 @@ type Story = StoryObj<typeof meta>;
 export const List: Story = {
   args: {
     icon: faList,
+    label: "Add to your list",
   },
 };
 
 export const Heart: Story = {
   args: {
     icon: faHeart,
+    label: "Add to favorites",
   },
 };
 
 export const Bookmark: Story = {
   args: {
     icon: faBookmark,
+    label: "Add to watchlist",
   },
 };

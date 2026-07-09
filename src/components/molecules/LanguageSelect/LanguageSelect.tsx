@@ -10,12 +10,16 @@ import type { ChangeEvent, KeyboardEvent } from "react";
 
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
+import { languageSelectLabels } from "../../../data/labels";
 
 export type LanguageSelectProps = {
   languageList: Array<{ code: string; label: string }>;
   selected: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;
   type: "primary" | "fallback";
+  filterPlaceholder?: string;
+  filterAriaLabel?: string;
+  listAriaLabel?: string;
 }
 
 export default function LanguageSelect({
@@ -23,6 +27,9 @@ export default function LanguageSelect({
   selected,
   onSelect,
   type,
+  filterPlaceholder = languageSelectLabels.filterPlaceholder,
+  filterAriaLabel = languageSelectLabels.filterAriaLabel,
+  listAriaLabel = languageSelectLabels.listAriaLabel,
 }: LanguageSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("");
@@ -181,14 +188,14 @@ export default function LanguageSelect({
               <Input
                 value={filter}
                 onChange={handleFilter}
-                placeholder="Filter"
-                ariaLabel="Filter languages"
+                placeholder={filterPlaceholder}
+                ariaLabel={filterAriaLabel}
                 ref={inputRef}
               />
             </div>
           </div>
 
-          <ul role="listbox" ref={listRef} aria-label="Select language">
+          <ul role="listbox" ref={listRef} aria-label={listAriaLabel}>
             {renderedList()}
           </ul>
         </div>

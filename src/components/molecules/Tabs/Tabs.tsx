@@ -4,14 +4,21 @@ import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import type { KeyboardEvent, MouseEvent } from "react";
+import { tabsLabels } from "../../../data/labels";
 
 type TabsProps = {
   tabs: Array<{ id: number; label: string }>;
   activeTab: number;
   onTabChange: (id: number) => void;
+  mobileListAriaLabel?: string;
 }
 
-export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
+export default function Tabs({
+  tabs,
+  activeTab,
+  onTabChange,
+  mobileListAriaLabel = tabsLabels.mobileListAriaLabel,
+}: TabsProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 });
 
@@ -53,7 +60,7 @@ export default function Tabs({ tabs, activeTab, onTabChange }: TabsProps) {
           <ul
             className={styles.mobileDropdownList}
             role="listbox"
-            aria-label="Select tab"
+            aria-label={mobileListAriaLabel}
           >
             {tabs.map((tab) => (
               <li

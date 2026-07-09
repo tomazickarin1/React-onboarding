@@ -7,6 +7,7 @@ import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
+import { popularMoviesPageLabels } from "../../../data/labels";
 
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 
@@ -61,7 +62,17 @@ async function getGenres(): Promise<Genre[]> {
   return data.genres;
 }
 
-export default function PopularMovies() {
+type PopularMoviesPageProps = {
+  heading?: string;
+  resultsAriaLabel?: string;
+  searchButtonLabel?: string;
+};
+
+export default function PopularMovies({
+  heading = popularMoviesPageLabels.heading,
+  resultsAriaLabel = popularMoviesPageLabels.resultsAriaLabel,
+  searchButtonLabel = popularMoviesPageLabels.searchButton,
+}: PopularMoviesPageProps) {
   const [sortToggle, setSortToggle] = useState(false);
   const [genreToggle, setGenreToggle] = useState(false);
   const [appliedGenres, setApliedGenres] = useState<number[]>([]);
@@ -112,7 +123,7 @@ export default function PopularMovies() {
   return (
     <SingleColumn>
       <div className={styles.container}>
-        <h2>Popular Movies</h2>
+        <h2>{heading}</h2>
         <div className={styles.popularWrapper}>
           <div className={styles.filterWrapper}>
             <FilterPanel
@@ -140,13 +151,13 @@ export default function PopularMovies() {
               disabled={!hasChanges}
               className={styles.submitBtn}
             >
-              Search
+              {searchButtonLabel}
             </button>
           </div>
           <div
             className={styles.moviesGrid}
             aria-live="polite"
-            aria-label="Movie results"
+            aria-label={resultsAriaLabel}
           >
             {movies.map((r) => {
               return (

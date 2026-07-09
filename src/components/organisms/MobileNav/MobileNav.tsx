@@ -5,8 +5,17 @@ import UserMenu from "../../molecules/UserMenu/UserMenu";
 import mobileLogo from "../../../assets/mobile-logo.svg";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { mobileNavLabels } from "../../../data/labels";
 
-export default function MobileNav() {
+type MobileNavProps = {
+  homeAriaLabel?: string;
+  openMenuAriaLabel?: string;
+};
+
+export default function MobileNav({
+  homeAriaLabel = mobileNavLabels.homeAriaLabel,
+  openMenuAriaLabel = mobileNavLabels.openMenuAriaLabel,
+}: MobileNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -18,12 +27,12 @@ export default function MobileNav() {
       <nav className={styles.mobileNavbar}>
         <button
           className={styles.burgerBtn}
-          aria-label="Open menu"
+          aria-label={openMenuAriaLabel}
           onClick={toggleOpen}
         >
           <Icon icon={faBars} />
         </button>
-        <a href="/" className={styles.mobileLogo} aria-label="Home">
+        <a href="/" className={styles.mobileLogo} aria-label={homeAriaLabel}>
           <img src={mobileLogo} alt="" />
         </a>
         <div className={styles.mobileRight}>
