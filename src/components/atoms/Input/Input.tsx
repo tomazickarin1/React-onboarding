@@ -1,31 +1,32 @@
-import { forwardRef } from "react";
 import styles from "./Input.module.scss";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, Ref } from "react";
 
 export type InputProps = {
-  value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   ariaLabel?: string;
   type?: "text" | "search";
+  ref?: Ref<HTMLInputElement>;
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, placeholder, ariaLabel, type = "text" }, ref) => {
-    return (
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        aria-label={ariaLabel}
-        className={styles.input}
-        ref={ref}
-      />
-    );
-  },
-);
-
-Input.displayName = "Input";
-
-export default Input;
+export default function Input({
+  value,
+  onChange,
+  placeholder,
+  ariaLabel,
+  type = "text",
+  ref,
+}: InputProps) {
+  return (
+    <input
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      aria-label={ariaLabel}
+      className={styles.input}
+      ref={ref}
+    />
+  );
+}

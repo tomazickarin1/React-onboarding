@@ -19,6 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Input: Story = {
   args: {
+    value: "",
     placeholder: "Type something...",
     onChange: fn(),
     type: "text",
