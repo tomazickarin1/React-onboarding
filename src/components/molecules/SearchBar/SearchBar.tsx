@@ -2,27 +2,28 @@ import styles from "./SearchBar.module.scss";
 import Icon from "../../atoms/Icon/Icon";
 import Input from "../../atoms/Input/Input";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
-import { useState } from "react";
 import type { SubmitEvent } from "react";
-import { useNavigate } from "react-router";
 import { searchBarLabels } from "../../../data/labels";
 
 type SearchBarProps = {
+  query: string;
   placeholder?: string;
   ariaLabel?: string;
+  onSubmit: () => void;
+  onQueryChange: (value: string) => void;
 };
 
 export default function SearchBar({
   placeholder = searchBarLabels.placeholder,
   ariaLabel = searchBarLabels.ariaLabel,
+  query,
+  onSubmit,
+  onQueryChange
 }: SearchBarProps) {
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    void navigate(`/search?query=${query}`);
+    onSubmit();
   }
 
   return (
@@ -35,7 +36,7 @@ export default function SearchBar({
           placeholder={placeholder}
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
+            onQueryChange(e.target.value);
           }}
         />
       </form>
