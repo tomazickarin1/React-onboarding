@@ -20,13 +20,18 @@ type Movie = {
   date: string;
   description: string;
 };
-type Person = { id: number; name: string; department: string };
+type Person = { id: number; name: string; department: string; profileImg: string };
 type SimpleItem = { id: number; name: string };
 
 type SearchResult =
   | { kind: "media"; movies: Movie[]; totalPages: number }
   | { kind: "person"; people: Person[]; totalPages: number }
   | { kind: "simple"; items: SimpleItem[]; totalPages: number };
+
+type SearchResultsProps = {
+  errorLabel?: string;
+  emptyLabel?: string;
+};
 
 const mediaItemSchema = z.object({
   id: z.number(),
@@ -42,6 +47,7 @@ const personItemSchema = z.object({
   id: z.number(),
   name: z.string(),
   known_for_department: z.string().optional(),
+  profile_path: z.string().nullable().optional(),
 });
 
 const simpleItemSchema = z.object({
@@ -69,6 +75,8 @@ async function fetchSearchMovies(
 
   const json: unknown = await response.json();
 
+  console.log(json);
+
   let searchResult: SearchResult;
 
   if (filter === "person") {
@@ -79,6 +87,7 @@ async function fetchSearchMovies(
         id: p.id,
         name: p.name,
         department: p.known_for_department ?? "",
+        profileImg: p.profile_path ? `${tmbImageUrl}${p.profile_path}` : "",
       })),
       totalPages: data.total_pages,
     };
@@ -106,11 +115,6 @@ async function fetchSearchMovies(
 
   return searchResult;
 }
-
-type SearchResultsProps = {
-  errorLabel?: string;
-  emptyLabel?: string;
-};
 
 export default function SearchResults({
   errorLabel = searchResultsLabels.error,
@@ -140,8 +144,17 @@ export default function SearchResults({
 
   let contentData;
 
+  console.log(data);
+
   if (data.kind === "person") {
-    contentData = data.people.map((person) => <PersonCard key={person.id} />);
+    contentData = data.people.map((person) => (
+      <PersonCard
+        key={person.id}
+        name={person.name}
+        department={person.department}
+        profileImg={person.profileImg}
+      />
+    ));
   } else if (data.kind === "simple") {
     contentData = data.items.map((item) => <p key={item.id}>{item.name}</p>);
   } else {
