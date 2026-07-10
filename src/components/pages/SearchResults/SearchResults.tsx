@@ -20,7 +20,12 @@ type Movie = {
   date: string;
   description: string;
 };
-type Person = { id: number; name: string; department: string; profileImg: string };
+type Person = {
+  id: number;
+  name: string;
+  department: string;
+  profileImg: string;
+};
 type SimpleItem = { id: number; name: string };
 
 type SearchResult =
@@ -74,8 +79,6 @@ async function fetchSearchMovies(
   }
 
   const json: unknown = await response.json();
-
-  console.log(json);
 
   let searchResult: SearchResult;
 
@@ -144,8 +147,6 @@ export default function SearchResults({
 
   let contentData;
 
-  console.log(data);
-
   if (data.kind === "person") {
     contentData = data.people.map((person) => (
       <PersonCard
@@ -166,7 +167,6 @@ export default function SearchResults({
         title={movie.title}
         date={movie.date ? formatDate(movie.date) : ""}
         content={movie.description}
-        isLoading={isLoading}
       />
     ));
   }

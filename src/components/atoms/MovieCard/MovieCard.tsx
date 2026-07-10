@@ -9,7 +9,6 @@ export type MovieCardProps = {
   title: string;
   date: string;
   content: string;
-  isLoading: boolean;
 }
 
 const MovieCard = ({
@@ -18,15 +17,7 @@ const MovieCard = ({
   title,
   date,
   content,
-  isLoading,
 }: MovieCardProps) => {
-  if (isLoading) {
-    return (
-      <div className={`${style.movieCard ?? ""} ${style.loading ?? ""}`}>
-        Loading...
-      </div>
-    );
-  }
 
   return (
     <div className={style.movieCard}>
