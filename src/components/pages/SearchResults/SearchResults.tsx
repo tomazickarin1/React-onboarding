@@ -8,67 +8,10 @@ import Pagination from "../../molecules/Pagination/Pagination";
 import Spinner from "../../atoms/Spinner/Spinner";
 import { searchResultsLabels } from "../../../data/labels";
 import { z } from "zod";
+import PersonCard from "../../atoms/PersonCard/PersonCard";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
-
-const tmdbMovieSchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  poster_path: z.string().nullable(),
-  release_date: z.string(),
-  overview: z.string(),
-});
-
-const tmdbTvShowSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  poster_path: z.string().nullable(),
-  first_air_date: z.string(),
-  overview: z.string(),
-});
-
-const tmdbPeopleSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  known_for_department: z.string().optional(),
-  known_for: z.array(z.unknown()),
-});
-
-const tmdbCollectionsSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  poster_path: z.string().nullable(),
-  overview: z.string(),
-});
-
-const tmdbKeywordsCompaniesSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-});
-
-function tmdbResponseSchema<T extends z.ZodType>(itemSchema: T) {
-  return z.object({
-    results: z.array(itemSchema),
-    total_pages: z.number(),
-  });
-}
-type TmdbSearchResponse = { results: unknown[]; total_pages: number };
-
-const defaultResponseSchema = tmdbResponseSchema(tmdbKeywordsCompaniesSchema);
-
-const responseSchemasByFilter: Record<string, z.ZodType<TmdbSearchResponse>> = {
-  movie: tmdbResponseSchema(tmdbMovieSchema),
-  tv: tmdbResponseSchema(tmdbTvShowSchema),
-  person: tmdbResponseSchema(tmdbPeopleSchema),
-  collection: tmdbResponseSchema(tmdbCollectionsSchema),
-  company: tmdbResponseSchema(tmdbKeywordsCompaniesSchema),
-  keyword: tmdbResponseSchema(tmdbKeywordsCompaniesSchema),
-};
-
-function getResponseSchema(filter: string): z.ZodType<TmdbSearchResponse> {
-  return responseSchemasByFilter[filter] ?? defaultResponseSchema;
-}
 
 type Movie = {
   id: number;
@@ -77,8 +20,38 @@ type Movie = {
   date: string;
   description: string;
 };
+type Person = { id: number; name: string; department: string };
+type SimpleItem = { id: number; name: string };
 
-type SearchResult = { movies: Movie[]; totalPages: number };
+type SearchResult =
+  | { kind: "media"; movies: Movie[]; totalPages: number }
+  | { kind: "person"; people: Person[]; totalPages: number }
+  | { kind: "simple"; items: SimpleItem[]; totalPages: number };
+
+const mediaItemSchema = z.object({
+  id: z.number(),
+  title: z.string().optional(),
+  name: z.string().optional(),
+  poster_path: z.string().nullable().optional(),
+  release_date: z.string().optional(),
+  first_air_date: z.string().optional(),
+  overview: z.string().optional(),
+});
+
+const personItemSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  known_for_department: z.string().optional(),
+});
+
+const simpleItemSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+function responseEnvelope<T extends z.ZodType>(itemSchema: T) {
+  return z.object({ results: z.array(itemSchema), total_pages: z.number() });
+}
 
 async function fetchSearchMovies(
   page: number,
@@ -95,69 +68,43 @@ async function fetchSearchMovies(
   }
 
   const json: unknown = await response.json();
-  const data = getResponseSchema(filter).parse(json);
 
-  console.log(data);
+  let searchResult: SearchResult;
 
-  function toMovie(item: unknown, filter: string): Movie {
-    if (filter === "movie") {
-      const movie = tmdbMovieSchema.parse(item);
-      return {
-        id: movie.id,
-        title: movie.title,
-        url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
-        date: movie.release_date,
-        description: movie.overview,
-      };
-    }
-    if (filter === "tv") {
-      const tv = tmdbTvShowSchema.parse(item);
-      return {
-        id: tv.id,
-        title: tv.name,
-        url: tv.poster_path ? `${tmbImageUrl}${tv.poster_path}` : "",
-        date: tv.first_air_date,
-        description: tv.overview,
-      };
-    }
-    if (filter === "person") {
-      const person = tmdbPeopleSchema.parse(item);
-      return {
-        id: person.id,
-        title: person.name,
-        url: "",
-        date: "",
-        description: person.known_for_department ?? "",
-      };
-    }
-    if (filter === "collection") {
-      const collection = tmdbCollectionsSchema.parse(item);
-      return {
-        id: collection.id,
-        title: collection.name,
-        url: collection.poster_path
-          ? `${tmbImageUrl}${collection.poster_path}`
-          : "",
-        date: "",
-        description: collection.overview,
-      };
-    }
-    const rest = tmdbKeywordsCompaniesSchema.parse(item);
-    return {
-      id: rest.id,
-      title: rest.name,
-      url: "",
-      date: "",
-      description: "",
+  if (filter === "person") {
+    const data = responseEnvelope(personItemSchema).parse(json);
+    searchResult = {
+      kind: "person",
+      people: data.results.map((p) => ({
+        id: p.id,
+        name: p.name,
+        department: p.known_for_department ?? "",
+      })),
+      totalPages: data.total_pages,
+    };
+  } else if (filter === "keyword" || filter === "company") {
+    const data = responseEnvelope(simpleItemSchema).parse(json);
+    searchResult = {
+      kind: "simple",
+      items: data.results.map((r) => ({ id: r.id, name: r.name })),
+      totalPages: data.total_pages,
+    };
+  } else {
+    const data = responseEnvelope(mediaItemSchema).parse(json);
+    searchResult = {
+      kind: "media",
+      movies: data.results.map((m) => ({
+        id: m.id,
+        title: m.title ?? m.name ?? "",
+        url: m.poster_path ? `${tmbImageUrl}${m.poster_path}` : "",
+        date: m.release_date ?? m.first_air_date ?? "",
+        description: m.overview ?? "",
+      })),
+      totalPages: data.total_pages,
     };
   }
 
-  const searchData = {
-    movies: data.results.map((item) => toMovie(item, filter)),
-    totalPages: data.total_pages,
-  };
-
-  return searchData;
+  return searchResult;
 }
 
 type SearchResultsProps = {
@@ -191,20 +138,29 @@ export default function SearchResults({
     return <p>{emptyLabel}</p>;
   }
 
+  let contentData;
+
+  if (data.kind === "person") {
+    contentData = data.people.map((person) => <PersonCard key={person.id} />);
+  } else if (data.kind === "simple") {
+    contentData = data.items.map((item) => <p key={item.id}>{item.name}</p>);
+  } else {
+    contentData = data.movies.map((movie) => (
+      <MovieCard
+        key={movie.id}
+        id={String(movie.id)}
+        imageUrl={movie.url}
+        title={movie.title}
+        date={movie.date ? formatDate(movie.date) : ""}
+        content={movie.description}
+        isLoading={isLoading}
+      />
+    ));
+  }
+
   return (
     <div className={styles.movieCards}>
-      {data.movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          id={String(movie.id)}
-          imageUrl={movie.url}
-          title={movie.title}
-          date={movie.date ? formatDate(movie.date) : ""}
-          content={movie.description}
-          isLoading={isLoading}
-        />
-      ))}
-
+      {contentData}
       <Pagination
         page={page}
         totalPages={data.totalPages}
