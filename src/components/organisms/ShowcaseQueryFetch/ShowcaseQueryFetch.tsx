@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import Showcase from "../Showcase/Showcase";
+import { z } from "zod";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
-type TmdbMovie = {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  release_date: string;
-}
+const tmdbMovieSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  poster_path: z.string().nullable(),
+  release_date: z.string(),
+});
 
-type TmdbResponse = {
-  results: TmdbMovie[];
-}
+const tmdbResponseSchema = z.object({
+  results: z.array(tmdbMovieSchema),
+});
 
 type Movie = { id: number; url: string; title: string; date: string };
 
@@ -25,7 +26,8 @@ async function fetchPopularMovies(): Promise<Movie[]> {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
-  const data = (await response.json()) as TmdbResponse;
+  const json: unknown = await response.json();
+  const data = tmdbResponseSchema.parse(json);
 
   return data.results.map((movie) => ({
     id: movie.id,
