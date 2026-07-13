@@ -4,7 +4,7 @@ import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
 import CardComponent from "./Card";
 
 const meta = {
-  title: "Component/atoms/Card",
+  title: "Component/molecules/Card",
   component: CardComponent,
 } satisfies Meta<typeof CardComponent>;
 
@@ -16,8 +16,8 @@ export const ShowcaseCard: Story = {
   args: {
     image: pladeholderPoster,
     title: "movie title",
-    date: "12.4.2026",
-    isLoading: false,
+    date: "2026-05-13",
+    formatedDate: "13 May 2026",
     variant: "showcase",
     id: "2",
   },
@@ -27,8 +27,8 @@ export const PopularCard: Story = {
   args: {
     image: pladeholderPoster,
     title: "movie title",
-    date: "12.4.2026",
-    isLoading: false,
+    date: "2026-05-13",
+    formatedDate: "13 May 2026",
     variant: "popular",
     id: "1",
   },

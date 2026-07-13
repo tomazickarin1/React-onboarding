@@ -1,0 +1,40 @@
+.cardSkeleton {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .date {
+    font-weight: 300;
+    color: var(--color-black);
+  }
+
+  .placeholder {
+    height: 220px;
+    width: 150px;
+    background: var(--color-grey-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      height: auto;
+      width: 50%;
+    }
+  }
+
+  &.popular .placeholder {
+    width: 150px;
+  }
+
+  &.showcase .placeholder {
+    width: 150px;
+  }
+}

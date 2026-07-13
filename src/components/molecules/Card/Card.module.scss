@@ -47,7 +47,6 @@
       0 4px 6px -4px rgb(0 0 0 / 0.1);
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;
-    display: inline-block;
 
     img {
       width: 100%;
@@ -58,6 +57,10 @@
 
     .cardText {
       padding: 8px 12px 12px 12px;
+    }
+
+    .placeholder {
+      width: 100%;
     }
   }
 
@@ -74,6 +77,10 @@
       width: 150px;
       object-fit: cover;
       border-radius: 8px;
+    }
+
+    .placeholder {
+      width: 150px;
     }
   }
 }

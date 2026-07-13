@@ -1,13 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import styles from "./PopularMoviesPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
-import Card from "../../atoms/Card/Card";
+import Card from "../../molecules/Card/Card";
 import { useQuery } from "@tanstack/react-query";
 import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
 import { popularMoviesPageLabels } from "../../../data/labels";
+import { formatDate } from "../../../utils/formatDate";
 
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 
@@ -19,7 +20,7 @@ type Tmdbmovie = {
   title: string;
   poster_path: string | null;
   release_date: string;
-}
+};
 type Movie = { id: number; url: string; title: string; date: string };
 type Genre = { id: number; name: string };
 
@@ -160,6 +161,7 @@ export default function PopularMovies({
             aria-label={resultsAriaLabel}
           >
             {movies.map((r) => {
+              const date = formatDate(r.date);
               return (
                 <Card
                   key={r.id}
@@ -167,6 +169,7 @@ export default function PopularMovies({
                   image={r.url}
                   title={r.title}
                   date={r.date}
+                  formatedDate={date}
                   variant="popular"
                 />
               );
