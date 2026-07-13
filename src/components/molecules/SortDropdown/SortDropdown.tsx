@@ -41,7 +41,7 @@ export default function SortDropdown({
         aria-haspopup="listbox"
       >
         {sortBy.label}
-        <Icon icon={faCaretDown} className={styles.caret ?? ""} />
+        <Icon icon={faCaretDown}/>
       </button>
 
       {isSortOpen && !isClickedOutsideSort && (

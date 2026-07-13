@@ -9,13 +9,7 @@ export default function UserScore({ score }: ScoreProps) {
   const userScore = Math.round(score * 10);
   return (
     <div className={styles.scoreWrapper}>
-      <div className={styles.scoreCircleContainer}>
-        <ScoreCircle score={userScore} />
-        <span className={styles.scoreText}>
-          {userScore}
-          <sup>%</sup>
-        </span>
-      </div>
+      <ScoreCircle score={userScore} />
       <span className={styles.scoreLabel}>
         User
         <br />
