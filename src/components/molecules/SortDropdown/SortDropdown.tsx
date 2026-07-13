@@ -41,15 +41,11 @@ export default function SortDropdown({
         aria-haspopup="listbox"
       >
         {sortBy.label}
-        <Icon icon={faCaretDown}/>
+        <Icon icon={faCaretDown} />
       </button>
 
       {isSortOpen && !isClickedOutsideSort && (
-        <ul
-          className={styles.sortList}
-          role="listbox"
-          aria-label={ariaLabel}
-        >
+        <ul className={styles.sortList} role="listbox" aria-label={ariaLabel}>
           {sortOptions.map((option) => (
             <li
               key={option.value}

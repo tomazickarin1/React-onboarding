@@ -5,7 +5,7 @@ export type MainMenuLinkProps = {
   label: string;
   url?: string;
   handleMenuToggle: () => void;
-}
+};
 
 export default function MainMenuLink({
   label,

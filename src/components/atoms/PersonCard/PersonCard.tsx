@@ -11,7 +11,7 @@ type PersonCardProps = {
 export default function PersonCard({
   name,
   department,
-  profileImg
+  profileImg,
 }: PersonCardProps) {
   return (
     <div className={styles.personCard}>

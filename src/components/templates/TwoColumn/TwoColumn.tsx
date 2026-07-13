@@ -6,7 +6,7 @@ import styles from "./TwoColumn.module.scss";
 type TwoColumnProps = {
   main: ReactNode;
   sidebar: ReactNode;
-}
+};
 
 export default function TwoColumn({ main, sidebar }: TwoColumnProps) {
   return (

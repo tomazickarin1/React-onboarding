@@ -4,7 +4,7 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export type IconProps = {
   icon: IconDefinition;
   className?: string;
-}
+};
 
 export default function Icon({ icon, className }: IconProps) {
   return (

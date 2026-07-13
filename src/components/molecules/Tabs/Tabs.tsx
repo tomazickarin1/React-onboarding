@@ -11,7 +11,7 @@ type TabsProps = {
   activeTab: number;
   onTabChange: (id: number) => void;
   mobileListAriaLabel?: string;
-}
+};
 
 export default function Tabs({
   tabs,

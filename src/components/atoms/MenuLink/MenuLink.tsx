@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export type MenuLinkProps = {
   label: string;
   url: string;
-}
+};
 
 export default function MenuLink({ label, url }: MenuLinkProps) {
   return (

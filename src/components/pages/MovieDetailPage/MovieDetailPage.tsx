@@ -25,7 +25,7 @@ type MovieDetails = {
     crew: Array<{ id: number; name: string; job: string }>;
   };
   vote_average: number;
-}
+};
 
 async function fetchMovieDetails(id: string) {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;

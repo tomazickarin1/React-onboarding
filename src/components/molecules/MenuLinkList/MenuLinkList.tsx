@@ -3,7 +3,7 @@ import MenuLink from "../../atoms/MenuLink/MenuLink";
 
 export type MenuLinkListProps = {
   links: Array<{ label: string; url: string }>;
-}
+};
 
 export default function MenuLinkList({ links }: MenuLinkListProps) {
   return (

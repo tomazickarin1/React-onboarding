@@ -8,7 +8,7 @@ export type ButtonProps = {
   className?: string;
   "aria-expanded"?: boolean;
   "aria-label"?: string;
-}
+};
 
 export default function Button({
   label,

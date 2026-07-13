@@ -5,7 +5,7 @@ type searchFilterLinkProps = {
   linkLabel: string;
   count: number;
   searchParams: string;
-}
+};
 
 export default function SearchFilterLink({
   linkName,

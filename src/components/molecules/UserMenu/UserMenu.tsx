@@ -23,7 +23,11 @@ export default function UserMenu({
 
   return (
     <div className={styles.userMenu}>
-      <button onClick={toggleOpen} aria-expanded={isOpen} aria-label={ariaLabel}>
+      <button
+        onClick={toggleOpen}
+        aria-expanded={isOpen}
+        aria-label={ariaLabel}
+      >
         <Icon icon={faUser} />
       </button>
       {isOpen && (

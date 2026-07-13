@@ -9,16 +9,9 @@ export type MovieCardProps = {
   title: string;
   date: string;
   content: string;
-}
+};
 
-const MovieCard = ({
-  id,
-  imageUrl,
-  title,
-  date,
-  content,
-}: MovieCardProps) => {
-
+const MovieCard = ({ id, imageUrl, title, date, content }: MovieCardProps) => {
   return (
     <div className={style.movieCard}>
       <div className={imageUrl ? style.poster : style.placeholder}>

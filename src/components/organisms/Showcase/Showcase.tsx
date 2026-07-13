@@ -10,7 +10,7 @@ type ShowcaseProps = {
   heading?: string;
   emptyLabel?: string;
   tabs?: Array<{ id: number; label: string }>;
-}
+};
 
 export default function Showcase({
   movies,

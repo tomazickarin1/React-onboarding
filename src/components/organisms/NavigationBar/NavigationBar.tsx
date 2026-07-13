@@ -10,8 +10,8 @@ export default function NavigationBar() {
   const navigate = useNavigate();
 
   function handleSearchSubmit() {
-    const url = new URL("/search", window.location.origin)
-    url.searchParams.set("query", query)
+    const url = new URL("/search", window.location.origin);
+    url.searchParams.set("query", query);
     void navigate(`${url.pathname}${url.search}`);
   }
 

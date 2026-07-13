@@ -5,7 +5,7 @@ import { searchFilterPanelLabels } from "../../../data/labels";
 type searchFilterPanelProps = {
   children: ReactNode;
   heading?: string;
-}
+};
 
 export default function SearchFilterPanel({
   children,

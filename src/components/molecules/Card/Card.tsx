@@ -39,7 +39,9 @@ export default function Card({
             {title}
           </Link>
         </h3>
-        <time className={styles.date} dateTime={date}>{formatedDate}</time>
+        <time className={styles.date} dateTime={date}>
+          {formatedDate}
+        </time>
       </div>
     </div>
   );

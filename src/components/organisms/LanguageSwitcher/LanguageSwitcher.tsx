@@ -16,7 +16,7 @@ export type LanguageSwitcherProps = {
   defaultLanguageLabel?: string;
   fallbackLanguageLabel?: string;
   resetLabel?: string;
-}
+};
 
 export default function LanguageSwitcher({
   languageList,

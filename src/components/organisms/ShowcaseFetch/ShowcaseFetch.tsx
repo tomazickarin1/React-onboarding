@@ -9,11 +9,11 @@ type TmdbMovie = {
   title: string;
   poster_path: string | null;
   release_date: string;
-}
+};
 
 type TmdbResponse = {
   results: TmdbMovie[];
-}
+};
 
 type Movie = { id: number; title: string; url: string; date: string };
 

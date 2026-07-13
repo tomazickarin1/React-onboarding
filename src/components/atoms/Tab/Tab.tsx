@@ -4,7 +4,7 @@ type TabProps = {
   label: string;
   isActive: boolean;
   onClick: () => void;
-}
+};
 
 export default function Tab({ label, isActive, onClick }: TabProps) {
   return (

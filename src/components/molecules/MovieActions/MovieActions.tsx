@@ -14,10 +14,7 @@ export default function MovieActions() {
     <div className={styles.actions}>
       <IconButton icon={faList} label={movieActionsLabels.addToList} />
       <IconButton icon={faHeart} label={movieActionsLabels.addToFavorites} />
-      <IconButton
-        icon={faBookmark}
-        label={movieActionsLabels.addToWatchlist}
-      />
+      <IconButton icon={faBookmark} label={movieActionsLabels.addToWatchlist} />
       <button className={styles.trailerButton}>
         <FontAwesomeIcon icon={faPlay} /> Play Trailer
       </button>

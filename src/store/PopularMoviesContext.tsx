@@ -8,9 +8,7 @@ const defaultValue = {
   movies: [] as Movie[],
   selectedGenres: [] as number[],
   sortBy: DEFAULT_SORT,
-  setSelectedGenres: (() => {}) as Dispatch<
-    SetStateAction<number[]>
-  >,
+  setSelectedGenres: (() => {}) as Dispatch<SetStateAction<number[]>>,
   setSortBy: (() => {}) as Dispatch<
     SetStateAction<{ value: string; label: string }>
   >,
@@ -19,11 +17,7 @@ const defaultValue = {
 
 export const PopularMoviesContext = createContext(defaultValue);
 
-export function PopularMoviesProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function PopularMoviesProvider({ children }: { children: ReactNode }) {
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState(DEFAULT_SORT);
   const [movies, setMovies] = useState<Movie[]>([]);

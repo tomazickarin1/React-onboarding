@@ -14,14 +14,13 @@ type Story = StoryObj<typeof meta>;
 export const CardSkeletonShowcase: Story = {
   args: {
     loadingLabel: "Loading",
-    variant: "showcase"
+    variant: "showcase",
   },
 };
 
 export const CardSkeletonPopular: Story = {
   args: {
     loadingLabel: "Loading",
-    variant: "popular"
+    variant: "popular",
   },
 };
-

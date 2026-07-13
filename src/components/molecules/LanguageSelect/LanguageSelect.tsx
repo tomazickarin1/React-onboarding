@@ -8,7 +8,6 @@ import Icon from "../../atoms/Icon/Icon";
 import Input from "../../atoms/Input/Input";
 import type { ChangeEvent, KeyboardEvent } from "react";
 
-
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { languageSelectLabels } from "../../../data/labels";
 
@@ -20,7 +19,7 @@ export type LanguageSelectProps = {
   filterPlaceholder?: string;
   filterAriaLabel?: string;
   listAriaLabel?: string;
-}
+};
 
 export default function LanguageSelect({
   languageList,

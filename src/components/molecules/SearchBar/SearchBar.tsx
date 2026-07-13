@@ -18,9 +18,8 @@ export default function SearchBar({
   ariaLabel = searchBarLabels.ariaLabel,
   query,
   onSubmit,
-  onQueryChange
+  onQueryChange,
 }: SearchBarProps) {
-
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     onSubmit();

@@ -6,7 +6,7 @@ import { useState } from "react";
 export type MainMenuItemProps = {
   label: string;
   links: Array<{ label: string; url: string }>;
-}
+};
 
 export default function MainMenuItem({ label, links }: MainMenuItemProps) {
   const [open, setOpen] = useState(false);
