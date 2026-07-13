@@ -4,14 +4,15 @@ import Card from "../../atoms/Card/Card";
 type CardsProps = {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
   isLoading: boolean;
+  variant?: "showcase" | "popular"
 }
 
-export default function Cards({ movies, isLoading }: CardsProps) {
+export default function Cards({ movies, isLoading, variant = "showcase" }: CardsProps) {
   return (
     <div className={styles.Cards}>
       {isLoading
         ? Array.from({ length: 8 }).map((item, index) => (
-            <Card key={index} id={"1"} isLoading={true} variant="showcase" />
+            <Card key={index} isLoading={true} variant={variant} />
           ))
         : movies.map((movie) => {
             return (
@@ -21,7 +22,7 @@ export default function Cards({ movies, isLoading }: CardsProps) {
                 image={movie.url}
                 title={movie.title}
                 date={movie.date}
-                variant="showcase"
+                variant={variant}
               />
             );
           })}
