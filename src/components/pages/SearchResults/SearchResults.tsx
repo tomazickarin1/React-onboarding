@@ -173,10 +173,7 @@ export default function SearchResults({
   return (
     <div className={styles.movieCards}>
       {contentData}
-      <Pagination
-        page={page}
-        totalPages={data.totalPages}
-      />
+      <Pagination page={page} totalPages={data.totalPages} />
     </div>
   );
 }
