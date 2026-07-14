@@ -7,7 +7,12 @@ import Reactions from "../../atoms/Reactions/Reactions";
 type ScoreProps = { score: number };
 
 export default function UserScore({ score }: ScoreProps) {
+  function onClickHandler() {
+    console.log("clicked");
+  }
+
   const userScore = Math.max(0, Math.min(100, Math.round(score * 10)));
+
   return (
     <div className={styles.scoreWrapper}>
       <ScoreCircle score={userScore} />
@@ -17,8 +22,8 @@ export default function UserScore({ score }: ScoreProps) {
         Score
       </span>
       <Reactions />
-      <button className={styles.vibeButton}>
-        What&apos;s your Vibe?
+      <button className={styles.vibeButton} onClick={onClickHandler}>
+        What's your Vibe?
         <span className={styles.tooltipWrapper}>
           <FontAwesomeIcon icon={faCircleInfo} />
           <span className={styles.tooltip}>
