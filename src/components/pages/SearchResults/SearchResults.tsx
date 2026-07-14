@@ -2,7 +2,6 @@ import styles from "./SearchResults.module.scss";
 import MovieCard from "../../atoms/MovieCard/MovieCard";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "react-router";
-import { useState } from "react";
 import { formatDate } from "../../../utils/formatDate";
 import Pagination from "../../molecules/Pagination/Pagination";
 import Spinner from "../../atoms/Spinner/Spinner";
@@ -123,10 +122,10 @@ export default function SearchResults({
   errorLabel = searchResultsLabels.error,
   emptyLabel = searchResultsLabels.empty,
 }: SearchResultsProps) {
-  const [page, setPage] = useState(1);
   const { filter } = useParams();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") ?? "";
+  const page = Number(searchParams.get("page") ?? "1");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["search-movies", page, filter, query],
@@ -177,7 +176,6 @@ export default function SearchResults({
       <Pagination
         page={page}
         totalPages={data.totalPages}
-        onPageChange={setPage}
       />
     </div>
   );

@@ -4,18 +4,22 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useSearchParams } from "react-router";
 
 type PaginationData = {
-  onPageChange: (page: number) => void;
   page: number;
   totalPages: number;
 };
 
-export default function Pagination({
-  onPageChange,
-  page,
-  totalPages,
-}: PaginationData) {
+export default function Pagination({ page, totalPages }: PaginationData) {
+  const [searchParams] = useSearchParams();
+
+  function pageHref(targetPage: number) {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", targetPage.toString());
+    return `?${params.toString()}`;
+  }
+
   // calculate start page
   const startPage = Math.max(1, Math.min(page - 2, totalPages - 4));
   // calculate which 5 pages are showing
@@ -23,36 +27,52 @@ export default function Pagination({
     (e, i) => startPage + i,
   );
 
+  const currentPage = Math.min(Math.max(page, 1), totalPages);
+
+  let prevLink;
+  let nextLink;
+
+  if (currentPage > 1) {
+    prevLink = (
+      <Link to={pageHref(currentPage - 1)}>
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </Link>
+    );
+  } else {
+    prevLink = (
+      <span aria-hidden="true">
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </span>
+    );
+  }
+
+   if (currentPage < totalPages) {
+    nextLink = (
+      <Link to={pageHref(currentPage + 1)}>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </Link>
+    );
+  } else {
+    nextLink = (
+      <span aria-hidden="true">
+        <FontAwesomeIcon icon={faChevronRight} />
+      </span>
+    );
+  }
+
   return (
     <nav className={styles.pageNumbers}>
-      <button
-        onClick={() => {
-          onPageChange(page - 1);
-        }}
-        disabled={page === 1}
-      >
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </button>
+      {prevLink}
       {pageNumbers.map((pageNum) => (
-        <button
+        <Link
           key={pageNum}
-          onClick={() => {
-            onPageChange(pageNum);
-          }}
-          data-active={page == pageNum}
+          to={pageHref(pageNum)}
+          data-active={currentPage == pageNum}
         >
-          {" "}
           {pageNum}
-        </button>
+        </Link>
       ))}
-      <button
-        onClick={() => {
-          onPageChange(page + 1);
-        }}
-        disabled={page === totalPages}
-      >
-        <FontAwesomeIcon icon={faChevronRight} />
-      </button>
+      {nextLink}
     </nav>
   );
 }

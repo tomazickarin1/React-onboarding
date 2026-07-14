@@ -79,7 +79,7 @@ export default function Tabs({
                 {tab.id === activeTab ? (
                   <div className={styles.activeBtnWrapper}>
                     <button type="button" onClick={handleOpen}>
-                      {tab.label}{" "}
+                      {tab.label}
                       <span className={styles.iconDown}>
                         <FontAwesomeIcon icon={faChevronDown} />
                       </span>

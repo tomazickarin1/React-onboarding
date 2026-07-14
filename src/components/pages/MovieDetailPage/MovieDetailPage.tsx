@@ -91,7 +91,7 @@ export default function MovieDetailPage() {
                   {movieDetails?.genres.map((g) => g.name).join(", ")}
                 </span>
                 <span>
-                  {Math.floor((movieDetails?.runtime ?? 0) / 60)}h{" "}
+                  {Math.floor((movieDetails?.runtime ?? 0) / 60)}h
                   {(movieDetails?.runtime ?? 0) % 60}m
                 </span>
               </div>
