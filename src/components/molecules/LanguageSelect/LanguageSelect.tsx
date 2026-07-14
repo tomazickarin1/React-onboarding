@@ -8,6 +8,8 @@ import Icon from "../../atoms/Icon/Icon";
 import Input from "../../atoms/Input/Input";
 import type { ChangeEvent, KeyboardEvent } from "react";
 
+import LanguageRenderedList from "../LanguageRenderedList/LanguageRenderedList";
+
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { languageSelectLabels } from "../../../data/labels";
 
@@ -137,31 +139,6 @@ export default function LanguageSelect({
     activeLabel = activeCode; // if no label just show the code
   }
 
-  const renderedList = () => {
-    return languageList
-      .filter((list) => list.label.toLowerCase().includes(filter.toLowerCase()))
-      .map((list) => {
-        return (
-          <li
-            key={list.code}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              onSelect(list.code, type);
-              setIsOpen(false);
-            }}
-            className={
-              list.code === (highlighted ?? selected) ? styles.active : "" // checks and adds active class if active
-            }
-            role="option"
-            tabIndex={0}
-            aria-selected={list.code === (highlighted ?? selected)}
-          >
-            {list.label} ({list.code})
-          </li>
-        );
-      });
-  };
-
   return (
     <div
       className={styles.selectWrapper}
@@ -195,7 +172,15 @@ export default function LanguageSelect({
           </div>
 
           <ul role="listbox" ref={listRef} aria-label={listAriaLabel}>
-            {renderedList()}
+            <LanguageRenderedList
+              languageList={languageList}
+              filter={filter}
+              onSelect={onSelect}
+              type={type}
+              setIsOpen={setIsOpen}
+              highlighted={highlighted}
+              selected={selected}
+            />
           </ul>
         </div>
       )}
