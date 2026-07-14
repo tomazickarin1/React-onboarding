@@ -3,6 +3,10 @@
   align-items: center;
   gap: 12px;
   margin: 20px 0;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 }
 
 .scoreLabel {
@@ -41,6 +45,10 @@
     opacity: 1;
     visibility: visible;
   }
+
+  @media (max-width: 992px) {
+    display: none;
+  }
 }
 
 .tooltip {
@@ -62,5 +70,11 @@
   pointer-events: none;
   z-index: 10;
   text-align: left;
-  font-size: .9rem;
+  font-size: 0.9rem;
+
+  @media (max-width: 1200px) {
+    top: 2rem;
+    left: -6rem;
+    transform: none;
+  }
 }

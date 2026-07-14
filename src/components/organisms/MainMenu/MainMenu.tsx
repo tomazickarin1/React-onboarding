@@ -12,16 +12,15 @@ export default function MainMenu() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 992);
 
   useEffect(() => {
-    const watchWdith = window.matchMedia("(max-width: 767px)");
+    const watchWidth = window.matchMedia("(max-width: 992px)");
 
     function handler(e: MediaQueryListEvent) {
       setIsMobile(e.matches);
     }
 
-    watchWdith.addEventListener("change", handler);
-
+    watchWidth.addEventListener("change", handler);
     return () => {
-      watchWdith.removeEventListener("change", handler);
+      watchWidth.removeEventListener("change", handler);
     };
   }, []);
 
