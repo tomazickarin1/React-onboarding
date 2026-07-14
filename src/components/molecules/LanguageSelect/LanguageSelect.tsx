@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./LanguageSelect.module.scss";
 import {
   faCaretDown,
@@ -42,18 +42,18 @@ export default function LanguageSelect({
   // boolean value
   const isClickedOutside = useClickOutside(containerRef);
 
+  useEffect(() => {
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
   const handleOpen = () => {
     const isCurrentlyOpen = isOpen && !isClickedOutside;
-    if (!isCurrentlyOpen) {
-      // if dropdwown closed - if its closed when you clik it
-      setTimeout(() => {
-        if (inputRef.current !== null) {
-          inputRef.current.focus();
-        }
-      }, 0); // run after react finishes updating the DOM - wait untill the dropdown is there to focus
-    } else {
+    if (isCurrentlyOpen) {
       setHighlighted(null);
     }
+
     setIsOpen(!isCurrentlyOpen);
   };
 
