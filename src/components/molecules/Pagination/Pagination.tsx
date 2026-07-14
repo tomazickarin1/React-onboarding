@@ -2,6 +2,7 @@ import styles from "./Pagination.module.scss";
 import {
   faChevronLeft,
   faChevronRight,
+  type IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useSearchParams } from "react-router";
@@ -29,36 +30,32 @@ export default function Pagination({ page, totalPages }: PaginationData) {
 
   const currentPage = Math.min(Math.max(page, 1), totalPages);
 
-  let prevLink;
-  let nextLink;
-
-  if (currentPage > 1) {
-    prevLink = (
-      <Link to={pageHref(currentPage - 1)}>
-        <FontAwesomeIcon icon={faChevronLeft} />
+  function prevNextLink(
+    isEnabled: boolean,
+    targetPage: number,
+    icon: IconDefinition,
+  ) {
+    return isEnabled ? (
+      <Link to={pageHref(targetPage)}>
+        <FontAwesomeIcon icon={icon} />
       </Link>
-    );
-  } else {
-    prevLink = (
+    ) : (
       <span aria-hidden="true">
-        <FontAwesomeIcon icon={faChevronLeft} />
+        <FontAwesomeIcon icon={icon} />
       </span>
     );
   }
 
-   if (currentPage < totalPages) {
-    nextLink = (
-      <Link to={pageHref(currentPage + 1)}>
-        <FontAwesomeIcon icon={faChevronRight} />
-      </Link>
-    );
-  } else {
-    nextLink = (
-      <span aria-hidden="true">
-        <FontAwesomeIcon icon={faChevronRight} />
-      </span>
-    );
-  }
+  const prevLink = prevNextLink(
+    currentPage > 1,
+    currentPage - 1,
+    faChevronLeft,
+  );
+  const nextLink = prevNextLink(
+    currentPage < totalPages,
+    currentPage + 1,
+    faChevronRight,
+  );
 
   return (
     <nav className={styles.pageNumbers}>
