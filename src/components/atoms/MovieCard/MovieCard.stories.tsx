@@ -18,7 +18,6 @@ export const Default: Story = {
     date: "01.05.2026",
     content:
       "A small woodland creature and a majestic bird magically trade places.",
-    isLoading: false,
   },
 };
 
@@ -30,7 +29,6 @@ export const NoPoster: Story = {
     date: "01.05.2026",
     content:
       "A small woodland creature and a majestic bird magically trade places.",
-    isLoading: false,
   },
 };
 
@@ -41,6 +39,5 @@ export const Loading: Story = {
     title: "",
     date: "",
     content: "",
-    isLoading: true,
   },
 };

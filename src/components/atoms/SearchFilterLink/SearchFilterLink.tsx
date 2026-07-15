@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import styles from "./SearchFilterLink.module.scss";
 
 type searchFilterLinkProps = {
   linkName: string;
@@ -14,7 +15,7 @@ export default function SearchFilterLink({
   searchParams,
 }: searchFilterLinkProps) {
   return (
-    <li>
+    <li className={styles.searchFilterLink}>
       <NavLink
         to={{
           pathname: linkName,
