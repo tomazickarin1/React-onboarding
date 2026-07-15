@@ -94,7 +94,9 @@ export default function LanguageSelect({
 
         if (!filtered[next]) return; // if there is no next
 
-        (listItems[next] as HTMLElement).focus(); // focus on the next one when going dow/up with the arrow
+        const target = listItems[next] as HTMLElement;
+        target.focus({ preventScroll: true }); // focus on the next one when going dow/up with the arrow
+        target.scrollIntoView({ block: "nearest" });
 
         setHighlighted(filtered[next].code);
       } else {
@@ -106,7 +108,9 @@ export default function LanguageSelect({
           }
           setHighlighted(null); // remove hilight (so the hilihted is currently selected)
         } else {
-          (listItems[i - 1] as HTMLElement).focus(); // focus on one step above the current one
+          const target = listItems[i - 1] as HTMLElement;
+          target.focus({ preventScroll: true }); // focus on one step above the current
+          target.scrollIntoView({ block: "nearest" });
 
           const itemAbove = filtered[i - 1]; // item you are moving up to
 

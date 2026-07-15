@@ -79,6 +79,11 @@
   display: flex;
   align-items: center;
 
+  &:focus-within {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 1px;
+  }
+
   svg {
     padding: 6px;
   }
@@ -94,5 +99,6 @@
     border: none;
     border-radius: 6px;
     flex: 1;
+    outline: none;
   }
 }
