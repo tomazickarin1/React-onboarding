@@ -40,6 +40,24 @@ const mockMovies = [
     poster_path: null,
     release_date: "2023-07-21",
   },
+    {
+    id: 3,
+    title: "Dune: Part Two",
+    poster_path: null,
+    release_date: "2024-03-01",
+  },
+  {
+    id: 4,
+    title: "Oppenheimer",
+    poster_path: null,
+    release_date: "2023-07-21",
+  },
+    {
+    id: 5,
+    title: "Dune: Part Two",
+    poster_path: null,
+    release_date: "2024-03-01",
+  },
 ];
 
 const mockGenres = [
