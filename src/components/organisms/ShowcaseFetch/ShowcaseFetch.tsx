@@ -48,7 +48,7 @@ export default function ShowcaseFetch() {
       })
       .catch((err: unknown) => {
         setError(err instanceof Error ? err.message : "Something went wrong");
-    })
+      })
       .finally(() => {
         setIsLoading(false);
       });
