@@ -4,6 +4,9 @@ import MobileNavComponent from "./MobileNav";
 const meta = {
   title: "Component/organisms/MobileNav",
   component: MobileNavComponent,
+  parameters: {
+    layout: "fullscreen",
+  },
 } satisfies Meta<typeof MobileNavComponent>;
 
 export default meta;
@@ -13,5 +16,8 @@ export const MobileNav: Story = {
   args: {
     homeAriaLabel: "test",
     openMenuAriaLabel: "test",
+  },
+  globals: {
+    viewport: { value: "mobile1" },
   },
 };
