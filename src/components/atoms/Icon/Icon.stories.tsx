@@ -11,6 +11,13 @@ import Icon from "./Icon";
 const meta = {
   title: "Component/atoms/Icon",
   component: Icon,
+  decorators: [
+    (Story) => (
+      <div style={{ width: "24px", height: "24px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Icon>;
 
 export default meta;

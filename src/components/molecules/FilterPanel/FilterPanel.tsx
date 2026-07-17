@@ -31,9 +31,13 @@ export default function FilterPanel({
         <h3>{title}</h3>
 
         {toggle ? (
-          <Icon icon={faChevronDown} className={styles.chevron ?? ""} />
+          <span className={styles.chevron}>
+            <Icon icon={faChevronDown} />
+          </span>
         ) : (
-          <Icon icon={faChevronRight} className={styles.chevron ?? ""} />
+          <span className={styles.chevron}>
+            <Icon icon={faChevronRight} />
+          </span>
         )}
       </button>
 

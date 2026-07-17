@@ -23,6 +23,11 @@
   &[aria-expanded="true"] {
     border-color: var(--color-blue);
   }
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 .sortList {
