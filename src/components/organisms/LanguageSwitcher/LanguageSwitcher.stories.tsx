@@ -5,6 +5,13 @@ import { expect } from "storybook/test";
 const meta = {
   title: "Component/organisms/LanguageSwitcher",
   component: LanguageSwitcherHandler,
+  loaders: [
+    () => {
+      localStorage.removeItem("selectedMain");
+      localStorage.removeItem("selectedFallback");
+      return {};
+    },
+  ],
 } satisfies Meta<typeof LanguageSwitcherHandler>;
 
 export default meta;
