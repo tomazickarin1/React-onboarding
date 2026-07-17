@@ -23,4 +23,11 @@ export const CardSkeletonPopular: Story = {
     loadingLabel: "Loading",
     variant: "popular",
   },
+    decorators: [
+    (Story) => (
+      <div style={{ width: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };

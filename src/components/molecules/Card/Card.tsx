@@ -4,7 +4,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
 
 type CardProps = {
-  id?: string;
+  id: string;
   image?: string;
   title?: string;
   date?: string;
@@ -34,7 +34,7 @@ export default function Card({
       <div className={styles.cardText}>
         <h3>
           <Link
-            to={`/movie/${id ?? ""}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}
+            to={`/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}
           >
             {title}
           </Link>

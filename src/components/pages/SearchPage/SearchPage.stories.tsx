@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { http, HttpResponse } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchPageComponent from "./SearchPage";
-import { mockMovies, TMDB_SEARCH_URL_MOVIE } from "../../../mock/mockData";
+import { searchFilters } from "../../../data/filterList";
 
 const meta = {
   title: "Component/pages/SearchPage",
@@ -26,14 +26,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const mockCounts: Record<string, number> = {
+  tv: 12,
+  person: 5,
+  movie: 20,
+  collection: 3,
+  keyword: 8,
+  company: 2,
+};
+
 export const SearchPage: Story = {
   parameters: {
     msw: {
-      handlers: [
-        http.get(TMDB_SEARCH_URL_MOVIE, () =>
-          HttpResponse.json({ results: mockMovies, total_pages: 5 }),
+      handlers: searchFilters.map(({ linkName }) =>
+        http.get(`https://api.themoviedb.org/3/search/${linkName}`, () =>
+          HttpResponse.json({ total_results: mockCounts[linkName] ?? 0 }),
         ),
-      ],
+      ),
     },
   },
 };

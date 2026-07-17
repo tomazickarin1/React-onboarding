@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const ShowcaseCard: Story = {
   args: {
     image: pladeholderPoster,
-    title: "movie title",
+    title: "Euphoria",
     date: "2026-05-13",
     formatedDate: "13 May 2026",
     variant: "showcase",
@@ -26,10 +26,17 @@ export const ShowcaseCard: Story = {
 export const PopularCard: Story = {
   args: {
     image: pladeholderPoster,
-    title: "movie title",
+    title: "Euphoria",
     date: "2026-05-13",
     formatedDate: "13 May 2026",
     variant: "popular",
     id: "1",
   },
+  decorators: [
+    (Story) => (
+      <div style={{ width: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };

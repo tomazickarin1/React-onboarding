@@ -16,7 +16,7 @@ export default function CardSkeleton({
       <div className={styles.placeholder}>
         <FontAwesomeIcon icon={faImage} />
       </div>
-      <div>
+      <div className={styles.loadingWrapper}>
         <h3>{loadingLabel}</h3>
       </div>
     </div>
