@@ -3,11 +3,14 @@ import styles from "./ScoreCircle.module.scss";
 type MoviesProps = { score: number };
 
 export default function ScoreCircle({ score }: MoviesProps) {
+
+  const clampedScore = Math.max(0, Math.min(100, score));
+
   const radius = 38;
   const circumference = 2 * Math.PI * radius;
-  const scoreOffset = ((100 - score) / 100) * circumference;
+  const scoreOffset = ((100 - clampedScore) / 100) * circumference;
   const scoreColor =
-    score >= 70 ? "#21d07a" : score >= 40 ? "#d2d531" : "#db2360";
+    clampedScore >= 70 ? "#21d07a" : clampedScore >= 40 ? "#d2d531" : "#db2360";
 
   return (
     <div className={styles.scoreCircleContainer}>
@@ -25,7 +28,7 @@ export default function ScoreCircle({ score }: MoviesProps) {
         />
       </svg>
       <span className={styles.scoreText}>
-        {score}
+        {clampedScore}
         <sup>%</sup>
       </span>
     </div>

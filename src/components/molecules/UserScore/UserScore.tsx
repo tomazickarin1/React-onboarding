@@ -11,7 +11,7 @@ export default function UserScore({ score }: ScoreProps) {
     console.log("clicked");
   }
 
-  const userScore = Math.max(0, Math.min(100, Math.round(score * 10)));
+  const userScore = Math.max(0, Math.min(100, Math.round(score)));
 
   return (
     <div className={styles.scoreWrapper}>
