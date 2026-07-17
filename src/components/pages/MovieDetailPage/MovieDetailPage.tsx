@@ -6,26 +6,29 @@ import UserScore from "../../molecules/UserScore/UserScore";
 import MovieActions from "../../molecules/MovieActions/MovieActions";
 import MovieInfo from "../../molecules/MovieInfo/MovieInfo";
 import CrewGrid from "../../molecules/CrewGrid/CrewGrid";
+import { z } from "zod";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 const tmbBackdropUrl = "https://image.tmdb.org/t/p/w1280";
 
-type MovieDetails = {
-  id: string;
-  overview: string;
-  title: string;
-  genres: Array<{ id: number; name: string }>;
-  release_date: string;
-  poster_path: string;
-  backdrop_path: string;
-  tagline: string;
-  runtime: number;
-  credits: {
-    crew: Array<{ id: number; name: string; job: string }>;
-  };
-  vote_average: number;
-};
+const movieSchema = z.object({
+  id: z.number(),
+  overview: z.string(),
+  title: z.string(),
+  genres: z.array(z.object({ id: z.number(), name: z.string() })),
+  release_date: z.string(),
+  poster_path: z.string(),
+  backdrop_path: z.string(),
+  tagline: z.string(),
+  runtime: z.number(),
+  credits: z.object({
+    crew: z.array(
+      z.object({ id: z.number(), name: z.string(), job: z.string() }),
+    ),
+  }),
+  vote_average: z.number(),
+});
 
 async function fetchMovieDetails(id: string) {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -37,7 +40,8 @@ async function fetchMovieDetails(id: string) {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
-  const data = (await response.json()) as MovieDetails;
+  const json: unknown = await response.json();
+  const data = movieSchema.parse(json);
 
   return data;
 }

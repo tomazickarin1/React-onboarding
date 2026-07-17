@@ -9,20 +9,35 @@ import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
 import { popularMoviesPageLabels } from "../../../data/labels";
 import { formatDate } from "../../../utils/formatDate";
+import { z } from "zod";
 
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 
-type Tmdbmovie = {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  release_date: string;
-};
 type Movie = { id: number; url: string; title: string; date: string };
 type Genre = { id: number; name: string };
+
+const tmdbMovieSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  poster_path: z.string().nullable(),
+  release_date: z.string(),
+});
+
+const tmdbResponseSchema = z.object({
+  results: z.array(tmdbMovieSchema),
+});
+
+const genreSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+const genreResponseSchema = z.object({
+  genres: z.array(genreSchema),
+});
 
 async function fetchPopularMovies(
   sortBy: string,
@@ -40,7 +55,8 @@ async function fetchPopularMovies(
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
-  const data = (await response.json()) as { results: Tmdbmovie[] };
+  const json: unknown = await response.json();
+  const data = tmdbResponseSchema.parse(json);
 
   return data.results.map((movie) => ({
     id: movie.id,
@@ -58,7 +74,8 @@ async function getGenres(): Promise<Genre[]> {
     throw new Error(`Request failed with status ${String(response.status)}`);
   }
 
-  const data = (await response.json()) as { genres: Genre[] };
+  const json: unknown = await response.json();
+  const data = genreResponseSchema.parse(json);
 
   return data.genres;
 }

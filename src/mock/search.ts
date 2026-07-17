@@ -31,14 +31,16 @@ export const mockMovies = [
     title: "Scary Movie",
     poster_path: null,
     release_date: "2024-03-01",
-    overview: "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe.",
+    overview:
+      "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe.",
   },
   {
     id: 2,
     title: "Obsession",
     poster_path: null,
     release_date: "2023-07-21",
-    overview: "After breaking the mysterious One Wish Willow to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+    overview:
+      "After breaking the mysterious One Wish Willow to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
   },
 ];
 
