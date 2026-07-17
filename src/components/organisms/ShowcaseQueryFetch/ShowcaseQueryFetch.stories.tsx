@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { http, HttpResponse } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { mockMovies, TMDB_POPULAR_URL } from "../../../mock/movies";
+import { mockMovies, TMDB_POPULAR_URL } from "../../../mock/mockData";
 import ShowcaseQueryFetch from "./ShowcaseQueryFetch";
 
 const meta = {

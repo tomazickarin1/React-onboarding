@@ -3,6 +3,7 @@ import PopularMoviesPageComponent from "./PopularMoviesPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { PopularMoviesProvider } from "../../../store/PopularMoviesContext";
+import { mockMovies, mockGenres } from "../../../mock/mockData";
 
 const meta = {
   title: "Component/pages/PopularMoviesPage",
@@ -26,45 +27,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-const mockMovies = [
-  {
-    id: 1,
-    title: "Dune: Part Two",
-    poster_path: null,
-    release_date: "2024-03-01",
-  },
-  {
-    id: 2,
-    title: "Oppenheimer",
-    poster_path: null,
-    release_date: "2023-07-21",
-  },
-  {
-    id: 3,
-    title: "Dune: Part Two",
-    poster_path: null,
-    release_date: "2024-03-01",
-  },
-  {
-    id: 4,
-    title: "Oppenheimer",
-    poster_path: null,
-    release_date: "2023-07-21",
-  },
-  {
-    id: 5,
-    title: "Dune: Part Two",
-    poster_path: null,
-    release_date: "2024-03-01",
-  },
-];
-
-const mockGenres = [
-  { id: 28, name: "Action" },
-  { id: 35, name: "Comedy" },
-  { id: 18, name: "Drama" },
-];
 
 export const PopularMoviesPage: Story = {
   parameters: {

@@ -5,6 +5,7 @@ export const TMDB_SEARCH_URL_PERSON =
   "https://api.themoviedb.org/3/search/person";
 export const TMDB_SEARCH_URL_SIMPLE =
   "https://api.themoviedb.org/3/search/keyword";
+export const TMDB_POPULAR_URL = "https://api.themoviedb.org/3/movie/popular";
 
 export const mockTV = [
   {
@@ -42,6 +43,28 @@ export const mockMovies = [
     overview:
       "After breaking the mysterious One Wish Willow to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
   },
+  {
+    id: 3,
+    title: "Scary Movie",
+    poster_path: null,
+    release_date: "2024-03-01",
+    overview:
+      "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe.",
+  },
+  {
+    id: 4,
+    title: "Obsession",
+    poster_path: null,
+    release_date: "2023-07-21",
+    overview:
+      "After breaking the mysterious One Wish Willow to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+  },
+];
+
+export const mockGenres = [
+  { id: 28, name: "Action" },
+  { id: 35, name: "Comedy" },
+  { id: 18, name: "Drama" },
 ];
 
 export const mockPeople = [

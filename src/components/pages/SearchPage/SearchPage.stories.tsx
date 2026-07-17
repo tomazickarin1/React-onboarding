@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { http, HttpResponse } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchPageComponent from "./SearchPage";
-import { mockMovies, TMDB_SEARCH_URL } from "../../../mock/movies";
+import { mockMovies, TMDB_SEARCH_URL_MOVIE } from "../../../mock/mockData";
 
 const meta = {
   title: "Component/pages/SearchPage",
@@ -30,7 +30,7 @@ export const SearchPage: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(TMDB_SEARCH_URL, () =>
+        http.get(TMDB_SEARCH_URL_MOVIE, () =>
           HttpResponse.json({ results: mockMovies, total_pages: 5 }),
         ),
       ],

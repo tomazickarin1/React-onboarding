@@ -11,7 +11,7 @@ import {
   TMDB_SEARCH_URL_MOVIE,
   TMDB_SEARCH_URL_PERSON,
   TMDB_SEARCH_URL_SIMPLE,
-} from "../../../mock/search";
+} from "../../../mock/mockData";
 import { Routes, Route } from "react-router";
 
 const meta = {

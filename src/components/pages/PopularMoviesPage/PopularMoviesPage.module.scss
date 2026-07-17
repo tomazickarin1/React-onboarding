@@ -48,6 +48,7 @@
 
 .moviesGrid {
   display: grid;
+  align-items: start;
   gap: 24px;
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
