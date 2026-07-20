@@ -12,7 +12,7 @@ export default function CardSkeleton({
   variant,
 }: CardSkeletonProps) {
   return (
-    <div className={`${styles.cardSkeleton ?? ""} ${styles[variant] ?? ""}`}>
+    <div className={`${styles.cardSkeleton} ${styles[variant]}`}>
       <div className={styles.placeholder}>
         <FontAwesomeIcon icon={faImage} />
       </div>

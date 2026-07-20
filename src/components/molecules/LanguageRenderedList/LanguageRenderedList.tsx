@@ -31,7 +31,7 @@ export default function LanguageRenderedList({
             setIsOpen(false);
           }}
           className={
-            `${(list.code === (highlighted ?? selected) ? styles.active : "") ?? ""} ${styles.languageList ?? ""}` // checks and adds active class if active
+            `${list.code === (highlighted ?? selected) ? styles.active : ""} ${styles.languageList}` // checks and adds active class if active
           }
           role="option"
           tabIndex={0}

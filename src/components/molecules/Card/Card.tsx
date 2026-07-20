@@ -21,7 +21,7 @@ export default function Card({
   id,
 }: CardProps) {
   return (
-    <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
+    <div className={`${styles.showcaseCard} ${styles[variant]}`}>
       <div className={image ? "" : styles.placeholder}>
         {image ? (
           <img src={image} alt="placeholder image" />

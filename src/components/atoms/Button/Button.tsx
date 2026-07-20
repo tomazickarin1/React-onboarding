@@ -23,7 +23,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${styles[variant] ?? ""} ${className ?? ""}`}
+      className={`${styles[variant]} ${className ?? ""}`}
       aria-expanded={ariaExpanded}
       aria-label={ariaLabel}
     >
