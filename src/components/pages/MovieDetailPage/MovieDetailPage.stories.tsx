@@ -31,7 +31,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const mockMovieDetails = {
-  id: "3",
+  id: 3,
   overview:
     "A group of astronauts travel through a wormhole in search of a new home for humanity.",
   title: "Interstellar",
