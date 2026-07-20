@@ -3,7 +3,6 @@ import styles from "./ScoreCircle.module.scss";
 type MoviesProps = { score: number };
 
 export default function ScoreCircle({ score }: MoviesProps) {
-
   const clampedScore = Math.max(0, Math.min(100, score));
 
   const radius = 38;

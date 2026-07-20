@@ -23,3 +23,20 @@ export const LanguageSelect: Story = {
     onSelect: fn(),
   },
 };
+
+export const LanguageSelectOpen: Story = {
+  args: {
+    languageList: [
+      { code: "en", label: "English" },
+      { code: "fr", label: "French" },
+      { code: "de", label: "German" },
+    ],
+    selected: "en",
+    type: "primary",
+    onSelect: fn(),
+  },
+  play: async ({ canvas, userEvent }) => {
+    const button = canvas.getByRole("button", { name: /english/i });
+    await userEvent.click(button);
+  },
+};

@@ -1,5 +1,6 @@
 .mobileNavbar {
   display: none;
+  height: 60px;
 
   @media (max-width: 992px) {
     display: flex;
@@ -8,6 +9,7 @@
     padding: 0.5rem 20px;
     max-width: var(--max-width);
     margin: auto;
+    background-color: var(--color-navy);
   }
 }
 
@@ -48,7 +50,7 @@
 
 .overlay {
   position: fixed;
-  top: 50px;
+  top: 60px;
   left: 0;
   right: 0;
   bottom: 0;

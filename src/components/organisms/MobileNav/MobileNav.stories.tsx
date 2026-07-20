@@ -14,10 +14,24 @@ type Story = StoryObj<typeof meta>;
 
 export const MobileNav: Story = {
   args: {
-    homeAriaLabel: "test",
-    openMenuAriaLabel: "test",
+    homeAriaLabel: "Mobile nav",
+    openMenuAriaLabel: "Mobile nav",
   },
   globals: {
     viewport: { value: "mobile1" },
+  },
+};
+
+export const MobileNavOpen: Story = {
+  args: {
+    homeAriaLabel: "Mobile nav",
+    openMenuAriaLabel: "Mobile nav",
+  },
+  globals: {
+    viewport: { value: "mobile1" },
+  },
+  play: async ({ canvas, userEvent }) => {
+    const button = canvas.getByRole("button", { name: /Mobile nav/i });
+    await userEvent.click(button);
   },
 };

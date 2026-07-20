@@ -20,6 +20,37 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const Open: Story = {
+  play: async ({ canvas, userEvent }) => {
+    const langButton = canvas.getByRole("button", {
+      name: /language settings/i,
+    });
+    await userEvent.click(langButton);
+  },
+};
+
+export const OpenFilter: Story = {
+  play: async ({ canvas, userEvent }) => {
+    const langButton = canvas.getByRole("button", {
+      name: /language settings/i,
+    });
+    await userEvent.click(langButton);
+
+    const buttonDefaultLanguage = canvas.getAllByRole("button", {
+      name: /afrikaans/i,
+    })[0];
+    if (!buttonDefaultLanguage) throw new Error("Afrikaans button not found");
+    await userEvent.click(buttonDefaultLanguage);
+
+    await expect(
+      canvas.getByRole("group", { name: /language preferences/i }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("textbox", { name: /filter languages/i }),
+    ).toBeVisible();
+  },
+};
+
 export const ClickOutsideClosesPickBox: Story = {
   play: async ({ canvas, userEvent }) => {
     // open the pick box
