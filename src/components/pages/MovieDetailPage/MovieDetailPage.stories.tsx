@@ -3,6 +3,7 @@ import MovieDetailPageComponent from "./MovieDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { Routes, Route } from "react-router";
+import placeholderPoster from "../../../assets/placeholder-poster.jpg";
 
 const meta = {
   title: "Component/pages/MovieDetailPage",
@@ -40,14 +41,14 @@ const mockMovieDetails = {
     { id: 18, name: "Drama" },
   ],
   release_date: "2014-11-07",
-  poster_path: null,
-  backdrop_path: null,
+  poster_path: "/placeholder-poster.jpg",
+  backdrop_path: "/placeholder-poster.jpg",
   tagline: "Mankind was born on Earth. It was never meant to die here.",
   runtime: 169,
   credits: {
     crew: [{ id: 1, name: "Christopher Nolan", job: "Director" }],
   },
-  vote_average: 8.7,
+  vote_average: 85,
 };
 
 export const MovieDetailPage: Story = {
@@ -57,6 +58,9 @@ export const MovieDetailPage: Story = {
       handlers: [
         http.get("https://api.themoviedb.org/3/movie/3", () =>
           HttpResponse.json(mockMovieDetails),
+        ),
+        http.get("https://image.tmdb.org/t/p/*", () =>
+          HttpResponse.redirect(placeholderPoster),
         ),
       ],
     },
