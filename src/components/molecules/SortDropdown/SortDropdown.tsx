@@ -39,6 +39,7 @@ export default function SortDropdown({
         className={styles.sortBtn}
         aria-expanded={isSortOpen}
         aria-haspopup="listbox"
+        aria-label={ariaLabel}
       >
         {sortBy.label}
         <Icon icon={faCaretDown} />

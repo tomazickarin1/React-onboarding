@@ -1,9 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import PaginationComponent from "./Pagination";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router";
+import { action } from "storybook/actions";
+
+function PageActionLogger() {
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    action("page-changed")(searchParams.get("page") ?? "1");
+  }, [searchParams]);
+  return null;
+}
 
 const meta = {
   title: "Component/molecules/Pagination",
   component: PaginationComponent,
+  decorators: [
+    (Story) => (
+      <>
+        <PageActionLogger />
+        <Story />
+      </>
+    ),
+  ],
 } satisfies Meta<typeof PaginationComponent>;
 
 export default meta;

@@ -16,3 +16,14 @@ export const SortDropdown: Story = {
     setSortBy: fn(),
   },
 };
+
+export const SortDropdownOpen: Story = {
+  args: {
+    sortBy: { value: "popularity.desc", label: "Popularity Descending" },
+    setSortBy: fn(),
+  },
+  play: async ({ canvas, userEvent }) => {
+    const button = canvas.getByRole("button", { name: /Sort results by/i });
+    await userEvent.click(button);
+  },
+};

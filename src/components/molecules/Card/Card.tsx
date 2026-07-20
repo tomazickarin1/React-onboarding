@@ -23,13 +23,11 @@ export default function Card({
   return (
     <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
       <div className={image ? "" : styles.placeholder}>
-        <a href="">
-          {image ? (
-            <img src={image} alt="placeholder image" />
-          ) : (
-            <FontAwesomeIcon icon={faImage} />
-          )}
-        </a>
+        {image ? (
+          <img src={image} alt="placeholder image" />
+        ) : (
+          <FontAwesomeIcon icon={faImage} />
+        )}
       </div>
       <div className={styles.cardText}>
         <h3>
