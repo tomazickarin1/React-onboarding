@@ -48,7 +48,7 @@ const mockMovieDetails = {
   credits: {
     crew: [{ id: 1, name: "Christopher Nolan", job: "Director" }],
   },
-  vote_average: 85,
+  vote_average: 8.5,
 };
 
 export const MovieDetailPage: Story = {
