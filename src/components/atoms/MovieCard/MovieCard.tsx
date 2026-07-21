@@ -12,20 +12,22 @@ export type MovieCardProps = {
 };
 
 const MovieCard = ({ id, imageUrl, title, date, content }: MovieCardProps) => {
+  const movieUrl = `/movie/${id}-${title.toLowerCase().replace(/\s+/g, "-")}`;
+
   return (
     <div className={style.movieCard}>
       <div className={imageUrl ? style.poster : style.placeholder}>
-        <a href="#">
+        <Link to={movieUrl}>
           {imageUrl ? (
             <img src={imageUrl} alt="placeholder image" />
           ) : (
             <FontAwesomeIcon icon={faImage} />
           )}
-        </a>
+        </Link>
       </div>
       <div className={style.content}>
         <div>
-          <Link to={`/movie/${id}-${title.toLowerCase().replace(/\s+/g, "-")}`}>
+          <Link to={movieUrl}>
             {title}
           </Link>
           <p className={style.date}>{date}</p>

@@ -20,19 +20,26 @@ export default function Card({
   variant,
   id,
 }: CardProps) {
+  const movieUrl = `/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`;
+
+
   return (
     <div className={`${styles.showcaseCard} ${styles[variant]}`}>
       <div className={image ? "" : styles.placeholder}>
-        {image ? (
-          <img src={image} alt="placeholder image" />
-        ) : (
-          <FontAwesomeIcon icon={faImage} />
-        )}
+        <Link
+          to={movieUrl}
+        >
+          {image ? (
+            <img src={image} alt="placeholder image" />
+          ) : (
+            <FontAwesomeIcon icon={faImage} />
+          )}
+        </Link>
       </div>
       <div className={styles.cardText}>
         <h3>
           <Link
-            to={`/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`}
+            to={movieUrl}
           >
             {title}
           </Link>
