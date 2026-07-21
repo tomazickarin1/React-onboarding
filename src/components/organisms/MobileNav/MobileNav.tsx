@@ -6,6 +6,7 @@ import mobileLogo from "../../../assets/mobile-logo.svg";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { mobileNavLabels } from "../../../data/labels";
+import { Link } from "react-router";
 
 type MobileNavProps = {
   homeAriaLabel?: string;
@@ -32,9 +33,9 @@ export default function MobileNav({
         >
           <Icon icon={faBars} />
         </button>
-        <a href="/" className={styles.mobileLogo} aria-label={homeAriaLabel}>
+        <Link to="/" className={styles.mobileLogo} aria-label={homeAriaLabel}>
           <img src={mobileLogo} alt="" />
-        </a>
+        </Link>
         <div className={styles.mobileRight}>
           <UserMenu />
           <div className={styles.serchIcon}>

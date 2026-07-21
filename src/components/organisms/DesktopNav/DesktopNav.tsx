@@ -3,6 +3,7 @@ import MainMenu from "../MainMenu/MainMenu";
 import LanguageSwitcherHandler from "../LanguageSwitcher/LanguageSwitcherHandler";
 import Icon from "../../atoms/Icon/Icon";
 import UserMenu from "../../molecules/UserMenu/UserMenu";
+import { Link } from "react-router";
 
 import logo from "../../../assets/logo.svg";
 import plus from "../../../assets/plus.svg";
@@ -25,9 +26,9 @@ export default function DesktopNav({
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
-        <a href="/" className={styles.logo} aria-label={homeAriaLabel}>
+        <Link to="/" className={styles.logo} aria-label={homeAriaLabel}>
           <img src={logo} />
-        </a>
+        </Link>
         <MainMenu />
       </div>
       <div className={styles.right}>
