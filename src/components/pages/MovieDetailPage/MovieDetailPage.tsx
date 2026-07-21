@@ -7,6 +7,7 @@ import MovieActions from "../../molecules/MovieActions/MovieActions";
 import MovieInfo from "../../molecules/MovieInfo/MovieInfo";
 import CrewGrid from "../../molecules/CrewGrid/CrewGrid";
 import { z } from "zod";
+import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -66,6 +67,10 @@ export default function MovieDetailPage() {
         year: "numeric",
       })
     : "";
+
+  UseDocumentTitle(
+    `${movieDetails?.title ?? ""} (${releaseYear !== null ? String(releaseYear) : ""})- The Movie Database(TMDB)`,
+  );
 
   return (
     <SingleColumn>

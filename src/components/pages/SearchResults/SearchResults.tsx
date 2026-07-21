@@ -8,6 +8,7 @@ import Spinner from "../../atoms/Spinner/Spinner";
 import { searchResultsLabels } from "../../../data/labels";
 import { z } from "zod";
 import PersonCard from "../../atoms/PersonCard/PersonCard";
+import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -126,6 +127,7 @@ export default function SearchResults({
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") ?? "";
   const page = Number(searchParams.get("page") ?? "1");
+  UseDocumentTitle(`${query} - The Movie Database(TMDB)`);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["search-movies", page, filter, query],

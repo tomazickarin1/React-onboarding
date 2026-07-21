@@ -50,9 +50,7 @@ export default function MobileNav({
           }}
         />
       )}
-      <div
-        className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}
-      >
+      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}>
         <MainMenu />
       </div>
     </>

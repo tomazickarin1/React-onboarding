@@ -26,7 +26,6 @@ async function fetchAllCounts(query: string) {
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
-
   const query = searchParams.get("query") ?? "";
 
   const filterQuery = useQuery({

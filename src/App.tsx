@@ -5,7 +5,6 @@ import SearchResults from "./components/pages/SearchResults/SearchResults";
 import MovieDetailPage from "./components/pages/MovieDetailPage/MovieDetailPage";
 import PopularMoviesPage from "./components/pages/PopularMoviesPage/PopularMoviesPage";
 import { PopularMoviesProvider } from "./store/PopularMoviesContext";
-
 import { Routes, Route, Navigate, useSearchParams } from "react-router";
 
 function SearchRedirect() {

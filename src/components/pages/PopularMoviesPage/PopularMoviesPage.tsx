@@ -10,7 +10,7 @@ import { DEFAULT_SORT } from "../../../data/sortingOptions";
 import { popularMoviesPageLabels } from "../../../data/labels";
 import { formatDate } from "../../../utils/formatDate";
 import { z } from "zod";
-
+import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 
 const tmbUrl = "https://api.themoviedb.org/3";
@@ -91,6 +91,8 @@ export default function PopularMovies({
   resultsAriaLabel = popularMoviesPageLabels.resultsAriaLabel,
   searchButtonLabel = popularMoviesPageLabels.searchButton,
 }: PopularMoviesPageProps) {
+  UseDocumentTitle("Popular Movies Page - The Movie Database(TMDB)");
+
   const [sortToggle, setSortToggle] = useState(false);
   const [genreToggle, setGenreToggle] = useState(false);
   const [appliedGenres, setApliedGenres] = useState<number[]>([]);
