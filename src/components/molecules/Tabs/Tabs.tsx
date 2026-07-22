@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import type { KeyboardEvent, MouseEvent } from "react";
 import { tabsLabels } from "../../../data/labels";
+import type { RefObject } from "react";
 
 type TabsProps = {
   tabs: Array<{ id: number; label: string }>;
   activeTab: number;
   onTabChange: (id: number) => void;
   mobileListAriaLabel?: string;
-  ref: string;
-  sliderStyle: string;
+  ref: RefObject<HTMLDivElement | null>;
 };
 
 export default function Tabs({
@@ -37,7 +37,7 @@ export default function Tabs({
       left: activeElement.offsetLeft,
       width: activeElement.offsetWidth,
     });
-  }, [activeTab, tabs]);
+  }, [activeTab, tabs, ref]);
 
   const handleOnKeyDown = (e: KeyboardEvent, id: number) => {
     if (e.key === "Enter") {
