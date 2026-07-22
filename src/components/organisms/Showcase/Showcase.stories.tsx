@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
+import { fn } from "storybook/test";
 
 import ShowcaseComponent from "./Showcase";
 
@@ -29,5 +30,8 @@ export const Showcase: Story = {
       { id: 12, title: "In Theatres", url: pladeholderPoster, date: "nov 15" },
     ],
     isLoading: false,
+    activeTab: 1,
+    ref: { current: null },
+    onTabChange: fn(),
   },
 };

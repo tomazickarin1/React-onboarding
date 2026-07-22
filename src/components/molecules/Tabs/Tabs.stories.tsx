@@ -22,5 +22,6 @@ export const Tabs: Story = {
     ],
     activeTab: 1,
     onTabChange: fn(),
+    ref: { current: null },
   },
 };

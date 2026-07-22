@@ -22,7 +22,6 @@ export default function Tabs({
   ref,
   mobileListAriaLabel = tabsLabels.mobileListAriaLabel,
 }: TabsProps) {
-  // const wrapperRef = useRef<HTMLDivElement>(null);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 });
 
   const [isOpen, setIsOpen] = useState(false);
