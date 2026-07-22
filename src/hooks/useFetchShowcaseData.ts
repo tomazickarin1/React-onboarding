@@ -24,6 +24,11 @@ type ShowcaseData = {
 
 async function fetchAndMapMovies(url: string): Promise<Movie[]> {
   const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${String(response.status)}`);
+  }
+
   const json: unknown = await response.json();
   const data = tmdbResponseSchema.parse(json);
 
