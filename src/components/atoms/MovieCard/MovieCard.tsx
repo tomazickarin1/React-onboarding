@@ -27,9 +27,7 @@ const MovieCard = ({ id, imageUrl, title, date, content }: MovieCardProps) => {
       </div>
       <div className={style.content}>
         <div>
-          <Link to={movieUrl}>
-            {title}
-          </Link>
+          <Link to={movieUrl}>{title}</Link>
           <p className={style.date}>{date}</p>
         </div>
         <div>

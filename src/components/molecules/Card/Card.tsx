@@ -22,13 +22,10 @@ export default function Card({
 }: CardProps) {
   const movieUrl = `/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`;
 
-
   return (
     <div className={`${styles.showcaseCard} ${styles[variant]}`}>
       <div className={image ? "" : styles.placeholder}>
-        <Link
-          to={movieUrl}
-        >
+        <Link to={movieUrl}>
           {image ? (
             <img src={image} alt="placeholder image" />
           ) : (
@@ -38,11 +35,7 @@ export default function Card({
       </div>
       <div className={styles.cardText}>
         <h3>
-          <Link
-            to={movieUrl}
-          >
-            {title}
-          </Link>
+          <Link to={movieUrl}>{title}</Link>
         </h3>
         <time className={styles.date} dateTime={date}>
           {formatedDate}

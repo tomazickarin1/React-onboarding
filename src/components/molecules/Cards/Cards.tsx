@@ -18,7 +18,6 @@ export default function Cards({
   loadingLabel = cardLabels.loading,
 }: CardsProps) {
 
-  // console.log(movies);
   return (
     <div className={styles.Cards}>
       {isLoading
