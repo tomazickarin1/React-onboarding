@@ -2,24 +2,17 @@ import styles from "./Card.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
+import { formatDate } from "../../../utils/formatDate";
 
 type CardProps = {
   id: string;
   image?: string;
-  title?: string;
+  title: string;
   date?: string;
-  formatedDate?: string;
   variant: "showcase" | "popular";
 };
 
-export default function Card({
-  image,
-  title,
-  date,
-  formatedDate,
-  variant,
-  id,
-}: CardProps) {
+export default function Card({ image, title, date, variant, id }: CardProps) {
   const movieUrl = `/movie/${id}-${title ? title.toLowerCase().replace(/\s+/g, "-") : ""}`;
 
   return (
@@ -37,9 +30,12 @@ export default function Card({
         <h3>
           <Link to={movieUrl}>{title}</Link>
         </h3>
-        <time className={styles.date} dateTime={date}>
-          {formatedDate}
-        </time>
+
+        {date && (
+          <time className={styles.date} dateTime={date}>
+            {formatDate(date)}
+          </time>
+        )}
       </div>
     </div>
   );

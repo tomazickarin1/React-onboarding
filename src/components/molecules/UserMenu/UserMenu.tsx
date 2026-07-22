@@ -32,8 +32,8 @@ export default function UserMenu({
       </button>
       {isOpen && (
         <div className={styles.dropdown}>
-          <a href="#">{loginLabel}</a>
-          <a href="#">{joinLabel}</a>
+          <a>{loginLabel}</a>
+          <a>{joinLabel}</a>
         </div>
       )}
     </div>

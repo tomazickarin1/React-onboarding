@@ -32,13 +32,13 @@ export default function DesktopNav({
         <MainMenu />
       </div>
       <div className={styles.right}>
-        <a href="#" aria-label={createAriaLabel} className={styles.plus}>
+        <a aria-label={createAriaLabel} className={styles.plus}>
           <img src={plus} />
         </a>
         <LanguageSwitcherHandler />
         <div className={styles.joinDesktop}>
-          <a href="#">{loginLinkLabel}</a>
-          <a href="#">{joinLinkLabel}</a>
+          <a>{loginLinkLabel}</a>
+          <a>{joinLinkLabel}</a>
         </div>
         <div className={styles.joinMobile}>
           <UserMenu />
