@@ -17,6 +17,8 @@ export default function Cards({
   variant = "showcase",
   loadingLabel = cardLabels.loading,
 }: CardsProps) {
+
+  // console.log(movies);
   return (
     <div className={styles.Cards}>
       {isLoading

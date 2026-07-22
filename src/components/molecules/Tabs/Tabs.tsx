@@ -1,6 +1,6 @@
 import styles from "./Tabs.module.scss";
 import Tab from "../../atoms/Tab/Tab";
-import { useRef, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import type { KeyboardEvent, MouseEvent } from "react";
@@ -11,23 +11,26 @@ type TabsProps = {
   activeTab: number;
   onTabChange: (id: number) => void;
   mobileListAriaLabel?: string;
+  ref: string;
+  sliderStyle: string;
 };
 
 export default function Tabs({
   tabs,
   activeTab,
   onTabChange,
+  ref,
   mobileListAriaLabel = tabsLabels.mobileListAriaLabel,
 }: TabsProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  // const wrapperRef = useRef<HTMLDivElement>(null);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 });
 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (!wrapperRef.current) return;
+    if (!ref.current) return;
     const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
-    const tabElements = wrapperRef.current.querySelectorAll("[data-tab]");
+    const tabElements = ref.current.querySelectorAll("[data-tab]");
     const activeElement = tabElements[activeIndex] as HTMLElement;
 
     setSliderStyle({
@@ -111,7 +114,7 @@ export default function Tabs({
         )}
       </div>
 
-      <div className={styles.selectorWrap} ref={wrapperRef}>
+      <div className={styles.selectorWrap} ref={ref}>
         <div
           className={styles.slider}
           style={{ left: sliderStyle.left, width: sliderStyle.width }}
