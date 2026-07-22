@@ -6,7 +6,8 @@ export const TMDB_SEARCH_URL_PERSON =
 export const TMDB_SEARCH_URL_SIMPLE =
   "https://api.themoviedb.org/3/search/keyword";
 export const TMDB_POPULAR_URL = "https://api.themoviedb.org/3/movie/popular";
-export const TMDB_DISCOVER_URL_MOVIE = "https://api.themoviedb.org/3/discover/movie"
+export const TMDB_DISCOVER_URL_MOVIE =
+  "https://api.themoviedb.org/3/discover/movie";
 export const TMDB_DISCOVER_URL_NOW_PLAYING = `https://api.themoviedb.org/3/movie/now_playing`;
 
 export const mockTV = [
