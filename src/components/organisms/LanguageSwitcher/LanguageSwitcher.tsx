@@ -4,6 +4,7 @@ import LanguageSelect from "../../molecules/LanguageSelect/LanguageSelect";
 import Button from "../../atoms/Button/Button";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { languageSwitcherLabels } from "../../../data/labels";
+import type { KeyboardEvent } from "react";
 
 export type LanguageSwitcherProps = {
   languageList: Array<{ code: string; label: string }>;
@@ -40,8 +41,18 @@ export default function LanguageSwitcher({
     setIsOpen(true);
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <section className={styles.languageSwitcher} ref={ref}>
+    <section
+      className={styles.languageSwitcher}
+      ref={ref}
+      onKeyDown={handleKeyDown}
+    >
       <Button
         variant="language"
         label={selectedMain.split("-").pop() ?? ""}

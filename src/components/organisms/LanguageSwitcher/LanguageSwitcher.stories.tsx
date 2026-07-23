@@ -12,6 +12,9 @@ const meta = {
       return {};
     },
   ],
+  globals: {
+    backgrounds: { value: "dark" },
+  }
 } satisfies Meta<typeof LanguageSwitcherHandler>;
 
 export default meta;
