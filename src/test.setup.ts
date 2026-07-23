@@ -27,3 +27,5 @@ Object.defineProperty(globalThis, "localStorage", {
   writable: true,
   configurable: true,
 });
+
+Element.prototype.scrollIntoView = function () {};

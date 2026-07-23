@@ -48,6 +48,11 @@ export default function LanguageSelect({
     if (inputRef.current !== null) {
       inputRef.current.focus();
     }
+    if (isOpen && listRef.current !== null) {
+      listRef.current
+        .querySelector(`[aria-selected="true"]`)
+        ?.scrollIntoView({ block: "nearest" });
+    }
   }, [isOpen]);
 
   const handleOpen = () => {

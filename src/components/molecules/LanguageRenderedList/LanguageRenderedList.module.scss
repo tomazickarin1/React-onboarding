@@ -5,6 +5,16 @@
   cursor: pointer;
   list-style: none;
 
+  &:focus {
+    outline: none;
+  }
+
+  @media (forced-colors: active) {
+    &:focus {
+      outline: 2px solid;
+    }
+  }
+
   &.active {
     background-color: var(--color-blue);
     color: var(--color-white);
