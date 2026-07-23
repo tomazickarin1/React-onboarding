@@ -2,6 +2,7 @@
   border-top: 1px solid rgba(227, 227, 227, 1);
   border-bottom: 1px solid rgba(227, 227, 227, 1);
   background: white;
+  position: relative;
 }
 
 .searchBar {
@@ -49,6 +50,60 @@
     &::placeholder {
       color: var(--color-text-muted);
       font-size: 1.1rem;
+    }
+  }
+}
+
+.trendingMovies {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.trendingHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: var(--color-grey-light);
+  font-weight: 600;
+  max-width: 1300px;
+  margin: auto;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.trendingList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 1300px;
+  margin: auto;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      background-color: var(--color-grey-light);
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: var(--color-text-muted);
     }
   }
 }

@@ -4,6 +4,7 @@ import type { ChangeEvent, Ref } from "react";
 export type InputProps = {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
   placeholder?: string;
   ariaLabel?: string;
   type?: "text" | "search";
@@ -13,6 +14,7 @@ export type InputProps = {
 export default function Input({
   value,
   onChange,
+  onClick,
   placeholder,
   ariaLabel,
   type = "text",
@@ -23,6 +25,7 @@ export default function Input({
       type={type}
       value={value}
       onChange={onChange}
+      onClick={onClick}
       placeholder={placeholder}
       aria-label={ariaLabel}
       className={styles.input}

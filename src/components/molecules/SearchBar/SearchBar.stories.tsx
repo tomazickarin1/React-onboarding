@@ -11,11 +11,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const topTenMovies = [
+  { title: "Masters of the Universe", id: 454639 },
+  { title: "Disclosure Day", id: 127 },
+  { title: "Disclosure Day", id: 1275779 },
+  { title: "The Odyssey", id: 1368337 },
+  { title: "Elize: Shadows of a Woman", id: 1487861 },
+];
+
 export const Default: Story = {
   args: {
     query: "",
     onSubmit: fn(),
     onQueryChange: fn(),
+    topTenMovies: topTenMovies,
   },
   render: function Render(args) {
     const [, updateArgs] = useArgs();
