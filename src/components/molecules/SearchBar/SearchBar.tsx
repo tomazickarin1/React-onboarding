@@ -8,8 +8,9 @@ import {
 import type { SubmitEvent } from "react";
 import { searchBarLabels } from "../../../data/labels";
 import { useState, useRef } from "react";
-import { Link } from "react-router";
 import { useClickOutside } from "../../../hooks/useClickOutside";
+import { useNavigate } from "react-router";
+import type { MouseEvent } from "react";
 
 type SearchBarProps = {
   query: string;
@@ -40,6 +41,16 @@ export default function SearchBar({
     setTrendingOpen(true);
   };
 
+  const navigate = useNavigate();
+
+  const handleSearchTitle = (e: MouseEvent<HTMLLIElement>) => {
+    const movTitle = e.currentTarget.textContent;
+    console.log(movTitle);
+    const url = new URL("/search/movie", window.location.origin);
+    url.searchParams.set("query", movTitle);
+    void navigate(`${url.pathname}${url.search}`);
+  };
+
   const isClickedOutside = useClickOutside(containerRef);
 
   return (
@@ -68,13 +79,9 @@ export default function SearchBar({
           </div>
           <ul className={styles.trendingList}>
             {topTenMovies.map((m) => (
-              <li key={m.id}>
-                <Link
-                  to={`/movie/${m.id.toString()}-${m.title.toLowerCase().replace(/\s+/g, "-")}`}
-                >
-                  <Icon icon={faMagnifyingGlass} />
-                  <span>{m.title}</span>
-                </Link>
+              <li key={m.id} onClick={handleSearchTitle}>
+                <Icon icon={faMagnifyingGlass} />
+                <span>{m.title}</span>
               </li>
             ))}
           </ul>
