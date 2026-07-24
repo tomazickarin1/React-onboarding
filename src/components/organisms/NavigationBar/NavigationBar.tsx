@@ -6,8 +6,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router";
 
-const tmbUrl = "https://api.themoviedb.org/3";
+const tmdbUrl = "https://api.themoviedb.org/3";
 
 const tmdbMovieSchema = z.object({
   title: z.string(),
@@ -21,7 +22,25 @@ const trendingSchema = z.object({
 async function fetchTrending() {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const response = await fetch(
-    `${tmbUrl}/trending/movie/day?api_key=${apiKey}`,
+    `${tmdbUrl}/trending/movie/day?api_key=${apiKey}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${String(response.status)}`);
+  }
+
+  const json: unknown = await response.json();
+  const data = trendingSchema.parse(json);
+  const top10 = data.results.slice(0, 10);
+
+  return top10;
+}
+
+async function fetchSearch(query: string) {
+  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+
+  const response = await fetch(
+    `${tmdbUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}&page=1`,
   );
 
   if (!response.ok) {
@@ -31,13 +50,14 @@ async function fetchTrending() {
   const json: unknown = await response.json();
   const data = trendingSchema.parse(json);
 
-  const top10 = data.results.slice(0, 10);
-
-  return top10;
+  return data.results.slice(0, 10);
 }
 
 export default function NavigationBar() {
-  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("query") ?? "");
+
+  // const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
   const trendingQuery = useQuery({
@@ -45,7 +65,13 @@ export default function NavigationBar() {
     queryFn: () => fetchTrending(),
   });
 
+  const searchQuery = useQuery({
+    queryKey: ["search-results", query],
+    queryFn: () => fetchSearch(query),
+  });
+
   const movieTitles = trendingQuery.data;
+  const searchResults = searchQuery.data;
 
   function handleSearchSubmit() {
     const url = new URL("/search", window.location.origin);
@@ -62,6 +88,7 @@ export default function NavigationBar() {
       <SearchBar
         query={query}
         topTenMovies={movieTitles ?? []}
+        searchResults={searchResults ?? []}
         onQueryChange={setQuery}
         onSubmit={handleSearchSubmit}
       />

@@ -5,12 +5,12 @@ import {
   faMagnifyingGlass,
   faArrowTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
-import type { SubmitEvent } from "react";
+import type { SubmitEvent, ChangeEvent } from "react";
 import { searchBarLabels } from "../../../data/labels";
 import { useState, useRef } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router";
-import type { MouseEvent } from "react";
+import SearchResults from "../SearchResults/SearchResults";
 
 type SearchBarProps = {
   query: string;
@@ -19,6 +19,7 @@ type SearchBarProps = {
   onSubmit: () => void;
   topTenMovies: Array<{ title: string; id: number }>;
   onQueryChange: (value: string) => void;
+  searchResults: Array<{ title: string; id: number }>;
 };
 
 export default function SearchBar({
@@ -28,8 +29,10 @@ export default function SearchBar({
   onSubmit,
   onQueryChange,
   topTenMovies,
+  searchResults,
 }: SearchBarProps) {
   const [trendingOpen, setTrendingOpen] = useState(false);
+  const [searchResultsOpen, setSearchResultsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
@@ -38,18 +41,37 @@ export default function SearchBar({
   }
 
   const handleClick = () => {
+    // on click only trending should ever open
     setTrendingOpen(true);
+
+    if (query !== "") {
+      setTrendingOpen(false);
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setTrendingOpen(value === "");
+    onQueryChange(e.target.value);
+    setSearchResultsOpen(true);
   };
 
   const navigate = useNavigate();
 
-  const handleSearchTitle = (e: MouseEvent<HTMLLIElement>) => {
-    const movTitle = e.currentTarget.textContent;
+  const handleSearchTitle = (movTitle: string) => {
+    // console.log("handleSearchTitle called with:", movTitle);
+
     const url = new URL("/search/movie", window.location.origin);
     url.searchParams.set("query", movTitle);
     void navigate(`${url.pathname}${url.search}`);
     setTrendingOpen(false);
+    setSearchResultsOpen(false);
     onQueryChange(movTitle);
+
+    console.log(movTitle);
+    console.log(query);
+
+
   };
 
   const isClickedOutside = useClickOutside(containerRef);
@@ -64,11 +86,7 @@ export default function SearchBar({
           placeholder={placeholder}
           value={query}
           onClick={handleClick}
-          onChange={(e) => {
-            const value = e.target.value;
-            setTrendingOpen(value === "");
-            onQueryChange(e.target.value);
-          }}
+          onChange={handleChange}
         />
       </form>
 
@@ -77,20 +95,21 @@ export default function SearchBar({
           <div className={styles.trendingHeader}>
             <div className={styles.trendingHeaderInner}>
               <Icon icon={faArrowTrendUp} />
-              <h2>Trending</h2>
+              <span>Trending</span>
             </div>
           </div>
-          <ul className={styles.trendingList}>
-            {topTenMovies.map((m) => (
-              <li key={m.id} onClick={handleSearchTitle}>
-                <div className={styles.rowInner}>
-                  <Icon icon={faMagnifyingGlass} />
-                  <span>{m.title}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <SearchResults
+            movieList={topTenMovies}
+            handleSearch={handleSearchTitle}
+          />
         </div>
+      )}
+
+      {searchResultsOpen && !isClickedOutside && (
+        <SearchResults
+          movieList={searchResults}
+          handleSearch={handleSearchTitle}
+        />
       )}
     </div>
   );

@@ -6,6 +6,8 @@ import MovieDetailPage from "./components/pages/MovieDetailPage/MovieDetailPage"
 import PopularMoviesPage from "./components/pages/PopularMoviesPage/PopularMoviesPage";
 import { PopularMoviesProvider } from "./store/PopularMoviesContext";
 import { Routes, Route, Navigate, useSearchParams } from "react-router";
+import NavigationBar from "./components/organisms/NavigationBar/NavigationBar";
+import Footer from "./components/organisms/Footer/Footer";
 
 function SearchRedirect() {
   const [searchParams] = useSearchParams();
@@ -22,6 +24,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <NavigationBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />}>
@@ -38,6 +41,7 @@ export default function App() {
           }
         />
       </Routes>
+      <Footer />
     </QueryClientProvider>
   );
 }
