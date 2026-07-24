@@ -20,6 +20,7 @@ type SearchBarProps = {
   topTenMovies: Array<{ title: string; id: number }>;
   onQueryChange: (value: string) => void;
   searchResults: Array<{ title: string; id: number }>;
+  isSearching: boolean;
 };
 
 export default function SearchBar({
@@ -30,6 +31,7 @@ export default function SearchBar({
   onQueryChange,
   topTenMovies,
   searchResults,
+  isSearching,
 }: SearchBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,6 +62,8 @@ export default function SearchBar({
 
   const isClickedOutside = useClickOutside(containerRef);
 
+  const noResults = !isSearching && searchResults.length === 0 && query !== "";
+
   return (
     <div className={styles.searchBarWrapper} ref={containerRef}>
       <form className={styles.searchBar} role="search" onSubmit={handleSubmit}>
@@ -85,10 +89,16 @@ export default function SearchBar({
             </div>
           )}
 
-          <SearchResults
-            movieList={query === "" ? topTenMovies : searchResults}
-            handleSearch={handleSearchTitle}
-          />
+          {noResults ? (
+            <div className={styles.empty}>
+              <p>No results</p>
+            </div>
+          ) : (
+            <SearchResults
+              movieList={query === "" ? topTenMovies : searchResults}
+              handleSearch={handleSearchTitle}
+            />
+          )}
         </div>
       )}
     </div>

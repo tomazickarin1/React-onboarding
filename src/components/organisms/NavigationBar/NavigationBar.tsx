@@ -94,6 +94,7 @@ export default function NavigationBar() {
         searchResults={searchResults ?? []}
         onQueryChange={setQuery}
         onSubmit={handleSearchSubmit}
+        isSearching={searchQuery.isFetching || query !== debounceQuery}
       />
     </>
   );
