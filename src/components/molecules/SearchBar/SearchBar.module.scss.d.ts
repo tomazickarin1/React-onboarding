@@ -1,7 +1,9 @@
 export type Styles = {
+  rowInner: string;
   searchBar: string;
   searchBarWrapper: string;
   trendingHeader: string;
+  trendingHeaderInner: string;
   trendingList: string;
   trendingMovies: string;
 };

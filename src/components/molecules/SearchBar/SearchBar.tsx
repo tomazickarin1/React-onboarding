@@ -45,10 +45,11 @@ export default function SearchBar({
 
   const handleSearchTitle = (e: MouseEvent<HTMLLIElement>) => {
     const movTitle = e.currentTarget.textContent;
-    console.log(movTitle);
     const url = new URL("/search/movie", window.location.origin);
     url.searchParams.set("query", movTitle);
     void navigate(`${url.pathname}${url.search}`);
+    setTrendingOpen(false);
+    onQueryChange(movTitle);
   };
 
   const isClickedOutside = useClickOutside(containerRef);
@@ -74,14 +75,18 @@ export default function SearchBar({
       {trendingOpen && !isClickedOutside && (
         <div className={styles.trendingMovies}>
           <div className={styles.trendingHeader}>
-            <Icon icon={faArrowTrendUp} />
-            <span>Trending</span>
+            <div className={styles.trendingHeaderInner}>
+              <Icon icon={faArrowTrendUp} />
+              <h2>Trending</h2>
+            </div>
           </div>
           <ul className={styles.trendingList}>
             {topTenMovies.map((m) => (
               <li key={m.id} onClick={handleSearchTitle}>
-                <Icon icon={faMagnifyingGlass} />
-                <span>{m.title}</span>
+                <div className={styles.rowInner}>
+                  <Icon icon={faMagnifyingGlass} />
+                  <span>{m.title}</span>
+                </div>
               </li>
             ))}
           </ul>
