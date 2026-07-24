@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 const tmdbUrl = "https://api.themoviedb.org/3";
 
@@ -57,8 +58,9 @@ export default function NavigationBar() {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("query") ?? "");
 
-  // const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  const debounceQuery = useDebounce(query, 400);
 
   const trendingQuery = useQuery({
     queryKey: ["trending-results"],
@@ -66,8 +68,9 @@ export default function NavigationBar() {
   });
 
   const searchQuery = useQuery({
-    queryKey: ["search-results", query],
-    queryFn: () => fetchSearch(query),
+    queryKey: ["search-results", debounceQuery],
+    queryFn: () => fetchSearch(debounceQuery),
+    enabled: debounceQuery !== "",
   });
 
   const movieTitles = trendingQuery.data;

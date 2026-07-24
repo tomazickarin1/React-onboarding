@@ -59,19 +59,12 @@ export default function SearchBar({
   const navigate = useNavigate();
 
   const handleSearchTitle = (movTitle: string) => {
-    // console.log("handleSearchTitle called with:", movTitle);
-
     const url = new URL("/search/movie", window.location.origin);
     url.searchParams.set("query", movTitle);
     void navigate(`${url.pathname}${url.search}`);
     setTrendingOpen(false);
     setSearchResultsOpen(false);
     onQueryChange(movTitle);
-
-    console.log(movTitle);
-    console.log(query);
-
-
   };
 
   const isClickedOutside = useClickOutside(containerRef);
