@@ -31,8 +31,7 @@ export default function SearchBar({
   topTenMovies,
   searchResults,
 }: SearchBarProps) {
-  const [trendingOpen, setTrendingOpen] = useState(false);
-  const [searchResultsOpen, setSearchResultsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
@@ -41,19 +40,12 @@ export default function SearchBar({
   }
 
   const handleClick = () => {
-    // on click only trending should ever open
-    setTrendingOpen(true);
-
-    if (query !== "") {
-      setTrendingOpen(false);
-    }
+    setIsOpen(true);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTrendingOpen(value === "");
+    setIsOpen(true);
     onQueryChange(e.target.value);
-    setSearchResultsOpen(true);
   };
 
   const navigate = useNavigate();
@@ -62,8 +54,7 @@ export default function SearchBar({
     const url = new URL("/search/movie", window.location.origin);
     url.searchParams.set("query", movTitle);
     void navigate(`${url.pathname}${url.search}`);
-    setTrendingOpen(false);
-    setSearchResultsOpen(false);
+    setIsOpen(false);
     onQueryChange(movTitle);
   };
 
@@ -83,26 +74,22 @@ export default function SearchBar({
         />
       </form>
 
-      {trendingOpen && !isClickedOutside && (
+      {isOpen && !isClickedOutside && (
         <div className={styles.trendingMovies}>
-          <div className={styles.trendingHeader}>
-            <div className={styles.trendingHeaderInner}>
-              <Icon icon={faArrowTrendUp} />
-              <span>Trending</span>
+          {query === "" && (
+            <div className={styles.trendingHeader}>
+              <div className={styles.trendingHeaderInner}>
+                <Icon icon={faArrowTrendUp} />
+                <span>Trending</span>
+              </div>
             </div>
-          </div>
+          )}
+
           <SearchResults
-            movieList={topTenMovies}
+            movieList={query === "" ? topTenMovies : searchResults}
             handleSearch={handleSearchTitle}
           />
         </div>
-      )}
-
-      {searchResultsOpen && !isClickedOutside && (
-        <SearchResults
-          movieList={searchResults}
-          handleSearch={handleSearchTitle}
-        />
       )}
     </div>
   );
