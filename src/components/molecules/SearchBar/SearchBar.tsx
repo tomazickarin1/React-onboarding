@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import type { SubmitEvent, ChangeEvent, KeyboardEvent } from "react";
 import { searchBarLabels } from "../../../data/labels";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router";
 import SearchResults from "../SearchResults/SearchResults";
@@ -36,6 +36,32 @@ export default function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Pressing s (not while already typing) jumps focus into the search input
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+
+      console.log(target.tagName);
+      // Don't hijack "s" if the user is already typing somewhere.
+      const isTyping =
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable;
+
+      if (e.key === "s" && !isTyping && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleGlobalKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleGlobalKeyDown);
+    };
+  }, []);
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -102,6 +128,7 @@ export default function SearchBar({
           value={query}
           onClick={handleClick}
           onChange={handleChange}
+          ref={inputRef}
         />
       </form>
 

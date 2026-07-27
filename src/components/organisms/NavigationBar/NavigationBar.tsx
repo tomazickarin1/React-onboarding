@@ -32,8 +32,6 @@ export default function NavigationBar() {
     }
   }
 
-  const navigate = useNavigate();
-
   const trendingQuery = useQuery({
     queryKey: ["trending-results"],
     queryFn: () =>
@@ -56,6 +54,8 @@ export default function NavigationBar() {
 
   const movieTitles = trendingQuery.data;
   const searchResults = searchQuery.data;
+
+  const navigate = useNavigate();
 
   // Navigates to the search page with the current query in the URL.
   function handleSearchSubmit() {
