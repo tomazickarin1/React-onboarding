@@ -56,27 +56,21 @@ export default function SearchBar({
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       setIsOpen(false);
-      console.log("escape");
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
       setHighlightedIndex((prev) =>
         prev + 1 < currentList.length ? prev + 1 : 0,
       );
-      console.log("ArrowDown");
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setHighlightedIndex((prev) =>
         prev - 1 >= 0 ? prev - 1 : currentList.length - 1,
       );
-      console.log("ArrowUp");
     } else if (e.key === "Enter") {
       const movie = currentList[highlightedIndex];
       if (movie) handleSearchTitle(movie.title);
-      console.log("Enter");
     }
   };
-
-  console.log(highlightedIndex);
 
   const navigate = useNavigate();
 
