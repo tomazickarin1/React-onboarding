@@ -5,7 +5,7 @@ import {
   faMagnifyingGlass,
   faArrowTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
-import type { SubmitEvent, ChangeEvent } from "react";
+import type { SubmitEvent, ChangeEvent, KeyboardEvent } from "react";
 import { searchBarLabels } from "../../../data/labels";
 import { useState, useRef } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
@@ -35,6 +35,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,6 +50,37 @@ export default function SearchBar({
     setIsOpen(true);
     onQueryChange(e.target.value);
   };
+
+    const currentList = query === "" ? topTenMovies : searchResults;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        console.log("escape");
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setHighlightedIndex((prev) =>
+          prev + 1 < currentList.length ? prev + 1 : 0,
+        );
+        console.log("ArrowDown");
+
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setHighlightedIndex((prev) =>
+          prev - 1 >= 0 ? prev - 1 : currentList.length - 1,
+        );
+        console.log("ArrowUp");
+
+      } else if (e.key === "Enter") {
+        const movie = currentList[highlightedIndex];
+        if (movie) handleSearchTitle(movie.title);
+        console.log("Enter");
+
+      }
+    };
+
+    console.log(highlightedIndex);
+
 
   const navigate = useNavigate();
 
@@ -66,7 +98,12 @@ export default function SearchBar({
 
   return (
     <div className={styles.searchBarWrapper} ref={containerRef}>
-      <form className={styles.searchBar} role="search" onSubmit={handleSubmit}>
+      <form
+        className={styles.searchBar}
+        role="search"
+        onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+      >
         <Icon icon={faMagnifyingGlass} />
         <Input
           type="search"

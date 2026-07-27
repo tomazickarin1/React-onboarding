@@ -12,13 +12,15 @@ export default function SearchResults({
   handleSearch,
 }: SearchResultsProps) {
   return (
-    <ul className={styles.trendingList}>
+    <ul className={styles.dropdownList}>
       {movieList.map((m) => (
         <li
           key={m.id}
           onClick={() => {
             handleSearch(m.title);
           }}
+          role="option"
+          tabIndex={-1}
         >
           <div className={styles.rowInner}>
             <Icon icon={faMagnifyingGlass} />

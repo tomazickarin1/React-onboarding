@@ -1,8 +1,8 @@
 export type Styles = {
+  dropdownList: string;
   rowInner: string;
   trendingHeader: string;
   trendingHeaderInner: string;
-  trendingList: string;
   trendingMovies: string;
 };
 

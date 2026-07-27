@@ -16,7 +16,7 @@ const tmdbMovieSchema = z.object({
   id: z.number(),
 });
 
-const trendingSchema = z.object({
+const movieListSchema = z.object({
   results: z.array(tmdbMovieSchema),
 });
 
@@ -31,7 +31,7 @@ async function fetchTrending() {
   }
 
   const json: unknown = await response.json();
-  const data = trendingSchema.parse(json);
+  const data = movieListSchema.parse(json);
   const top10 = data.results.slice(0, 10);
 
   return top10;
@@ -49,7 +49,7 @@ async function fetchSearch(query: string) {
   }
 
   const json: unknown = await response.json();
-  const data = trendingSchema.parse(json);
+  const data = movieListSchema.parse(json);
 
   return data.results.slice(0, 10);
 }
@@ -70,7 +70,7 @@ export default function NavigationBar() {
   const searchQuery = useQuery({
     queryKey: ["search-results", debounceQuery],
     queryFn: () => fetchSearch(debounceQuery),
-    enabled: debounceQuery !== "",
+    enabled: debounceQuery !== "", // skip the search when input is empty
   });
 
   const movieTitles = trendingQuery.data;
