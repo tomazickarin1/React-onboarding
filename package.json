@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest",
-    "typegen": "typed-scss-modules src --watch --exportType default --nameFormat none"
+    "test": "vitest"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
@@ -41,7 +40,6 @@
     "sass": "^1.98.0",
     "storybook": "^10.2.17",
     "terser": "^5.46.0",
-    "typed-scss-modules": "^8.1.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0",
     "typescript-plugin-css-modules": "^5.2.0",

@@ -17,7 +17,8 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowJs": true,
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"]
 }
