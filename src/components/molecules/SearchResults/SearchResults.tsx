@@ -5,15 +5,17 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 type SearchResultsProps = {
   movieList: Array<{ id: number; title: string }>;
   handleSearch: (title: string) => void;
+  highlightedIndex: number;
 };
 
 export default function SearchResults({
   movieList,
   handleSearch,
+  highlightedIndex,
 }: SearchResultsProps) {
   return (
     <ul className={styles.dropdownList}>
-      {movieList.map((m) => (
+      {movieList.map((m, index) => (
         <li
           key={m.id}
           onClick={() => {
@@ -21,6 +23,7 @@ export default function SearchResults({
           }}
           role="option"
           tabIndex={-1}
+          className={index === highlightedIndex ? styles.highlighted : ""}
         >
           <div className={styles.rowInner}>
             <Icon icon={faMagnifyingGlass} />

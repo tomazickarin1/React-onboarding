@@ -1,5 +1,6 @@
 export type Styles = {
   dropdownList: string;
+  highlighted: string;
   rowInner: string;
   trendingHeader: string;
   trendingHeaderInner: string;
