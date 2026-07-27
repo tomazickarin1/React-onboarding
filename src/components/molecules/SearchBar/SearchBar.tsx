@@ -44,7 +44,6 @@ export default function SearchBar({
     const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
       const target = e.target as HTMLElement;
 
-      console.log(target.tagName);
       // Don't hijack "s" if the user is already typing somewhere.
       const isTyping =
         target.tagName === "INPUT" ||
