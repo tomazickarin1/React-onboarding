@@ -4,62 +4,24 @@ import MobileNav from "../MobileNav/MobileNav";
 import DesktopNav from "../DesktopNav/DesktopNav";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams, useLocation } from "react-router";
 import { useDebounce } from "../../../hooks/useDebounce";
+import { fetchMovieList } from "../../../utils/fetchMovieList";
 
 const tmdbUrl = "https://api.themoviedb.org/3";
-
-const tmdbMovieSchema = z.object({
-  title: z.string(),
-  id: z.number(),
-});
-
-const movieListSchema = z.object({
-  results: z.array(tmdbMovieSchema),
-});
-
-async function fetchTrending() {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(
-    `${tmdbUrl}/trending/movie/day?api_key=${apiKey}`,
-  );
-
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${String(response.status)}`);
-  }
-
-  const json: unknown = await response.json();
-  const data = movieListSchema.parse(json);
-  const top10 = data.results.slice(0, 10);
-
-  return top10;
-}
-
-async function fetchSearch(query: string) {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-
-  const response = await fetch(
-    `${tmdbUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}&page=1`,
-  );
-
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${String(response.status)}`);
-  }
-
-  const json: unknown = await response.json();
-  const data = movieListSchema.parse(json);
-
-  return data.results.slice(0, 10);
-}
+const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
 export default function NavigationBar() {
   const [searchParams] = useSearchParams();
+  // What is currently typed in the search box.
   const [query, setQuery] = useState(searchParams.get("query") ?? "");
   const location = useLocation();
+  // Save the last pathname - so we can compare it when it changes.
   const [prevPathname, setPrevPathname] = useState(location.pathname);
 
+  // Runs only right after navigating to a different page. Clears the
+  // search box outside /search, or re-syncs it from the URL on /search.
   if (location.pathname !== prevPathname) {
     setPrevPathname(location.pathname);
 
@@ -72,24 +34,32 @@ export default function NavigationBar() {
 
   const navigate = useNavigate();
 
-  const debounceQuery = useDebounce(query, 400);
-
   const trendingQuery = useQuery({
     queryKey: ["trending-results"],
-    queryFn: () => fetchTrending(),
+    queryFn: () =>
+      fetchMovieList(`${tmdbUrl}/trending/movie/day?api_key=${apiKey}`),
   });
+
+  // Wait for typing to pause before actually searching, so we don't
+  // fire a request on every keystroke.
+  const debounceQuery = useDebounce(query, 400);
 
   const searchQuery = useQuery({
     queryKey: ["search-results", debounceQuery],
-    queryFn: () => fetchSearch(debounceQuery),
-    enabled: debounceQuery !== "", // skip the search when input is empty
+    queryFn: () =>
+      fetchMovieList(
+        `${tmdbUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(debounceQuery)}&page=1`,
+      ),
+    // skip the search when input is empty.
+    enabled: debounceQuery !== "",
   });
 
   const movieTitles = trendingQuery.data;
   const searchResults = searchQuery.data;
 
+  // Navigates to the search page with the current query in the URL.
   function handleSearchSubmit() {
-    const url = new URL("/search", window.location.origin);
+    const url = new URL("/search/movie", window.location.origin);
     url.searchParams.set("query", query);
     void navigate(`${url.pathname}${url.search}`);
   }
@@ -106,6 +76,8 @@ export default function NavigationBar() {
         searchResults={searchResults ?? []}
         onQueryChange={setQuery}
         onSubmit={handleSearchSubmit}
+        // True while we're still waiting on a result — either the
+        // debounce hasn't caught up yet, or the fetch is in flight.
         isSearching={searchQuery.isFetching || query !== debounceQuery}
       />
     </>
