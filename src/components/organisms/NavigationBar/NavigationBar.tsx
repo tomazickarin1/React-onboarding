@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router";
+import { useSearchParams, useLocation } from "react-router";
 import { useDebounce } from "../../../hooks/useDebounce";
 
 const tmdbUrl = "https://api.themoviedb.org/3";
@@ -57,6 +57,18 @@ async function fetchSearch(query: string) {
 export default function NavigationBar() {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("query") ?? "");
+  const location = useLocation();
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+
+  if (location.pathname !== prevPathname) {
+    setPrevPathname(location.pathname);
+
+    if (location.pathname.startsWith("/search")) {
+      setQuery(searchParams.get("query") ?? "");
+    } else {
+      setQuery("");
+    }
+  }
 
   const navigate = useNavigate();
 
