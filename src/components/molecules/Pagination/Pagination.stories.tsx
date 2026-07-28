@@ -3,12 +3,23 @@ import PaginationComponent from "./Pagination";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { action } from "storybook/actions";
+import { useArgs } from "storybook/preview-api";
 
-function PageActionLogger() {
+// type PageSyncProps = {
+//   updateArgs: (args: {page: number}) => void;
+// }
+function PageSync({
+  updateArgs,
+}: {
+  updateArgs: (args: { page: number }) => void;
+}) {
   const [searchParams] = useSearchParams();
   useEffect(() => {
-    action("page-changed")(searchParams.get("page") ?? "1");
-  }, [searchParams]);
+    const page = Number(searchParams.get("page") ?? "1");
+    action("page-changed")(page);
+    updateArgs({ page });
+  }, [searchParams, updateArgs]);
+
   return null;
 }
 
@@ -16,12 +27,16 @@ const meta = {
   title: "Component/molecules/Pagination",
   component: PaginationComponent,
   decorators: [
-    (Story) => (
-      <>
-        <PageActionLogger />
-        <Story />
-      </>
-    ),
+    (Story) => {
+      const [, updateArgs] = useArgs();
+
+      return (
+        <>
+          <PageSync updateArgs={updateArgs} />
+          <Story />
+        </>
+      );
+    },
   ],
 } satisfies Meta<typeof PaginationComponent>;
 

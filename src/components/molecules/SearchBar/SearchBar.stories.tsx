@@ -23,8 +23,10 @@ export const Default: Story = {
   args: {
     query: "",
     onSubmit: fn(),
-    onQueryChange: fn(),
     topTenMovies: topTenMovies,
+    onQueryChange: fn(),
+    searchResults: [],
+    isSearching: false,
   },
   render: function Render(args) {
     const [, updateArgs] = useArgs();
