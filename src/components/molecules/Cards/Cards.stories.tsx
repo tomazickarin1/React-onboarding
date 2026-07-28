@@ -12,44 +12,55 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Cards: Story = {
+const movies = [
+  { id: 1, title: "Streaming", url: pladeholderPoster, date: "2026-03-01" },
+  { id: 2, title: "On TV", url: pladeholderPoster, date: "2026-03-01" },
+  { id: 3, title: "For Rent", url: pladeholderPoster, date: "2026-03-01" },
+  {
+    id: 4,
+    title: "In Theatres",
+    url: pladeholderPoster,
+    date: "2026-03-01",
+  },
+  {
+    id: 5,
+    title: "In Theatres",
+    url: pladeholderPoster,
+    date: "2026-03-01",
+  },
+  {
+    id: 6,
+    title: "In Theatres",
+    url: pladeholderPoster,
+    date: "2026-03-01",
+  },
+  {
+    id: 7,
+    title: "In Theatres",
+    url: pladeholderPoster,
+    date: "2026-03-01",
+  },
+  {
+    id: 8,
+    title: "In Theatres",
+    url: pladeholderPoster,
+    date: "2026-03-01",
+  },
+];
+
+export const Popular: Story = {
   args: {
-    movies: [
-      { id: 1, title: "Streaming", url: pladeholderPoster, date: "2026-03-01" },
-      { id: 2, title: "On TV", url: pladeholderPoster, date: "2026-03-01" },
-      { id: 3, title: "For Rent", url: pladeholderPoster, date: "2026-03-01" },
-      {
-        id: 4,
-        title: "In Theatres",
-        url: pladeholderPoster,
-        date: "2026-03-01",
-      },
-      {
-        id: 5,
-        title: "In Theatres",
-        url: pladeholderPoster,
-        date: "2026-03-01",
-      },
-      {
-        id: 6,
-        title: "In Theatres",
-        url: pladeholderPoster,
-        date: "2026-03-01",
-      },
-      {
-        id: 7,
-        title: "In Theatres",
-        url: pladeholderPoster,
-        date: "2026-03-01",
-      },
-      {
-        id: 8,
-        title: "In Theatres",
-        url: pladeholderPoster,
-        date: "2026-03-01",
-      },
-    ],
+    movies: movies,
     isLoading: false,
+    variant: "popular",
+  },
+};
+
+export const Showcase: Story = {
+  args: {
+    movies: movies,
+    isLoading: false,
+    variant: "showcase",
   },
 };
 

@@ -90,7 +90,6 @@ export const IsSearching: Story = {
   },
 };
 
-
 export const NoResults: Story = {
   args: {
     query: "Test",
