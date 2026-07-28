@@ -19,13 +19,21 @@ const topTenMovies = [
   { title: "Elize: Shadows of a Woman", id: 1487861 },
 ];
 
+const searchResults = [
+  { title: "Lorem ipsum", id: 454639 },
+  { title: "Disclosure Day", id: 127 },
+  { title: "Disclosure Day", id: 1275779 },
+  { title: "The Odyssey", id: 1368337 },
+  { title: "Elize: Shadows of a Woman", id: 1487861 },
+];
+
 export const Default: Story = {
   args: {
     query: "",
     onSubmit: fn(),
     topTenMovies: topTenMovies,
     onQueryChange: fn(),
-    searchResults: [],
+    searchResults: searchResults,
     isSearching: false,
   },
   render: function Render(args) {
@@ -39,5 +47,63 @@ export const Default: Story = {
         }}
       />
     );
+  },
+  play: async ({ canvas, userEvent }) => {
+    const dropdownBtn = canvas.getByRole("searchbox", {
+      name: /Search for a movie/i,
+    });
+    await userEvent.click(dropdownBtn);
+  },
+};
+
+export const SearchQuery: Story = {
+  args: {
+    query: "Lorem ipsum",
+    onSubmit: fn(),
+    topTenMovies: [],
+    onQueryChange: fn(),
+    searchResults: searchResults,
+    isSearching: false,
+  },
+  play: async ({ canvas, userEvent }) => {
+    const dropdownBtn = canvas.getByRole("searchbox", {
+      name: /Search for a movie/i,
+    });
+    await userEvent.click(dropdownBtn);
+  },
+};
+
+export const IsSearching: Story = {
+  args: {
+    query: "Test",
+    onSubmit: fn(),
+    topTenMovies: [],
+    onQueryChange: fn(),
+    searchResults: [],
+    isSearching: true,
+  },
+  play: async ({ canvas, userEvent }) => {
+    const dropdownBtn = canvas.getByRole("searchbox", {
+      name: /Search for a movie/i,
+    });
+    await userEvent.click(dropdownBtn);
+  },
+};
+
+
+export const NoResults: Story = {
+  args: {
+    query: "Test",
+    onSubmit: fn(),
+    topTenMovies: [],
+    onQueryChange: fn(),
+    searchResults: [],
+    isSearching: false,
+  },
+  play: async ({ canvas, userEvent }) => {
+    const dropdownBtn = canvas.getByRole("searchbox", {
+      name: /Search for a movie/i,
+    });
+    await userEvent.click(dropdownBtn);
   },
 };

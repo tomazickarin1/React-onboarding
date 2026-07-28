@@ -5,9 +5,6 @@ import { useSearchParams } from "react-router";
 import { action } from "storybook/actions";
 import { useArgs } from "storybook/preview-api";
 
-// type PageSyncProps = {
-//   updateArgs: (args: {page: number}) => void;
-// }
 function PageSync({
   updateArgs,
 }: {
