@@ -53,6 +53,7 @@ export default function SearchBar({
       if (e.key === "s" && !isTyping && !e.metaKey && !e.ctrlKey && !e.altKey) {
         e.preventDefault();
         inputRef.current?.focus();
+        setIsOpen(true);
       }
     };
 
@@ -111,6 +112,8 @@ export default function SearchBar({
 
   const noResults = !isSearching && searchResults.length === 0 && query !== "";
 
+  console.log(isOpen);
+
   return (
     <div className={styles.searchBarWrapper} ref={containerRef}>
       <form
@@ -132,7 +135,7 @@ export default function SearchBar({
       </form>
 
       {isOpen && !isClickedOutside && (
-        <div className={styles.trendingMovies}>
+        <div className={styles.searchResultsDropdown}>
           {query === "" && (
             <div className={styles.trendingHeader}>
               <div className={styles.trendingHeaderInner}>

@@ -35,9 +35,17 @@ export function useClickOutside(ref: RefObject<HTMLElement | null>): boolean {
       }
     };
 
+    const handleFocusIn = (e: FocusEvent) => {
+      if (ref.current && ref.current.contains(e.target as Node)) {
+        setIsClickedOutside(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("focusin", handleFocusIn);
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("focusin", handleFocusIn);
     };
   }, [ref]);
 
