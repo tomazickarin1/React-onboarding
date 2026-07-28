@@ -112,8 +112,6 @@ export default function SearchBar({
 
   const noResults = !isSearching && searchResults.length === 0 && query !== "";
 
-  console.log(isOpen);
-
   return (
     <div className={styles.searchBarWrapper} ref={containerRef}>
       <form

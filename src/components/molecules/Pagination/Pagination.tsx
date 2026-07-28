@@ -57,19 +57,25 @@ export default function Pagination({ page, totalPages }: PaginationData) {
     faChevronRight,
   );
 
+  const onlyOnePage = pageNumbers.length <= 1;
+
   return (
-    <nav className={styles.pageNumbers}>
-      {prevLink}
-      {pageNumbers.map((pageNum) => (
-        <Link
-          key={pageNum}
-          to={pageHref(pageNum)}
-          data-active={currentPage == pageNum}
-        >
-          {pageNum}
-        </Link>
-      ))}
-      {nextLink}
-    </nav>
+    <>
+      {!onlyOnePage && (
+        <nav className={styles.pageNumbers}>
+          {prevLink}
+          {pageNumbers.map((pageNum) => (
+            <Link
+              key={pageNum}
+              to={pageHref(pageNum)}
+              data-active={currentPage == pageNum}
+            >
+              {pageNum}
+            </Link>
+          ))}
+          {nextLink}
+        </nav>
+      )}
+    </>
   );
 }

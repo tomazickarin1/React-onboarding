@@ -172,6 +172,10 @@ export default function SearchResults({
     ));
   }
 
+  if (contentData.length == 0) {
+    return <p>{emptyLabel}</p>;
+  }
+
   return (
     <div className={styles.movieCards}>
       {contentData}
