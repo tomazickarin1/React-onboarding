@@ -10,6 +10,11 @@
   height: 80px;
   border-radius: 8px;
   flex-shrink: 0;
+
+  @media (max-width: 992px) {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .placeholder {
@@ -17,8 +22,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(0, 0, 0, 0.08);
-  font-size: 2rem;
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .image img {
@@ -32,7 +40,7 @@
   h3 {
     margin: 0;
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   p {

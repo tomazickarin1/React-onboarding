@@ -1,6 +1,5 @@
 import styles from "./PersonCard.module.scss";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import profileIcon from "../../../assets/profile.svg";
 
 type PersonCardProps = {
   name: string;
@@ -19,7 +18,7 @@ export default function PersonCard({
         {profileImg ? (
           <img src={profileImg} alt={name} />
         ) : (
-          <FontAwesomeIcon icon={faUser} />
+          <img src={profileIcon} alt="" />
         )}
       </div>
       <div className={styles.info}>

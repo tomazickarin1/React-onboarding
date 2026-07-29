@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Icon from "../../atoms/Icon/Icon";
 import styles from "./UserMenu.module.scss";
+import profileIcon from "../../../assets/profile.svg";
 
 type UserMenuProps = {
   ariaLabel: string;
@@ -27,7 +26,7 @@ export default function UserMenu({
         aria-expanded={isOpen}
         aria-label={ariaLabel}
       >
-        <Icon icon={faUser} />
+        <img src={profileIcon} alt="" />
       </button>
       {isOpen && (
         <div className={styles.dropdown}>
