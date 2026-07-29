@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   faStar,
   faHeart,
-  faUser,
   faMagnifyingGlass,
   faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,10 +28,6 @@ export const Star: Story = {
 
 export const Heart: Story = {
   args: { icon: faHeart },
-};
-
-export const User: Story = {
-  args: { icon: faUser },
 };
 
 export const Search: Story = {
