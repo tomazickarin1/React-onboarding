@@ -5,6 +5,9 @@ import MenuLinkListComponent from "./MenuLinkList";
 const meta = {
   title: "Component/molecules/MenuLinkList",
   component: MenuLinkListComponent,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof MenuLinkListComponent>;
 
 export default meta;

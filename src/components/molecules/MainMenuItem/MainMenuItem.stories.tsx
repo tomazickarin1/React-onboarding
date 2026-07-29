@@ -5,6 +5,9 @@ import MainMenuItemComponent from "./MainMenuItem";
 const meta = {
   title: "Component/molecules/MainMenuItem",
   component: MainMenuItemComponent,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof MainMenuItemComponent>;
 
 export default meta;
@@ -19,6 +22,20 @@ export const MainMenuItem: Story = {
       { label: "About", url: "/about" },
       { label: "Contact", url: "/contact" },
     ],
+  },
+};
+
+export const MainMenuItemMobile: Story = {
+  args: {
+    label: "Main Menu Item text",
+    links: [
+      { label: "Home", url: "/home" },
+      { label: "About", url: "/about" },
+      { label: "Contact", url: "/contact" },
+    ],
+  },
+  globals: {
+    viewport: { value: "mobile1" },
   },
 };
 

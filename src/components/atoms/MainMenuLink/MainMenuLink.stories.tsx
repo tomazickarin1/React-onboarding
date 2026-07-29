@@ -6,6 +6,9 @@ import MainMenuLinkComponent from "./MainMenuLink";
 const meta = {
   title: "Component/atoms/MainMenuLink",
   component: MainMenuLinkComponent,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof MainMenuLinkComponent>;
 
 export default meta;

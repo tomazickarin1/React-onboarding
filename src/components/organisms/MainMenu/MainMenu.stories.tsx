@@ -4,6 +4,9 @@ import MainMenuComponent from "./MainMenu";
 const meta = {
   title: "Component/organisms/MainMenu",
   component: MainMenuComponent,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof MainMenuComponent>;
 
 export default meta;

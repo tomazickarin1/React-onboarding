@@ -8,6 +8,9 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof DesktopNavComponent>;
 
 export default meta;

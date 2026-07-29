@@ -37,6 +37,9 @@ export const Language: Story = {
     type: "button",
     "aria-label": "Select language: English",
   },
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 };
 
 export const Reset: Story = {
