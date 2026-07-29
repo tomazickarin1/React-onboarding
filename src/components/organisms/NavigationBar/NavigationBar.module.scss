@@ -2,22 +2,3 @@
   background-color: var(--color-navy);
   position: relative;
 }
-
-.plus {
-  height: 23px;
-  width: 23px;
-}
-
-.right a {
-  color: var(--color-white);
-  text-decoration: none;
-}
-
-.joinDesktop {
-  display: flex;
-  gap: 1rem;
-
-  @media (max-width: 1200px) {
-    display: none;
-  }
-}
