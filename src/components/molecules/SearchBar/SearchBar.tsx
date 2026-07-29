@@ -6,7 +6,6 @@ import {
   faArrowTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
 import type { SubmitEvent, ChangeEvent, KeyboardEvent } from "react";
-import { searchBarLabels } from "../../../data/labels";
 import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router";
@@ -14,8 +13,8 @@ import SearchResults from "../SearchResults/SearchResults";
 
 type SearchBarProps = {
   query: string;
-  placeholder?: string;
-  ariaLabel?: string;
+  placeholder: string;
+  ariaLabel: string;
   onSubmit: () => void;
   topTenMovies: Array<{ title: string; id: number }>;
   onQueryChange: (value: string) => void;
@@ -24,8 +23,8 @@ type SearchBarProps = {
 };
 
 export default function SearchBar({
-  placeholder = searchBarLabels.placeholder,
-  ariaLabel = searchBarLabels.ariaLabel,
+  placeholder,
+  ariaLabel,
   query,
   onSubmit,
   onQueryChange,

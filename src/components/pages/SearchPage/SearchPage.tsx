@@ -5,6 +5,7 @@ import SearchFilterLink from "../../atoms/SearchFilterLink/SearchFilterLink";
 import { Outlet, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { searchFilters } from "../../../data/filterList";
+import { searchFilterPanelLabels } from "../../../data/labels";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 
@@ -53,7 +54,9 @@ export default function SearchPage() {
   return (
     <SingleColumn>
       <div className={styles.searchWrapper}>
-        <SearchFilterPanel>{filteLinks}</SearchFilterPanel>
+        <SearchFilterPanel heading={searchFilterPanelLabels.heading}>
+          {filteLinks}
+        </SearchFilterPanel>
         <Outlet />
       </div>
     </SingleColumn>

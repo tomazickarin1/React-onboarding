@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import MovieActionsComponent from "./MovieActions";
+import { movieActionsLabels } from "../../../data/labels";
 
 const meta = {
   title: "Component/molecules/MovieActions",
@@ -9,4 +10,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const MovieActions: Story = {};
+export const MovieActions: Story = {
+  args: {
+    addToListLabel: movieActionsLabels.addToList,
+    addToFavoritesLabel: movieActionsLabels.addToFavorites,
+    addToWatchlistLabel: movieActionsLabels.addToWatchlist,
+    playTrailerLabel: movieActionsLabels.playTrailer,
+  },
+};

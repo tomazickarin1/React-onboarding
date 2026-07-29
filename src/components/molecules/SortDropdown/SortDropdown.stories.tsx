@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { sortDropdownLabels } from "../../../data/labels";
 import SortDropdownComponent from "./SortDropdown";
 
 const meta = {
@@ -14,6 +15,7 @@ export const SortDropdown: Story = {
   args: {
     sortBy: { value: "popularity.desc", label: "Popularity Descending" },
     setSortBy: fn(),
+    ariaLabel: sortDropdownLabels.ariaLabel,
   },
 };
 
@@ -21,6 +23,7 @@ export const SortDropdownOpen: Story = {
   args: {
     sortBy: { value: "popularity.desc", label: "Popularity Descending" },
     setSortBy: fn(),
+    ariaLabel: sortDropdownLabels.ariaLabel,
   },
   play: async ({ canvas, userEvent }) => {
     const button = canvas.getByRole("button", { name: /Sort results by/i });

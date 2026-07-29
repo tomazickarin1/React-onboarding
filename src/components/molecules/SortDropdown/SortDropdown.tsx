@@ -4,7 +4,6 @@ import Icon from "../../atoms/Icon/Icon";
 import { useState, useRef } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { sortOptions } from "../../../data/sortingOptions";
-import { sortDropdownLabels } from "../../../data/labels";
 
 type SortOption = {
   value: string;
@@ -14,13 +13,13 @@ type SortOption = {
 type SortDropdownProps = {
   sortBy: SortOption;
   setSortBy: (option: SortOption) => void;
-  ariaLabel?: string;
+  ariaLabel: string;
 };
 
 export default function SortDropdown({
   sortBy,
   setSortBy,
-  ariaLabel = sortDropdownLabels.ariaLabel,
+  ariaLabel,
 }: SortDropdownProps) {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);

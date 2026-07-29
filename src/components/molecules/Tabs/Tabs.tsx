@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import type { KeyboardEvent, MouseEvent } from "react";
-import { tabsLabels } from "../../../data/labels";
 import type { RefObject } from "react";
 
 type TabsProps = {
   tabs: Array<{ id: number; label: string }>;
   activeTab: number;
   onTabChange: (id: number) => void;
-  mobileListAriaLabel?: string;
+  mobileListAriaLabel: string;
   ref: RefObject<HTMLDivElement | null>;
 };
 
@@ -20,7 +19,7 @@ export default function Tabs({
   activeTab,
   onTabChange,
   ref,
-  mobileListAriaLabel = tabsLabels.mobileListAriaLabel,
+  mobileListAriaLabel,
 }: TabsProps) {
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 });
 

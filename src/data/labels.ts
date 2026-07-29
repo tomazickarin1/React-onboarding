@@ -6,6 +6,7 @@ export const movieActionsLabels = {
   addToList: "Add to your list",
   addToFavorites: "Add to favorites",
   addToWatchlist: "Add to watchlist",
+  playTrailer: "Play Trailer",
 };
 
 export const searchBarLabels = {

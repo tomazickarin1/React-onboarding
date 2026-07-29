@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useArgs } from "storybook/preview-api";
 import { fn } from "storybook/test";
 import SearchBar from "./SearchBar";
+import { searchBarLabels } from "../../../data/labels";
 
 const meta = {
   title: "Component/molecules/SearchBar",
@@ -30,6 +31,8 @@ const searchResults = [
 export const Default: Story = {
   args: {
     query: "",
+    placeholder: searchBarLabels.placeholder,
+    ariaLabel: searchBarLabels.ariaLabel,
     onSubmit: fn(),
     topTenMovies: topTenMovies,
     onQueryChange: fn(),
@@ -59,6 +62,8 @@ export const Default: Story = {
 export const SearchQuery: Story = {
   args: {
     query: "Lorem ipsum",
+    placeholder: searchBarLabels.placeholder,
+    ariaLabel: searchBarLabels.ariaLabel,
     onSubmit: fn(),
     topTenMovies: [],
     onQueryChange: fn(),
@@ -76,6 +81,8 @@ export const SearchQuery: Story = {
 export const IsSearching: Story = {
   args: {
     query: "Test",
+    placeholder: searchBarLabels.placeholder,
+    ariaLabel: searchBarLabels.ariaLabel,
     onSubmit: fn(),
     topTenMovies: [],
     onQueryChange: fn(),
@@ -93,6 +100,8 @@ export const IsSearching: Story = {
 export const NoResults: Story = {
   args: {
     query: "Test",
+    placeholder: searchBarLabels.placeholder,
+    ariaLabel: searchBarLabels.ariaLabel,
     onSubmit: fn(),
     topTenMovies: [],
     onQueryChange: fn(),

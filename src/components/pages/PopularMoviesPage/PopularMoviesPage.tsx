@@ -7,7 +7,7 @@ import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
-import { popularMoviesPageLabels } from "../../../data/labels";
+import { sortDropdownLabels } from "../../../data/labels";
 import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
@@ -80,15 +80,15 @@ async function getGenres(): Promise<Genre[]> {
 }
 
 type PopularMoviesPageProps = {
-  heading?: string;
-  resultsAriaLabel?: string;
-  searchButtonLabel?: string;
+  heading: string;
+  resultsAriaLabel: string;
+  searchButtonLabel: string;
 };
 
 export default function PopularMovies({
-  heading = popularMoviesPageLabels.heading,
-  resultsAriaLabel = popularMoviesPageLabels.resultsAriaLabel,
-  searchButtonLabel = popularMoviesPageLabels.searchButton,
+  heading,
+  resultsAriaLabel,
+  searchButtonLabel,
 }: PopularMoviesPageProps) {
   UseDocumentTitle("Popular Movies Page - The Movie Database(TMDB)");
 
@@ -151,7 +151,11 @@ export default function PopularMovies({
               toggleAction={handleSortToggle}
               toggle={sortToggle}
             >
-              <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+              <SortDropdown
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                ariaLabel={sortDropdownLabels.ariaLabel}
+              />
             </FilterPanel>
             <FilterPanel
               title={"Filters"}

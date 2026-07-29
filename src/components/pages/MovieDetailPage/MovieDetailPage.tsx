@@ -8,6 +8,7 @@ import MovieInfo from "../../molecules/MovieInfo/MovieInfo";
 import CrewGrid from "../../molecules/CrewGrid/CrewGrid";
 import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
+import { movieInfoLabels, movieActionsLabels } from "../../../data/labels";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -105,10 +106,16 @@ export default function MovieDetailPage() {
                 </span>
               </div>
               <UserScore score={movieDetails?.vote_average ?? 0} />
-              <MovieActions />
+              <MovieActions
+                addToListLabel={movieActionsLabels.addToList}
+                addToFavoritesLabel={movieActionsLabels.addToFavorites}
+                addToWatchlistLabel={movieActionsLabels.addToWatchlist}
+                playTrailerLabel={movieActionsLabels.playTrailer}
+              />
               <MovieInfo
                 tagline={movieDetails?.tagline ?? ""}
                 overview={movieDetails?.overview ?? ""}
+                overviewHeading={movieInfoLabels.overviewHeading}
               />
               <CrewGrid crewDetails={movieDetails?.credits.crew ?? []} />
             </div>

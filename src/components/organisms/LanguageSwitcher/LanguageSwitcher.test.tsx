@@ -17,6 +17,11 @@ describe("LanguageSwitcher", () => {
         selectedFallback="de-DE"
         onSelect={() => {}}
         onReset={() => {}}
+        ariaLabel="Language settings"
+        legend="Language Preferences"
+        defaultLanguageLabel="Default Language"
+        fallbackLanguageLabel="Fallback Language"
+        resetLabel="Reset"
       />,
     );
   });

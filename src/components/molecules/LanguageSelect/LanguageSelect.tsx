@@ -11,16 +11,15 @@ import type { ChangeEvent, KeyboardEvent } from "react";
 import LanguageRenderedList from "../LanguageRenderedList/LanguageRenderedList";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { languageSelectLabels } from "../../../data/labels";
 
 export type LanguageSelectProps = {
   languageList: Array<{ code: string; label: string }>;
   selected: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;
   type: "primary" | "fallback";
-  filterPlaceholder?: string;
-  filterAriaLabel?: string;
-  listAriaLabel?: string;
+  filterPlaceholder: string;
+  filterAriaLabel: string;
+  listAriaLabel: string;
 };
 
 export default function LanguageSelect({
@@ -28,9 +27,9 @@ export default function LanguageSelect({
   selected,
   onSelect,
   type,
-  filterPlaceholder = languageSelectLabels.filterPlaceholder,
-  filterAriaLabel = languageSelectLabels.filterAriaLabel,
-  listAriaLabel = languageSelectLabels.listAriaLabel,
+  filterPlaceholder,
+  filterAriaLabel,
+  listAriaLabel,
 }: LanguageSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("");

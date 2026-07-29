@@ -5,17 +5,17 @@ import UserMenu from "../../molecules/UserMenu/UserMenu";
 import mobileLogo from "../../../assets/mobile-logo.svg";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { mobileNavLabels } from "../../../data/labels";
+import { userMenuLabels } from "../../../data/labels";
 import { Link } from "react-router";
 
 type MobileNavProps = {
-  homeAriaLabel?: string;
-  openMenuAriaLabel?: string;
+  homeAriaLabel: string;
+  openMenuAriaLabel: string;
 };
 
 export default function MobileNav({
-  homeAriaLabel = mobileNavLabels.homeAriaLabel,
-  openMenuAriaLabel = mobileNavLabels.openMenuAriaLabel,
+  homeAriaLabel,
+  openMenuAriaLabel,
 }: MobileNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -37,7 +37,11 @@ export default function MobileNav({
           <img src={mobileLogo} alt="" />
         </Link>
         <div className={styles.mobileRight}>
-          <UserMenu />
+          <UserMenu
+            ariaLabel={userMenuLabels.ariaLabel}
+            loginLabel={userMenuLabels.login}
+            joinLabel={userMenuLabels.join}
+          />
           <div className={styles.serchIcon}>
             <Icon icon={faMagnifyingGlass} />
           </div>

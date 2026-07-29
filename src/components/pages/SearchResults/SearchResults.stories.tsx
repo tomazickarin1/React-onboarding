@@ -13,6 +13,7 @@ import {
   TMDB_SEARCH_URL_SIMPLE,
 } from "../../../mock/mockData";
 import { Routes, Route } from "react-router";
+import { searchResultsLabels } from "../../../data/labels";
 
 const meta = {
   title: "Component/pages/SearchResults",
@@ -41,6 +42,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const TvShow: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/tv"],
     msw: {
@@ -54,6 +59,10 @@ export const TvShow: Story = {
 };
 
 export const Movie: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/movie"],
     msw: {
@@ -67,6 +76,10 @@ export const Movie: Story = {
 };
 
 export const Person: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/person"],
     msw: {
@@ -80,6 +93,10 @@ export const Person: Story = {
 };
 
 export const Simple: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/keyword"],
     msw: {
@@ -93,6 +110,10 @@ export const Simple: Story = {
 };
 
 export const Loading: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/movie"],
     msw: {
@@ -107,6 +128,10 @@ export const Loading: Story = {
 };
 
 export const Error: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/movie"],
     msw: {
@@ -123,6 +148,10 @@ export const Error: Story = {
 };
 
 export const Empty: Story = {
+  args: {
+    errorLabel: searchResultsLabels.error,
+    emptyLabel: searchResultsLabels.empty,
+  },
   parameters: {
     routeEntries: ["/movie"],
     msw: {
@@ -134,4 +163,3 @@ export const Empty: Story = {
     },
   },
 };
-

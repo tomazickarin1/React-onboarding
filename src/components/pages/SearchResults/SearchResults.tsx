@@ -5,7 +5,6 @@ import { useParams, useSearchParams } from "react-router";
 import { formatDate } from "../../../utils/formatDate";
 import Pagination from "../../molecules/Pagination/Pagination";
 import Spinner from "../../atoms/Spinner/Spinner";
-import { searchResultsLabels } from "../../../data/labels";
 import { z } from "zod";
 import PersonCard from "../../atoms/PersonCard/PersonCard";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
@@ -34,8 +33,8 @@ type SearchResult =
   | { kind: "simple"; items: SimpleItem[]; totalPages: number };
 
 type SearchResultsProps = {
-  errorLabel?: string;
-  emptyLabel?: string;
+  errorLabel: string;
+  emptyLabel: string;
 };
 
 const mediaItemSchema = z.object({
@@ -120,8 +119,8 @@ async function fetchSearchMovies(
 }
 
 export default function SearchResults({
-  errorLabel = searchResultsLabels.error,
-  emptyLabel = searchResultsLabels.empty,
+  errorLabel,
+  emptyLabel,
 }: SearchResultsProps) {
   const { filter } = useParams();
   const [searchParams] = useSearchParams();

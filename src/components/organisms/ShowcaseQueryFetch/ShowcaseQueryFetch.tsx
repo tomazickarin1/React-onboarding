@@ -3,6 +3,7 @@ import Showcase from "../Showcase/Showcase";
 import { useState } from "react";
 import { useRef } from "react";
 import { useFetchShowcaseData } from "../../../hooks/useFetchShowcaseData";
+import { cardLabels, showcaseLabels, tabsLabels } from "../../../data/labels";
 
 type Movie = { id: number; url: string; title: string; date: string };
 
@@ -36,6 +37,11 @@ export default function ShowcaseQueryFetch() {
       activeTab={activeTab}
       onTabChange={setActiveTab}
       ref={wrapperRef}
+      heading={showcaseLabels.heading}
+      emptyLabel={showcaseLabels.empty}
+      loadingLabel={cardLabels.loading}
+      mobileListAriaLabel={tabsLabels.mobileListAriaLabel}
+      tabs={showcaseLabels.tabs}
     />
   );
 }

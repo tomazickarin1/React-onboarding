@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { languages } from "../../../data/language-list.json";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { languageSwitcherLabels } from "../../../data/labels";
 
 const languageList = languages.map((lang) => {
   const lastOpen = lang.lastIndexOf("(");
@@ -43,6 +44,11 @@ export default function LanguageSwitcherHandler() {
       selectedFallback={fallback}
       onReset={handleReset}
       onSelect={handleSelect}
+      ariaLabel={languageSwitcherLabels.ariaLabel}
+      legend={languageSwitcherLabels.legend}
+      defaultLanguageLabel={languageSwitcherLabels.defaultLanguage}
+      fallbackLanguageLabel={languageSwitcherLabels.fallbackLanguage}
+      resetLabel={languageSwitcherLabels.reset}
     />
   );
 }

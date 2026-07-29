@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
+import { cardLabels } from "../../../data/labels";
 
 import CardsComponent from "./Cards";
 
@@ -53,6 +54,7 @@ export const Popular: Story = {
     movies: movies,
     isLoading: false,
     variant: "popular",
+    loadingLabel: cardLabels.loading,
   },
 };
 
@@ -61,6 +63,7 @@ export const Showcase: Story = {
     movies: movies,
     isLoading: false,
     variant: "showcase",
+    loadingLabel: cardLabels.loading,
   },
 };
 
@@ -68,5 +71,6 @@ export const Loading: Story = {
   args: {
     movies: [],
     isLoading: true,
+    loadingLabel: cardLabels.loading,
   },
 };

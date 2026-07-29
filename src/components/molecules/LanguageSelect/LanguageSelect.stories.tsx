@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { languageSelectLabels } from "../../../data/labels";
 
 import LanguageSelectComponent from "./LanguageSelect";
 
@@ -21,6 +22,9 @@ export const LanguageSelect: Story = {
     selected: "en",
     type: "primary",
     onSelect: fn(),
+    filterPlaceholder: languageSelectLabels.filterPlaceholder,
+    filterAriaLabel: languageSelectLabels.filterAriaLabel,
+    listAriaLabel: languageSelectLabels.listAriaLabel,
   },
 };
 
@@ -34,6 +38,9 @@ export const LanguageSelectOpen: Story = {
     selected: "en",
     type: "primary",
     onSelect: fn(),
+    filterPlaceholder: languageSelectLabels.filterPlaceholder,
+    filterAriaLabel: languageSelectLabels.filterAriaLabel,
+    listAriaLabel: languageSelectLabels.listAriaLabel,
   },
   play: async ({ canvas, userEvent }) => {
     const button = canvas.getByRole("button", { name: /english/i });

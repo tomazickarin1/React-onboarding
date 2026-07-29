@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
 import { fn } from "storybook/test";
+import { cardLabels, showcaseLabels, tabsLabels } from "../../../data/labels";
 
 import ShowcaseComponent from "./Showcase";
 
@@ -80,6 +81,11 @@ export const Showcase: Story = {
     activeTab: 1,
     ref: { current: null },
     onTabChange: fn(),
+    heading: showcaseLabels.heading,
+    emptyLabel: showcaseLabels.empty,
+    loadingLabel: cardLabels.loading,
+    mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
+    tabs: showcaseLabels.tabs,
   },
 };
 
@@ -90,6 +96,11 @@ export const IsLoading: Story = {
     activeTab: 1,
     ref: { current: null },
     onTabChange: fn(),
+    heading: showcaseLabels.heading,
+    emptyLabel: showcaseLabels.empty,
+    loadingLabel: cardLabels.loading,
+    mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
+    tabs: showcaseLabels.tabs,
   },
 };
 
@@ -100,5 +111,10 @@ export const NoMovies: Story = {
     activeTab: 1,
     ref: { current: null },
     onTabChange: fn(),
+    heading: showcaseLabels.heading,
+    emptyLabel: showcaseLabels.empty,
+    loadingLabel: cardLabels.loading,
+    mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
+    tabs: showcaseLabels.tabs,
   },
 };

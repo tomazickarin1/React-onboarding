@@ -8,6 +8,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams, useLocation } from "react-router";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { fetchMovieList } from "../../../utils/fetchMovieList";
+import {
+  searchBarLabels,
+  desktopNavLabels,
+  mobileNavLabels,
+} from "../../../data/labels";
 
 const tmdbUrl = "https://api.themoviedb.org/3";
 const apiKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -67,8 +72,16 @@ export default function NavigationBar() {
   return (
     <>
       <div className={styles.navbarWrapper}>
-        <DesktopNav />
-        <MobileNav />
+        <DesktopNav
+          homeAriaLabel={desktopNavLabels.homeAriaLabel}
+          createAriaLabel={desktopNavLabels.createAriaLabel}
+          loginLinkLabel={desktopNavLabels.loginLink}
+          joinLinkLabel={desktopNavLabels.joinLink}
+        />
+        <MobileNav
+          homeAriaLabel={mobileNavLabels.homeAriaLabel}
+          openMenuAriaLabel={mobileNavLabels.openMenuAriaLabel}
+        />
       </div>
       <SearchBar
         query={query}
@@ -79,6 +92,8 @@ export default function NavigationBar() {
         // True while we're still waiting on a result — either the
         // debounce hasn't caught up yet, or the fetch is in flight.
         isSearching={searchQuery.isFetching || query !== debounceQuery}
+        placeholder={searchBarLabels.placeholder}
+        ariaLabel={searchBarLabels.ariaLabel}
       />
     </>
   );

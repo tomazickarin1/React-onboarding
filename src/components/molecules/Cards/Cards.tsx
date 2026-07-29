@@ -1,20 +1,19 @@
 import styles from "./Cards.module.scss";
 import Card from "../Card/Card";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
-import { cardLabels } from "../../../data/labels";
 
 type CardsProps = {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
   isLoading: boolean;
   variant?: "showcase" | "popular";
-  loadingLabel?: string;
+  loadingLabel: string;
 };
 
 export default function Cards({
   movies,
   isLoading,
   variant = "showcase",
-  loadingLabel = cardLabels.loading,
+  loadingLabel,
 }: CardsProps) {
   return (
     <div className={styles.Cards}>

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { PopularMoviesProvider } from "../../../store/PopularMoviesContext";
 import { mockMovies, mockGenres } from "../../../mock/mockData";
+import { popularMoviesPageLabels } from "../../../data/labels";
 
 const meta = {
   title: "Component/pages/PopularMoviesPage",
@@ -29,6 +30,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const PopularMoviesPage: Story = {
+  args: {
+    heading: popularMoviesPageLabels.heading,
+    resultsAriaLabel: popularMoviesPageLabels.resultsAriaLabel,
+    searchButtonLabel: popularMoviesPageLabels.searchButton,
+  },
   parameters: {
     msw: {
       handlers: [

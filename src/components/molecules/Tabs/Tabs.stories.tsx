@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { tabsLabels } from "../../../data/labels";
 
 import TabsComponent from "./Tabs";
 
@@ -23,5 +24,6 @@ export const Tabs: Story = {
     activeTab: 1,
     onTabChange: fn(),
     ref: { current: null },
+    mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
   },
 };

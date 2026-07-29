@@ -8,20 +8,20 @@ import { Link } from "react-router";
 import logo from "../../../assets/logo.svg";
 import plus from "../../../assets/plus.svg";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { desktopNavLabels } from "../../../data/labels";
+import { userMenuLabels } from "../../../data/labels";
 
 type DesktopNavProps = {
-  homeAriaLabel?: string;
-  createAriaLabel?: string;
-  loginLinkLabel?: string;
-  joinLinkLabel?: string;
+  homeAriaLabel: string;
+  createAriaLabel: string;
+  loginLinkLabel: string;
+  joinLinkLabel: string;
 };
 
 export default function DesktopNav({
-  homeAriaLabel = desktopNavLabels.homeAriaLabel,
-  createAriaLabel = desktopNavLabels.createAriaLabel,
-  loginLinkLabel = desktopNavLabels.loginLink,
-  joinLinkLabel = desktopNavLabels.joinLink,
+  homeAriaLabel,
+  createAriaLabel,
+  loginLinkLabel,
+  joinLinkLabel,
 }: DesktopNavProps) {
   return (
     <nav className={styles.navbar}>
@@ -41,7 +41,11 @@ export default function DesktopNav({
           <a>{joinLinkLabel}</a>
         </div>
         <div className={styles.joinMobile}>
-          <UserMenu />
+          <UserMenu
+            ariaLabel={userMenuLabels.ariaLabel}
+            loginLabel={userMenuLabels.login}
+            joinLabel={userMenuLabels.join}
+          />
         </div>
         <div className={styles.serchIcon}>
           <Icon icon={faMagnifyingGlass} />

@@ -1,16 +1,15 @@
 import styles from "./MovieInfo.module.scss";
-import { movieInfoLabels } from "../../../data/labels";
 
 type MovieInfoProps = {
   tagline: string;
   overview: string;
-  overviewHeading?: string;
+  overviewHeading: string;
 };
 
 export default function MovieInfo({
   tagline,
   overview,
-  overviewHeading = movieInfoLabels.overviewHeading,
+  overviewHeading,
 }: MovieInfoProps) {
   return (
     <div className={styles.info}>

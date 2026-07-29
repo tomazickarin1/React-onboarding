@@ -1,18 +1,19 @@
 import styles from "./Showcase.module.scss";
 import Tabs from "../../molecules/Tabs/Tabs";
 import Cards from "../../molecules/Cards/Cards";
-import { showcaseLabels } from "../../../data/labels";
 import type { RefObject } from "react";
 
 type ShowcaseProps = {
   movies: Array<{ id: number; url: string; title: string; date: string }>;
   isLoading: boolean;
-  heading?: string;
-  emptyLabel?: string;
+  heading: string;
+  emptyLabel: string;
+  loadingLabel: string;
+  mobileListAriaLabel: string;
   activeTab: number;
   ref: RefObject<HTMLDivElement | null>;
   onTabChange: (id: number) => void;
-  tabs?: Array<{ id: number; label: string }>;
+  tabs: Array<{ id: number; label: string }>;
 };
 
 export default function Showcase({
@@ -21,9 +22,11 @@ export default function Showcase({
   activeTab,
   ref,
   onTabChange,
-  heading = showcaseLabels.heading,
-  emptyLabel = showcaseLabels.empty,
-  tabs = showcaseLabels.tabs,
+  heading,
+  emptyLabel,
+  loadingLabel,
+  mobileListAriaLabel,
+  tabs,
 }: ShowcaseProps) {
   return (
     <div className={styles.showcase}>
@@ -34,12 +37,13 @@ export default function Showcase({
           activeTab={activeTab}
           onTabChange={onTabChange}
           ref={ref}
+          mobileListAriaLabel={mobileListAriaLabel}
         />
       </div>
       {!isLoading && movies.length === 0 ? (
         <p>{emptyLabel}</p>
       ) : (
-        <Cards movies={movies} isLoading={isLoading} />
+        <Cards movies={movies} isLoading={isLoading} loadingLabel={loadingLabel} />
       )}
     </div>
   );

@@ -1,15 +1,14 @@
 import styles from "./SearchFilterPanel.module.scss";
 import type { ReactNode } from "react";
-import { searchFilterPanelLabels } from "../../../data/labels";
 
 type searchFilterPanelProps = {
   children: ReactNode;
-  heading?: string;
+  heading: string;
 };
 
 export default function SearchFilterPanel({
   children,
-  heading = searchFilterPanelLabels.heading,
+  heading,
 }: searchFilterPanelProps) {
   return (
     <div className={styles.searchFilters}>

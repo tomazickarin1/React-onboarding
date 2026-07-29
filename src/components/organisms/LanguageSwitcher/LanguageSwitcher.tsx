@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import LanguageSelect from "../../molecules/LanguageSelect/LanguageSelect";
 import Button from "../../atoms/Button/Button";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { languageSwitcherLabels } from "../../../data/labels";
+import { languageSelectLabels } from "../../../data/labels";
 import type { KeyboardEvent } from "react";
 
 export type LanguageSwitcherProps = {
@@ -12,11 +12,11 @@ export type LanguageSwitcherProps = {
   selectedFallback: string;
   onSelect: (code: string, type: "primary" | "fallback") => void;
   onReset: () => void;
-  ariaLabel?: string;
-  legend?: string;
-  defaultLanguageLabel?: string;
-  fallbackLanguageLabel?: string;
-  resetLabel?: string;
+  ariaLabel: string;
+  legend: string;
+  defaultLanguageLabel: string;
+  fallbackLanguageLabel: string;
+  resetLabel: string;
 };
 
 export default function LanguageSwitcher({
@@ -25,11 +25,11 @@ export default function LanguageSwitcher({
   selectedFallback,
   onSelect,
   onReset,
-  ariaLabel = languageSwitcherLabels.ariaLabel,
-  legend = languageSwitcherLabels.legend,
-  defaultLanguageLabel = languageSwitcherLabels.defaultLanguage,
-  fallbackLanguageLabel = languageSwitcherLabels.fallbackLanguage,
-  resetLabel = languageSwitcherLabels.reset,
+  ariaLabel,
+  legend,
+  defaultLanguageLabel,
+  fallbackLanguageLabel,
+  resetLabel,
 }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -80,6 +80,9 @@ export default function LanguageSwitcher({
                   selected={selectedMain}
                   type="primary"
                   onSelect={onSelect}
+                  filterPlaceholder={languageSelectLabels.filterPlaceholder}
+                  filterAriaLabel={languageSelectLabels.filterAriaLabel}
+                  listAriaLabel={languageSelectLabels.listAriaLabel}
                 />
               </div>
               <div>
@@ -89,6 +92,9 @@ export default function LanguageSwitcher({
                   selected={selectedFallback}
                   type="fallback"
                   onSelect={onSelect}
+                  filterPlaceholder={languageSelectLabels.filterPlaceholder}
+                  filterAriaLabel={languageSelectLabels.filterAriaLabel}
+                  listAriaLabel={languageSelectLabels.listAriaLabel}
                 />
               </div>
             </fieldset>
