@@ -43,7 +43,11 @@ export default function Showcase({
       {!isLoading && movies.length === 0 ? (
         <p>{emptyLabel}</p>
       ) : (
-        <Cards movies={movies} isLoading={isLoading} loadingLabel={loadingLabel} />
+        <Cards
+          movies={movies}
+          isLoading={isLoading}
+          loadingLabel={loadingLabel}
+        />
       )}
     </div>
   );

@@ -47,7 +47,7 @@ export default function DesktopNav({
             joinLabel={userMenuLabels.join}
           />
         </div>
-        <div className={styles.serchIcon}>
+        <div className={styles.searchIcon}>
           <Icon icon={faMagnifyingGlass} />
         </div>
       </div>

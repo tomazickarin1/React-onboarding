@@ -16,7 +16,7 @@ export default function Card({ image, title, date, variant, id }: CardProps) {
   const movieUrl = `/movie/${id}-${title.toLowerCase().replace(/\s+/g, "-")}`;
 
   return (
-    <div className={`${styles.showcaseCard} ${styles[variant]}`}>
+    <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
       <div className={image ? "" : styles.placeholder}>
         <Link to={movieUrl}>
           {image ? (

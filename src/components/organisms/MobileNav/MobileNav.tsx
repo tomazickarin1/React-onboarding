@@ -42,7 +42,7 @@ export default function MobileNav({
             loginLabel={userMenuLabels.login}
             joinLabel={userMenuLabels.join}
           />
-          <div className={styles.serchIcon}>
+          <div className={styles.searchIcon}>
             <Icon icon={faMagnifyingGlass} />
           </div>
         </div>
@@ -55,7 +55,9 @@ export default function MobileNav({
           }}
         />
       )}
-      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}>
+      <div
+        className={`${styles.drawer ?? ""} ${(menuOpen ? styles.drawerOpen : "") ?? ""}`}
+      >
         <MainMenu />
       </div>
     </>
