@@ -5,6 +5,9 @@ import { movieActionsLabels } from "../../../data/labels";
 const meta = {
   title: "Component/molecules/MovieActions",
   component: MovieActionsComponent,
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 } satisfies Meta<typeof MovieActionsComponent>;
 
 export default meta;

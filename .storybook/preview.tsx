@@ -12,7 +12,7 @@ initialize({
 const preview: Preview = {
   decorators: [
     (Story, context) => (
-      <MemoryRouter initialEntries={context.parameters.routeEntries ?? ["/"] }>
+      <MemoryRouter key={context.id} initialEntries={context.parameters.routeEntries ?? ["/"] }>
         <Story />
       </MemoryRouter>
     )

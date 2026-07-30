@@ -12,6 +12,7 @@ function PageSync({
 }) {
   const [searchParams] = useSearchParams();
   useEffect(() => {
+    if(!searchParams.has("page")) return;
     const page = Number(searchParams.get("page") ?? "1");
     action("page-changed")(page);
     updateArgs({ page });
