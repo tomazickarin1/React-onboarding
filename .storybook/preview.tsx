@@ -2,17 +2,41 @@
 import type { Preview } from "@storybook/react-vite";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import "../src/styles/global.scss";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter, useLocation } from "react-router";
+import { useEffect } from "react";
+import { action } from "storybook/actions";
 
 // Initialize MSW
 initialize({
   onUnhandledRequest: 'bypass',
 })
 
+// logs every navigation in actions tab
+function RouteActionLogger() {
+  // the current path and query string
+  // - changes when link click navigates somewhere else
+  const location = useLocation();
+
+  useEffect(() => {
+    action("navigated")(location.pathname + location.search);
+
+  }, [location]);
+
+  return null;
+}
+
 const preview: Preview = {
   decorators: [
     (Story, context) => (
-      <MemoryRouter key={context.id} initialEntries={context.parameters.routeEntries ?? ["/"] }>
+
+      // give each story unique id - forces react to build a new router each time
+      // you switch stories.
+
+      <MemoryRouter
+        key={context.id}
+        initialEntries={context.parameters.routeEntries ?? ["/"]}
+      >
+        <RouteActionLogger />
         <Story />
       </MemoryRouter>
     )
@@ -26,9 +50,6 @@ const preview: Preview = {
     },
 
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
       test: "todo",
     },
   },
