@@ -5,16 +5,27 @@ import { useSearchParams } from "react-router";
 import { action } from "storybook/actions";
 import { useArgs } from "storybook/preview-api";
 
+// update the page arg - so the links update visually
+// watch the url and copy the page value into the story arg when it changes
 function PageSync({
   updateArgs,
 }: {
   updateArgs: (args: { page: number }) => void;
 }) {
+  // read current url searh params
   const [searchParams] = useSearchParams();
+
   useEffect(() => {
-    if(!searchParams.has("page")) return;
+    // if the url has no page params, stop
+    // - so we dont override the page number
+    if (!searchParams.has("page")) return;
+
+    // get the page number from the url - turn into number
     const page = Number(searchParams.get("page") ?? "1");
+    // to see it in the actions tab
     action("page-changed")(page);
+    // put the new page number into the sotrys args
+    // makes pagination re-render with the new page
     updateArgs({ page });
   }, [searchParams, updateArgs]);
 
@@ -26,6 +37,7 @@ const meta = {
   component: PaginationComponent,
   decorators: [
     (Story) => {
+      // get and change the sotrys args
       const [, updateArgs] = useArgs();
 
       return (
