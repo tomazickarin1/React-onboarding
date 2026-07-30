@@ -41,6 +41,87 @@
     }
   }
 
+  .posterImage {
+    position: relative;
+  }
+
+  .options {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .optionsToggle {
+    width: 26px;
+    height: 26px;
+    background-color: var(--color-text-muted);
+    mask-image: url("../../../assets/options.svg");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-blue);
+    }
+  }
+
+  .optionsDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 270px;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 5;
+
+    a,
+    p {
+      margin: 0;
+    }
+  }
+
+  .optionsBlock {
+    padding: 8px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-grey);
+    }
+  }
+
+  .optionsPrompt {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-black);
+    padding: 4px 20px 0;
+  }
+
+  .optionsAction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 6px 20px;
+
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    &:hover {
+      background-color: var(--color-navy);
+      color: white;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
   &.popular {
     box-shadow:
       0 10px 15px -3px rgb(0 0 0 / 0.1),

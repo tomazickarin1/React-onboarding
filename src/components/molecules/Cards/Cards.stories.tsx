@@ -55,6 +55,10 @@ export const Popular: Story = {
     isLoading: false,
     variant: "popular",
     loadingLabel: cardLabels.loading,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };
 
@@ -64,6 +68,10 @@ export const Showcase: Story = {
     isLoading: false,
     variant: "showcase",
     loadingLabel: cardLabels.loading,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };
 
@@ -72,5 +80,9 @@ export const Loading: Story = {
     movies: [],
     isLoading: true,
     loadingLabel: cardLabels.loading,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };

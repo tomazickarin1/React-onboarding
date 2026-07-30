@@ -9,6 +9,10 @@ type ShowcaseProps = {
   heading: string;
   emptyLabel: string;
   loadingLabel: string;
+  optionsPromptLabel: string;
+  loginLabel: string;
+  notAMemberLabel: string;
+  signUpLabel: string;
   mobileListAriaLabel: string;
   activeTab: number;
   ref: RefObject<HTMLDivElement | null>;
@@ -25,6 +29,10 @@ export default function Showcase({
   heading,
   emptyLabel,
   loadingLabel,
+  optionsPromptLabel,
+  loginLabel,
+  notAMemberLabel,
+  signUpLabel,
   mobileListAriaLabel,
   tabs,
 }: ShowcaseProps) {
@@ -47,6 +55,10 @@ export default function Showcase({
           movies={movies}
           isLoading={isLoading}
           loadingLabel={loadingLabel}
+          optionsPromptLabel={optionsPromptLabel}
+          loginLabel={loginLabel}
+          notAMemberLabel={notAMemberLabel}
+          signUpLabel={signUpLabel}
         />
       )}
     </div>

@@ -1,5 +1,9 @@
 export const cardLabels = {
   loading: "Loading...",
+  optionsPrompt: "Want to rate or add this item to a list?",
+  login: "Login",
+  notAMember: "Not a member?",
+  signUp: "Sign up and join the community",
 };
 
 export const movieActionsLabels = {

@@ -86,6 +86,10 @@ export const Showcase: Story = {
     loadingLabel: cardLabels.loading,
     mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
     tabs: showcaseLabels.tabs,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };
 
@@ -101,6 +105,10 @@ export const IsLoading: Story = {
     loadingLabel: cardLabels.loading,
     mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
     tabs: showcaseLabels.tabs,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };
 
@@ -116,5 +124,9 @@ export const NoMovies: Story = {
     loadingLabel: cardLabels.loading,
     mobileListAriaLabel: tabsLabels.mobileListAriaLabel,
     tabs: showcaseLabels.tabs,
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };

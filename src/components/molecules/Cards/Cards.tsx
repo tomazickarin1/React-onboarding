@@ -7,6 +7,10 @@ type CardsProps = {
   isLoading: boolean;
   variant?: "showcase" | "popular";
   loadingLabel: string;
+  optionsPromptLabel: string;
+  loginLabel: string;
+  notAMemberLabel: string;
+  signUpLabel: string;
 };
 
 export default function Cards({
@@ -14,6 +18,10 @@ export default function Cards({
   isLoading,
   variant = "showcase",
   loadingLabel,
+  optionsPromptLabel,
+  loginLabel,
+  notAMemberLabel,
+  signUpLabel,
 }: CardsProps) {
   return (
     <div className={styles.Cards}>
@@ -34,6 +42,10 @@ export default function Cards({
                 title={movie.title}
                 date={movie.date}
                 variant={variant}
+                optionsPromptLabel={optionsPromptLabel}
+                loginLabel={loginLabel}
+                notAMemberLabel={notAMemberLabel}
+                signUpLabel={signUpLabel}
               />
             );
           })}

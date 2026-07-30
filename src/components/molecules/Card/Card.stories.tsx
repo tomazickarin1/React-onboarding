@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import pladeholderPoster from "../../../assets/placeholder-poster.jpg";
+import { cardLabels } from "../../../data/labels";
 
 import CardComponent from "./Card";
 
@@ -19,6 +20,10 @@ export const ShowcaseCard: Story = {
     date: "2026-05-13",
     variant: "showcase",
     id: "2",
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
 };
 
@@ -29,6 +34,10 @@ export const PopularCard: Story = {
     date: "2026-05-13",
     variant: "popular",
     id: "1",
+    optionsPromptLabel: cardLabels.optionsPrompt,
+    loginLabel: cardLabels.login,
+    notAMemberLabel: cardLabels.notAMember,
+    signUpLabel: cardLabels.signUp,
   },
   decorators: [
     (Story) => (

@@ -7,7 +7,7 @@ import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
-import { sortDropdownLabels } from "../../../data/labels";
+import { sortDropdownLabels, cardLabels } from "../../../data/labels";
 import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
@@ -191,6 +191,10 @@ export default function PopularMovies({
                   title={r.title}
                   date={r.date}
                   variant="popular"
+                  optionsPromptLabel={cardLabels.optionsPrompt}
+                  loginLabel={cardLabels.login}
+                  notAMemberLabel={cardLabels.notAMember}
+                  signUpLabel={cardLabels.signUp}
                 />
               );
             })}

@@ -40,6 +40,10 @@ export default function ShowcaseQueryFetch() {
       heading={showcaseLabels.heading}
       emptyLabel={showcaseLabels.empty}
       loadingLabel={cardLabels.loading}
+      optionsPromptLabel={cardLabels.optionsPrompt}
+      loginLabel={cardLabels.login}
+      notAMemberLabel={cardLabels.notAMember}
+      signUpLabel={cardLabels.signUp}
       mobileListAriaLabel={tabsLabels.mobileListAriaLabel}
       tabs={showcaseLabels.tabs}
     />
