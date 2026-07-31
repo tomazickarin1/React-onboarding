@@ -6,7 +6,7 @@ import mobileLogo from "../../../assets/mobile-logo.svg";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { userMenuLabels } from "../../../data/labels";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 type MobileNavProps = {
   homeAriaLabel: string;
@@ -18,6 +18,16 @@ export default function MobileNav({
   openMenuAriaLabel,
 }: MobileNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const location = useLocation();
+  console.log(location);
+
+  const [prevPath, setPrevPath] = useState(location.pathname);
+
+  if (location.pathname !== prevPath) {
+    setPrevPath(location.pathname);
+    setMenuOpen(false);
+  }
 
   const toggleOpen = () => {
     setMenuOpen(!menuOpen);

@@ -18,7 +18,9 @@ export default function UserMenu({
   const usermenuRef = useRef<HTMLDivElement>(null);
   const isClickedOutside = useClickOutside(usermenuRef);
 
-  const openUserMenu = () => { setIsOpen(true); }
+  const openUserMenu = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className={styles.userMenu} ref={usermenuRef}>
