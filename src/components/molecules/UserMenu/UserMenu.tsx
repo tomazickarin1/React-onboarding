@@ -18,29 +18,18 @@ export default function UserMenu({
   const usermenuRef = useRef<HTMLDivElement>(null);
   const isClickedOutside = useClickOutside(usermenuRef);
 
-  const isVisible = isOpen && !isClickedOutside;
-
-  const toggleOpen = () => {
-    setIsOpen(!isVisible);
-  };
-
-  console.log("is visible:", isVisible);
-
-  console.log("is opened", isOpen);
-  console.log("is not clicked outside", !isClickedOutside);
-
-  console.log("------------");
+  const openUserMenu = () => { setIsOpen(true); }
 
   return (
     <div className={styles.userMenu} ref={usermenuRef}>
       <button
-        onClick={toggleOpen}
+        onClick={openUserMenu}
         aria-expanded={isOpen}
         aria-label={ariaLabel}
       >
         <img src={profileIcon} alt="" />
       </button>
-      {isVisible && (
+      {isOpen && !isClickedOutside && (
         <div className={styles.dropdown}>
           <a>{loginLabel}</a>
           <a>{joinLabel}</a>
