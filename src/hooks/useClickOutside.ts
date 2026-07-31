@@ -31,7 +31,6 @@ export function useClickOutside(
 
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
-
       const target = e.target as Node;
 
       const isInside =
@@ -41,12 +40,11 @@ export function useClickOutside(
     };
 
     const handleFocusIn = (e: FocusEvent) => {
-
       const target = e.target as Node;
 
       const isInside =
         ref.current?.contains(target) || extraRef?.current?.contains(target);
-        
+
       if (isInside) {
         setIsClickedOutside(false);
       }

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./UserMenu.module.scss";
 import profileIcon from "../../../assets/profile.svg";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 type UserMenuProps = {
   ariaLabel: string;
@@ -14,13 +15,24 @@ export default function UserMenu({
   joinLabel,
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const usermenuRef = useRef<HTMLDivElement>(null);
+  const isClickedOutside = useClickOutside(usermenuRef);
+
+  const isVisible = isOpen && !isClickedOutside;
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isVisible);
   };
 
+  console.log("is visible:", isVisible);
+
+  console.log("is opened", isOpen);
+  console.log("is not clicked outside", !isClickedOutside);
+
+  console.log("------------");
+
   return (
-    <div className={styles.userMenu}>
+    <div className={styles.userMenu} ref={usermenuRef}>
       <button
         onClick={toggleOpen}
         aria-expanded={isOpen}
@@ -28,7 +40,7 @@ export default function UserMenu({
       >
         <img src={profileIcon} alt="" />
       </button>
-      {isOpen && (
+      {isVisible && (
         <div className={styles.dropdown}>
           <a>{loginLabel}</a>
           <a>{joinLabel}</a>

@@ -47,14 +47,19 @@ export default function Card({
 
     const optionsPosition = optionsRef.current?.getBoundingClientRect();
     if (!optionsPosition) return;
-    console.log(optionsPosition);
+
+    const margin = 8;
+    const left = Math.min(
+      Math.max(optionsPosition.right - 270, margin),
+      window.innerWidth - 270 - margin,
+    );
 
     // getting the icons real DOM position after its on the page,
     // not deriving state from state
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDropdownPosition({
       top: optionsPosition.bottom + 8,
-      left: optionsPosition.right - 150,
+      left: left,
     });
 
     const closeScroll = () => {
