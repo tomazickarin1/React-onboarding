@@ -23,20 +23,31 @@
 // returns a boolean
 import { useEffect, useState, type RefObject } from "react";
 
-export function useClickOutside(ref: RefObject<HTMLElement | null>): boolean {
+export function useClickOutside(
+  ref: RefObject<HTMLElement | null>,
+  extraRef?: RefObject<HTMLElement | null>,
+): boolean {
   const [isClickedOutside, setIsClickedOutside] = useState(false);
 
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setIsClickedOutside(true);
-      } else {
-        setIsClickedOutside(false);
-      }
+
+      const target = e.target as Node;
+
+      const isInside =
+        ref.current?.contains(target) || extraRef?.current?.contains(target);
+
+      setIsClickedOutside(!isInside);
     };
 
     const handleFocusIn = (e: FocusEvent) => {
-      if (ref.current && ref.current.contains(e.target as Node)) {
+
+      const target = e.target as Node;
+
+      const isInside =
+        ref.current?.contains(target) || extraRef?.current?.contains(target);
+        
+      if (isInside) {
         setIsClickedOutside(false);
       }
     };
@@ -47,7 +58,7 @@ export function useClickOutside(ref: RefObject<HTMLElement | null>): boolean {
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("focusin", handleFocusIn);
     };
-  }, [ref]);
+  }, [ref, extraRef]);
 
   return isClickedOutside;
 }

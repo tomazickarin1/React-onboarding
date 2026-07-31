@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
 import { formatDate } from "../../../utils/formatDate";
-import { useRef, useState } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
+import { createPortal } from "react-dom";
 
 type CardProps = {
   id: string;
@@ -31,12 +32,41 @@ export default function Card({
 }: CardProps) {
   const movieUrl = `/movie/${id}-${title.toLowerCase().replace(/\s+/g, "-")}`;
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
-  const isClickedOutside = useClickOutside(cardRef);
+  const optionsRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const isClickedOutside = useClickOutside(cardRef, dropdownRef);
 
   const handleOptionsToggle = () => {
     setOptionsOpen(!optionsOpen);
   };
+
+  useLayoutEffect(() => {
+    if (!optionsOpen) return;
+
+    const optionsPosition = optionsRef.current?.getBoundingClientRect();
+    if (!optionsPosition) return;
+    console.log(optionsPosition);
+
+    // getting the icons real DOM position after its on the page,
+    // not deriving state from state
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDropdownPosition({
+      top: optionsPosition.bottom + 8,
+      left: optionsPosition.right - 150,
+    });
+
+    const closeScroll = () => {
+      setOptionsOpen(false);
+    };
+
+    document.addEventListener("scroll", closeScroll, true);
+
+    return () => {
+      document.removeEventListener("scroll", closeScroll, true);
+    };
+  }, [optionsOpen]);
 
   return (
     <div className={`${styles.showcaseCard ?? ""} ${styles[variant] ?? ""}`}>
@@ -51,28 +81,42 @@ export default function Card({
             <FontAwesomeIcon icon={faImage} />
           )}
         </Link>
-        <div className={styles.options} onClick={handleOptionsToggle}>
+        <div
+          className={styles.options}
+          onClick={handleOptionsToggle}
+          ref={optionsRef}
+        >
           <div className={styles.optionsToggle}></div>
-          {optionsOpen && !isClickedOutside && (
-            <div className={styles.optionsDropdown}>
-              <div className={styles.optionsBlock}>
-                <p className={styles.optionsPrompt}>{optionsPromptLabel}</p>
-                <p className={styles.optionsAction}>
-                  <a>
-                    {loginLabel} <FontAwesomeIcon icon={faChevronRight} />
-                  </a>
-                </p>
-              </div>
-              <div className={styles.optionsBlock}>
-                <p className={styles.optionsPrompt}>{notAMemberLabel}</p>
-                <p className={styles.optionsAction ?? ""}>
-                  <a>
-                    {signUpLabel} <FontAwesomeIcon icon={faChevronRight} />
-                  </a>
-                </p>
-              </div>
-            </div>
-          )}
+          {optionsOpen &&
+            !isClickedOutside &&
+            createPortal(
+              <div
+                className={styles.optionsDropdown}
+                ref={dropdownRef}
+                style={{
+                  top: dropdownPosition.top,
+                  left: dropdownPosition.left,
+                }}
+              >
+                <div className={styles.optionsBlock}>
+                  <p className={styles.optionsPrompt}>{optionsPromptLabel}</p>
+                  <p className={styles.optionsAction}>
+                    <a>
+                      {loginLabel} <FontAwesomeIcon icon={faChevronRight} />
+                    </a>
+                  </p>
+                </div>
+                <div className={styles.optionsBlock}>
+                  <p className={styles.optionsPrompt}>{notAMemberLabel}</p>
+                  <p className={styles.optionsAction ?? ""}>
+                    <a>
+                      {signUpLabel} <FontAwesomeIcon icon={faChevronRight} />
+                    </a>
+                  </p>
+                </div>
+              </div>,
+              document.body,
+            )}
         </div>
       </div>
       <div className={styles.cardText}>
