@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./PopularMoviesPage.module.scss";
 import SingleColumn from "../../templates/SingleColumn/SingleColumn";
 import Card from "../../molecules/Card/Card";
@@ -10,7 +10,16 @@ import { DEFAULT_SORT } from "../../../data/sortingOptions";
 import { sortDropdownLabels, cardLabels } from "../../../data/labels";
 import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
-import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
+// import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
+import { useDispatch, useSelector } from "react-redux";
+import type { Dispatch, SetStateAction } from "react";
+import type { RootState } from "../../../store/store";
+
+import {
+  setMovies,
+  setSelectedGenres,
+  setSortBy,
+} from "../../../store/popularMoviesSlice";
 
 const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
@@ -97,14 +106,19 @@ export default function PopularMovies({
   const [appliedGenres, setApliedGenres] = useState<number[]>([]);
   const [appliedSortBy, setAppliedSortBy] = useState(DEFAULT_SORT);
 
-  const {
-    sortBy,
-    setSortBy,
-    selectedGenres,
-    setSelectedGenres,
-    movies,
-    setMovies,
-  } = useContext(PopularMoviesContext);
+  // const {
+  //   sortBy,
+  //   setSortBy,
+  //   selectedGenres,
+  //   setSelectedGenres,
+  //   movies,
+  //   setMovies,
+  // } = useContext(PopularMoviesContext);
+
+  const dispatch = useDispatch();
+  const { movies, selectedGenres, sortBy } = useSelector(
+    (state: RootState) => state.popularMovies,
+  );
 
   const { data: movieData } = useQuery({
     queryKey: ["popular-movies-page", appliedSortBy.value, appliedGenres],
@@ -118,9 +132,10 @@ export default function PopularMovies({
 
   useEffect(() => {
     if (movieData) {
-      setMovies(movieData);
+      // setMovies(movieData);
+      dispatch(setMovies(movieData));
     }
-  }, [movieData, setMovies]);
+  }, [movieData, dispatch]);
 
   const handleSortToggle = () => {
     setSortToggle(!sortToggle);
@@ -139,6 +154,14 @@ export default function PopularMovies({
     sortBy.value !== appliedSortBy.value ||
     JSON.stringify(selectedGenres) !== JSON.stringify(appliedGenres);
 
+  const handleSetSelectedGneres: Dispatch<SetStateAction<number[]>> = (
+    action,
+  ) => {
+    const value =
+      typeof action === "function" ? action(selectedGenres) : action;
+    dispatch(setSelectedGenres(value));
+  };
+
   return (
     <SingleColumn>
       <div className={styles.container}>
@@ -153,7 +176,8 @@ export default function PopularMovies({
             >
               <SortDropdown
                 sortBy={sortBy}
-                setSortBy={setSortBy}
+                // setSortBy={setSortBy}
+                setSortBy={(option) => dispatch(setSortBy(option))}
                 ariaLabel={sortDropdownLabels.ariaLabel}
               />
             </FilterPanel>
@@ -166,7 +190,8 @@ export default function PopularMovies({
               <GenreFilter
                 genre={genre}
                 selectedGenres={selectedGenres}
-                setSelectedGenres={setSelectedGenres}
+                // setSelectedGenres={setSelectedGenres}
+                setSelectedGenres={handleSetSelectedGneres}
               />
             </FilterPanel>
             <button
