@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import PopularMoviesPageComponent from "./PopularMoviesPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
-import { PopularMoviesProvider } from "../../../store/PopularMoviesContext";
+import { PopularMoviesProvider } from "../../../store/PopularMoviesProvider";
 import { mockMovies, mockGenres } from "../../../mock/mockData";
 import { popularMoviesPageLabels } from "../../../data/labels";
 

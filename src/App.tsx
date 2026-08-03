@@ -4,9 +4,9 @@ import SearchPage from "./components/pages/SearchPage/SearchPage";
 import SearchResults from "./components/pages/SearchResults/SearchResults";
 import MovieDetailPage from "./components/pages/MovieDetailPage/MovieDetailPage";
 import PopularMoviesPage from "./components/pages/PopularMoviesPage/PopularMoviesPage";
-// import { PopularMoviesProvider } from "./store/PopularMoviesContext";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
+import { PopularMoviesProvider } from "./store/PopularMoviesProvider";
+// import { Provider } from "react-redux";
+// import { store } from "./store/store";
 import { popularMoviesPageLabels, searchResultsLabels } from "./data/labels";
 import { Routes, Route, Navigate, useSearchParams } from "react-router";
 import NavigationBar from "./components/organisms/NavigationBar/NavigationBar";
@@ -46,15 +46,15 @@ export default function App() {
         <Route
           path="/popular"
           element={
-            // <PopularMoviesProvider>
-            <Provider store={store}>
+            <PopularMoviesProvider>
+              {/* <Provider store={store}> */}
               <PopularMoviesPage
                 heading={popularMoviesPageLabels.heading}
                 resultsAriaLabel={popularMoviesPageLabels.resultsAriaLabel}
                 searchButtonLabel={popularMoviesPageLabels.searchButton}
               />
-            </Provider>
-            // </PopularMoviesProvider>
+              {/* </Provider> */}
+            </PopularMoviesProvider>
           }
         />
       </Routes>
