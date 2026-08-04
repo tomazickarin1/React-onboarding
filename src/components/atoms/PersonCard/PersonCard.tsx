@@ -28,8 +28,11 @@ export default function PersonCard({
       </div>
       <div className={styles.info}>
         <h3>{name}</h3>
-        <p>{department}</p>
-        <p>{known_for}</p>
+        <p className={styles.sub}>
+          <span className={styles.bold}>{department}</span>
+          <span className={styles.spacer}>•</span>
+          {known_for}
+        </p>
       </div>
     </div>
   );
