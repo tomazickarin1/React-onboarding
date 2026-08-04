@@ -6,47 +6,13 @@ import UserScore from "../../molecules/UserScore/UserScore";
 import MovieActions from "../../molecules/MovieActions/MovieActions";
 import MovieInfo from "../../molecules/MovieInfo/MovieInfo";
 import CrewGrid from "../../molecules/CrewGrid/CrewGrid";
-import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
 import { movieInfoLabels, movieActionsLabels } from "../../../data/labels";
+import { fetchMovieDetails } from "../../../utils/fetchMovieDetails";
+import Spinner from "../../atoms/Spinner/Spinner";
 
-const tmbUrl = "https://api.themoviedb.org/3";
 const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
 const tmbBackdropUrl = "https://image.tmdb.org/t/p/w1280";
-
-const movieSchema = z.object({
-  id: z.number(),
-  overview: z.string(),
-  title: z.string(),
-  genres: z.array(z.object({ id: z.number(), name: z.string() })),
-  release_date: z.string(),
-  poster_path: z.string(),
-  backdrop_path: z.string(),
-  tagline: z.string(),
-  runtime: z.number(),
-  credits: z.object({
-    crew: z.array(
-      z.object({ id: z.number(), name: z.string(), job: z.string() }),
-    ),
-  }),
-  vote_average: z.number(),
-});
-
-async function fetchMovieDetails(id: string) {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(
-    `${tmbUrl}/movie/${id}?api_key=${apiKey}&append_to_response=credits,release_dates`,
-  );
-
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${String(response.status)}`);
-  }
-
-  const json: unknown = await response.json();
-  const data = movieSchema.parse(json);
-
-  return data;
-}
 
 export default function MovieDetailPage() {
   const movieId = useParams();
@@ -56,6 +22,7 @@ export default function MovieDetailPage() {
   });
 
   const movieDetails = movieDetailQuery.data;
+  const movieDetailsLoading = movieDetailQuery.isLoading;
 
   const releaseYear = movieDetails?.release_date
     ? new Date(movieDetails.release_date).getFullYear()
@@ -72,6 +39,10 @@ export default function MovieDetailPage() {
   UseDocumentTitle(
     `${movieDetails?.title ?? ""} (${releaseYear !== null ? String(releaseYear) : ""})- The Movie Database(TMDB)`,
   );
+
+  if (movieDetailsLoading) {
+    return <Spinner />;
+  }
 
   return (
     <SingleColumn>

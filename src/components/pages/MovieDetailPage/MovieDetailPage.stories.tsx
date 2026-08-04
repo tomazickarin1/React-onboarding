@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import MovieDetailPageComponent from "./MovieDetailPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, delay } from "msw";
 import { Routes, Route } from "react-router";
 import placeholderPoster from "../../../assets/placeholder-poster.jpg";
 
@@ -62,6 +62,24 @@ export const MovieDetailPage: Story = {
         http.get("https://image.tmdb.org/t/p/*", () =>
           HttpResponse.redirect(placeholderPoster),
         ),
+      ],
+    },
+  },
+};
+
+export const MovieDetailPageLoading: Story = {
+  parameters: {
+    routeEntries: ["/movie/3"],
+    msw: {
+      handlers: [
+        http.get("https://api.themoviedb.org/3/movie/3", async () => {
+          await delay("infinite");
+          return HttpResponse.json(mockMovieDetails);
+        }),
+        http.get("https://image.tmdb.org/t/p/*", async () => {
+          await delay("infinite");
+          return HttpResponse.redirect(placeholderPoster);
+        }),
       ],
     },
   },
