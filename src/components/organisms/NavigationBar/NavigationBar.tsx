@@ -2,7 +2,7 @@ import styles from "./NavigationBar.module.scss";
 import SearchBar from "../../molecules/SearchBar/SearchBar";
 import MobileNav from "../MobileNav/MobileNav";
 import DesktopNav from "../DesktopNav/DesktopNav";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams, useLocation } from "react-router";
@@ -24,6 +24,9 @@ export default function NavigationBar() {
   const location = useLocation();
   // Save the last pathname - so we can compare it when it changes.
   const [prevPathname, setPrevPathname] = useState(location.pathname);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const loopRef = useRef<HTMLDivElement>(null);
 
   // Runs only right after navigating to a different page. Clears the
   // search box outside /search, or re-syncs it from the URL on /search.
@@ -69,6 +72,10 @@ export default function NavigationBar() {
     void navigate(`${url.pathname}${url.search}`);
   }
 
+  const handleLoopClick = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <div className={styles.navbarWrapper}>
@@ -77,6 +84,8 @@ export default function NavigationBar() {
           createAriaLabel={desktopNavLabels.createAriaLabel}
           loginLinkLabel={desktopNavLabels.loginLink}
           joinLinkLabel={desktopNavLabels.joinLink}
+          handleLoopClick={handleLoopClick}
+          loopRef={loopRef}
         />
         <MobileNav
           homeAriaLabel={mobileNavLabels.homeAriaLabel}
@@ -89,6 +98,9 @@ export default function NavigationBar() {
         searchResults={searchResults ?? []}
         onQueryChange={setQuery}
         onSubmit={handleSearchSubmit}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        loopRef={loopRef}
         // True while we're still waiting on a result — either the
         // debounce hasn't caught up yet, or the fetch is in flight.
         isSearching={searchQuery.isFetching || query !== debounceQuery}

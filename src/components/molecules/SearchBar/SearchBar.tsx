@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router";
 import SearchResults from "../SearchResults/SearchResults";
+import type { RefObject } from "react";
 
 type SearchBarProps = {
   query: string;
@@ -20,6 +21,9 @@ type SearchBarProps = {
   onQueryChange: (value: string) => void;
   searchResults: Array<{ title: string; id: number }>;
   isSearching: boolean;
+  isOpen: boolean;
+  setIsOpen: (arg: boolean) => void;
+  loopRef: RefObject<HTMLDivElement | null>;
 };
 
 export default function SearchBar({
@@ -31,8 +35,10 @@ export default function SearchBar({
   topTenMovies,
   searchResults,
   isSearching,
+  isOpen,
+  setIsOpen,
+  loopRef,
 }: SearchBarProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -59,7 +65,7 @@ export default function SearchBar({
     return () => {
       document.removeEventListener("keydown", handleGlobalKeyDown);
     };
-  }, []);
+  }, [setIsOpen]);
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -106,7 +112,7 @@ export default function SearchBar({
     onQueryChange(movTitle);
   };
 
-  const isClickedOutside = useClickOutside(containerRef);
+  const isClickedOutside = useClickOutside(containerRef, loopRef);
 
   const noResults = !isSearching && searchResults.length === 0 && query !== "";
 

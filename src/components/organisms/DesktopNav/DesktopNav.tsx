@@ -4,6 +4,7 @@ import LanguageSwitcherHandler from "../LanguageSwitcher/LanguageSwitcherHandler
 import Icon from "../../atoms/Icon/Icon";
 import UserMenu from "../../molecules/UserMenu/UserMenu";
 import { Link } from "react-router";
+import type { RefObject } from "react";
 
 import logo from "../../../assets/logo.svg";
 import plus from "../../../assets/plus.svg";
@@ -15,6 +16,8 @@ type DesktopNavProps = {
   createAriaLabel: string;
   loginLinkLabel: string;
   joinLinkLabel: string;
+  handleLoopClick: () => void;
+  loopRef: RefObject<HTMLDivElement | null>;
 };
 
 export default function DesktopNav({
@@ -22,6 +25,8 @@ export default function DesktopNav({
   createAriaLabel,
   loginLinkLabel,
   joinLinkLabel,
+  handleLoopClick,
+  loopRef,
 }: DesktopNavProps) {
   return (
     <nav className={styles.navbar}>
@@ -47,7 +52,11 @@ export default function DesktopNav({
             joinLabel={userMenuLabels.join}
           />
         </div>
-        <div className={styles.searchIcon}>
+        <div
+          className={styles.searchIcon}
+          onClick={handleLoopClick}
+          ref={loopRef}
+        >
           <Icon icon={faMagnifyingGlass} />
         </div>
       </div>
