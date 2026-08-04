@@ -35,7 +35,6 @@ export default function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Pressing s (not while already typing) jumps focus into the search input

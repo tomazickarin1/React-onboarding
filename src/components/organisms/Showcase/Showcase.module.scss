@@ -2,6 +2,10 @@
   max-width: var(--max-width);
   margin: auto;
   padding: 2rem 40px;
+
+  @media (max-width: 768px) {
+    padding: 2rem 20px;
+  }
 }
 
 .showcaseHeader {
@@ -12,6 +16,7 @@
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   h2 {
