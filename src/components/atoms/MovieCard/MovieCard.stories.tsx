@@ -15,7 +15,7 @@ export const Default: Story = {
     id: "1007757",
     imageUrl: placeholderPoster,
     title: "Swapped",
-    date: "01.05.2026",
+    date: "2026-05-13",
     content:
       "A small woodland creature and a majestic bird magically trade places.",
   },
@@ -26,7 +26,7 @@ export const NoPoster: Story = {
     id: "1007757",
     imageUrl: "",
     title: "Swapped",
-    date: "01.05.2026",
+    date: "2026-05-13",
     content:
       "A small woodland creature and a majestic bird magically trade places.",
   },

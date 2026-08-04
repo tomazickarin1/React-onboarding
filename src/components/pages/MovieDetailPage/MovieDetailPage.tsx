@@ -94,9 +94,8 @@ export default function MovieDetailPage() {
               <h2>
                 {movieDetails?.title} <span>({releaseYear})</span>
               </h2>
-
               <div className={styles.facts}>
-                <span>{releaseDate}</span>
+                <time dateTime={movieDetails?.release_date}>{releaseDate}</time>
                 <span>
                   {movieDetails?.genres.map((g) => g.name).join(", ")}
                 </span>

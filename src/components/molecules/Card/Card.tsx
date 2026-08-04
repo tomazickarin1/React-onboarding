@@ -128,7 +128,6 @@ export default function Card({
         <h3>
           <Link to={movieUrl}>{title}</Link>
         </h3>
-
         {date && (
           <time className={styles.date} dateTime={date}>
             {formatDate(date)}
