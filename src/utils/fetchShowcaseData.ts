@@ -40,7 +40,7 @@ async function fetchAndMapMovies(url: string): Promise<Movie[]> {
   }));
 }
 
-export async function useFetchShowcaseData(): Promise<ShowcaseData> {
+export async function fetchShowcaseData(): Promise<ShowcaseData> {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
   const [streaming, rent, theater] = await Promise.all([

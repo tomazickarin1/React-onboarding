@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Showcase from "../Showcase/Showcase";
 import { useState } from "react";
 import { useRef } from "react";
-import { useFetchShowcaseData } from "../../../hooks/useFetchShowcaseData";
+import { fetchShowcaseData } from "../../../utils/fetchShowcaseData";
 import { cardLabels, showcaseLabels, tabsLabels } from "../../../data/labels";
 
 type Movie = { id: number; url: string; title: string; date: string };
@@ -10,7 +10,7 @@ type Movie = { id: number; url: string; title: string; date: string };
 export default function ShowcaseQueryFetch() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["showcase-movies"],
-    queryFn: useFetchShowcaseData,
+    queryFn: fetchShowcaseData,
   });
 
   const [activeTab, setActiveTab] = useState(1);
