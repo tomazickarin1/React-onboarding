@@ -15,6 +15,7 @@ type Person = {
   name: string;
   department: string;
   profileImg: string;
+  known_for: string[];
 };
 type SimpleItem = { id: number; name: string };
 
@@ -38,6 +39,12 @@ const personItemSchema = z.object({
   name: z.string(),
   known_for_department: z.string().optional(),
   profile_path: z.string().nullable().optional(),
+  known_for: z.array(
+    z.object({
+      title: z.string().optional(),
+      name: z.string().optional(),
+    }),
+  ),
 });
 
 const simpleItemSchema = z.object({
@@ -69,6 +76,8 @@ export async function fetchSearchMovies(
 
   if (filter === "person") {
     const data = responseEnvelope(personItemSchema).parse(json);
+
+    console.log(data.results);
     searchResult = {
       kind: "person",
       people: data.results.map((p) => ({
@@ -76,6 +85,7 @@ export async function fetchSearchMovies(
         name: p.name,
         department: p.known_for_department ?? "",
         profileImg: p.profile_path ? `${tmbImageUrl}${p.profile_path}` : "",
+        known_for: p.known_for.map((k) => k.title ?? k.name ?? ""),
       })),
       totalPages: data.total_pages,
     };

@@ -50,6 +50,7 @@ export default function SearchResults({
         name={person.name}
         department={person.department}
         profileImg={person.profileImg}
+        known_for={person.known_for}
       />
     ));
   } else if (data.kind === "simple") {

@@ -76,12 +76,14 @@ export const mockPeople = [
     name: "Anna Smith",
     known_for_department: "Acting",
     profile_path: null,
+    known_for: [],
   },
   {
     id: 2,
     name: "John Doe",
     known_for_department: "Directing",
     profile_path: null,
+    known_for: [],
   },
 ];
 
