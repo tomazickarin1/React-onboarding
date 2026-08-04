@@ -3,20 +3,6 @@
   align-items: center;
   gap: 1rem;
 
-  .sub {
-    color: black;
-    font-weight: 300;
-    font-size: 1rem;
-
-    .bold {
-      font-weight: 600;
-    }
-
-    .spacer {
-      padding: 0 0.5rem;
-    }
-  }
-
   .placeholder,
   .image {
     width: 80px;
@@ -58,7 +44,17 @@
 
     p {
       margin: 0.25rem 0 0;
-      // color: var(--color-text-muted);
+      color: black;
+      font-weight: 300;
+      font-size: 1rem;
+
+      .bold {
+        font-weight: 600;
+      }
+
+      .spacer {
+        padding: 0 0.25rem;
+      }
     }
   }
 }

@@ -5,7 +5,6 @@ type PersonCardProps = {
   name: string;
   department: string;
   profileImg: string;
-  // known_for: Array<{title: string}>
   known_for: string[];
 };
 
@@ -28,7 +27,7 @@ export default function PersonCard({
       </div>
       <div className={styles.info}>
         <h3>{name}</h3>
-        <p className={styles.sub}>
+        <p>
           <span className={styles.bold}>{department}</span>
           <span className={styles.spacer}>•</span>
           {known_for}

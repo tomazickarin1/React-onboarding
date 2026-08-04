@@ -86,12 +86,12 @@ export default function Card({
             <FontAwesomeIcon icon={faImage} />
           )}
         </Link>
-        <div
-          className={styles.options}
-          onClick={handleOptionsToggle}
-          ref={optionsRef}
-        >
-          <div className={styles.optionsToggle}></div>
+        <div className={styles.options} ref={optionsRef}>
+          <button
+            onClick={handleOptionsToggle}
+            aria-label={"Options toggle"}
+            className={styles.optionsToggle}
+          ></button>
           {optionsOpen &&
             !isClickedOutside &&
             createPortal(
