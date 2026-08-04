@@ -8,8 +8,9 @@ import FilterPanel from "../../molecules/FilterPanel/FilterPanel";
 import GenreFilter from "../../molecules/GenreFilter/GenreFilter";
 import { DEFAULT_SORT } from "../../../data/sortingOptions";
 import { sortDropdownLabels, cardLabels } from "../../../data/labels";
-import { z } from "zod";
 import { UseDocumentTitle } from "../../../hooks/useDocumentTitle";
+import { fetchPopularMovies } from "../../../utils/fetchPopularMovies";
+import { fetchGenres } from "../../../utils/fetchGenres";
 // import { PopularMoviesContext } from "../../../store/PopularMoviesContext";
 // import { useDispatch, useSelector } from "react-redux";
 // import type { Dispatch, SetStateAction } from "react";
@@ -22,73 +23,6 @@ import { usePopularMovies } from "../../../hooks/usePopularMovies";
 //   setSelectedGenres,
 //   setSortBy,
 // } from "../../../store/popularMoviesSlice";
-
-const tmbUrl = "https://api.themoviedb.org/3";
-const tmbImageUrl = "https://image.tmdb.org/t/p/w500";
-
-type Movie = { id: number; url: string; title: string; date: string };
-type Genre = { id: number; name: string };
-
-const tmdbMovieSchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  poster_path: z.string().nullable(),
-  release_date: z.string(),
-});
-
-const tmdbResponseSchema = z.object({
-  results: z.array(tmdbMovieSchema),
-});
-
-const genreSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-});
-
-const genreResponseSchema = z.object({
-  genres: z.array(genreSchema),
-});
-
-async function fetchPopularMovies(
-  sortBy: string,
-  genreId: number[],
-): Promise<Movie[]> {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const genreParam =
-    genreId.length > 0 ? `&with_genres=${genreId.join(",")}` : "";
-
-  const response = await fetch(
-    `${tmbUrl}/discover/movie?api_key=${apiKey}&sort_by=${sortBy}${genreParam}`,
-  );
-
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${String(response.status)}`);
-  }
-
-  const json: unknown = await response.json();
-  const data = tmdbResponseSchema.parse(json);
-
-  return data.results.map((movie) => ({
-    id: movie.id,
-    title: movie.title,
-    url: movie.poster_path ? `${tmbImageUrl}${movie.poster_path}` : "",
-    date: movie.release_date,
-  }));
-}
-
-async function getGenres(): Promise<Genre[]> {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const response = await fetch(`${tmbUrl}/genre/movie/list?api_key=${apiKey}`);
-
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${String(response.status)}`);
-  }
-
-  const json: unknown = await response.json();
-  const data = genreResponseSchema.parse(json);
-
-  return data.genres;
-}
 
 type PopularMoviesPageProps = {
   heading: string;
@@ -138,7 +72,7 @@ export default function PopularMovies({
 
   const { data: genre } = useQuery({
     queryKey: ["genre-list"],
-    queryFn: getGenres,
+    queryFn: fetchGenres,
   });
 
   useEffect(() => {
