@@ -2,12 +2,13 @@ import style from "./MovieCard.module.scss";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router";
+import { formatDate } from "../../../utils/formatDate";
 
 export type MovieCardProps = {
   id: string;
   imageUrl: string;
   title: string;
-  date: string;
+  date?: string;
   content: string;
 };
 
@@ -27,8 +28,14 @@ const MovieCard = ({ id, imageUrl, title, date, content }: MovieCardProps) => {
       </div>
       <div className={style.content}>
         <div>
-          <Link to={movieUrl}>{title}</Link>
-          <p className={style.date}>{date}</p>
+          <h3>
+            <Link to={movieUrl}>{title}</Link>
+          </h3>
+          {date && (
+            <time className={style.date} dateTime={date}>
+              {formatDate(date)}
+            </time>
+          )}
         </div>
         <div>
           <p className={style.description}>{content}</p>

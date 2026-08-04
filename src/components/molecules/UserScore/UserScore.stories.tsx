@@ -13,4 +13,7 @@ export const UserScore: Story = {
   args: {
     score: 5,
   },
+  globals: {
+    backgrounds: { value: "dark" },
+  },
 };

@@ -17,18 +17,10 @@ const genres = [
   { id: 4, name: "Horror" },
 ];
 
-export const Default: Story = {
+export const GenreFilter: Story = {
   args: {
     genre: genres,
     selectedGenres: [2],
-    setSelectedGenres: fn(),
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    genre: undefined,
-    selectedGenres: [],
     setSelectedGenres: fn(),
   },
 };
