@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { desktopNavLabels } from "../../../data/labels";
 import DesktopNavComponent from "./DesktopNav";
+import { fn } from "storybook/test";
 
 const meta = {
   title: "Component/organisms/DesktopNav",
@@ -22,6 +23,8 @@ export const DesktopNav: Story = {
     createAriaLabel: desktopNavLabels.createAriaLabel,
     loginLinkLabel: desktopNavLabels.loginLink,
     joinLinkLabel: desktopNavLabels.joinLink,
+    handleLoopClick: fn(),
+    loopRef: { current: null },
   },
   globals: {
     viewport: { value: "desktop" },

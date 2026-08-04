@@ -38,6 +38,9 @@ export const Default: Story = {
     onQueryChange: fn(),
     searchResults: searchResults,
     isSearching: false,
+    isOpen: true,
+    setIsOpen: fn(),
+    loopRef: { current: null },
   },
   render: function Render(args) {
     const [, updateArgs] = useArgs();
@@ -69,6 +72,9 @@ export const SearchQuery: Story = {
     onQueryChange: fn(),
     searchResults: searchResults,
     isSearching: false,
+    isOpen: true,
+    setIsOpen: fn(),
+    loopRef: { current: null },
   },
   play: async ({ canvas, userEvent }) => {
     const dropdownBtn = canvas.getByRole("searchbox", {
@@ -88,6 +94,9 @@ export const IsSearching: Story = {
     onQueryChange: fn(),
     searchResults: [],
     isSearching: true,
+    isOpen: true,
+    setIsOpen: fn(),
+    loopRef: { current: null },
   },
   play: async ({ canvas, userEvent }) => {
     const dropdownBtn = canvas.getByRole("searchbox", {
@@ -107,6 +116,9 @@ export const NoResults: Story = {
     onQueryChange: fn(),
     searchResults: [],
     isSearching: false,
+    isOpen: true,
+    setIsOpen: fn(),
+    loopRef: { current: null },
   },
   play: async ({ canvas, userEvent }) => {
     const dropdownBtn = canvas.getByRole("searchbox", {
