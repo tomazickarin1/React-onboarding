@@ -14,8 +14,6 @@ export default function PersonCard({
   profileImg,
   known_for,
 }: PersonCardProps) {
-  console.log(known_for);
-
   return (
     <div className={styles.personCard}>
       <div className={profileImg ? styles.image : styles.placeholder}>

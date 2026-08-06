@@ -76,8 +76,6 @@ export async function fetchSearchMovies(
 
   if (filter === "person") {
     const data = responseEnvelope(personItemSchema).parse(json);
-
-    console.log(data.results);
     searchResult = {
       kind: "person",
       people: data.results.map((p) => ({

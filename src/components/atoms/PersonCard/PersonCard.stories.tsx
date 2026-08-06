@@ -15,6 +15,7 @@ export const PersonCard: Story = {
     name: "Anna Smith",
     department: "Directing",
     profileImg: "",
+    known_for: ["Movie name"],
   },
 };
 
@@ -23,5 +24,6 @@ export const PersonCardWithImg: Story = {
     name: "Anna Smith",
     department: "Acting",
     profileImg: pladeholderPoster,
+    known_for: ["Movie name"],
   },
 };
